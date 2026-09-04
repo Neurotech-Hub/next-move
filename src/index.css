@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #1c1917;
+  --color-muted: #6f675f;
+  --color-paper: #f6f1e8;
+  --color-card: #fffdf8;
+  --color-washu: #a51417;
+  --color-gold: #b8893d;
+  --color-sage: #5b7c6a;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.react-flow__attribution {
+  background: transparent !important;
+  color: #78716c !important;
+  font-size: 10px !important;
+}
+
+.react-flow__node {
+  cursor: pointer;
+}
+
+.react-flow__node-region {
+  pointer-events: none;
+  cursor: default;
+}
+
+.react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.react-flow__edge-path,
+.react-flow__connection-path {
+  stroke-linecap: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
