@@ -2,6 +2,9 @@
 
 A static, client-side landscape for WashU investigators: **where am I, where could this go, and what should I do next?**
 
+**Live site:** [https://neurotech-hub.github.io/InnovationNavigator/](https://neurotech-hub.github.io/InnovationNavigator/)  
+**Repository:** [https://github.com/Neurotech-Hub/InnovationNavigator](https://github.com/Neurotech-Hub/InnovationNavigator)
+
 The primary view is a **Journey**: the research report’s readiness states (S0–S9) grouped by stage, with six destinations in a side rail and one fixed panel for Guide Me, results, and details. An **Overview map** (React Flow) is available as a secondary, simplified view. Resources live in the panel, not as an org chart on a canvas.
 
 ## Develop
@@ -18,7 +21,7 @@ npm run build
 npm run preview
 ```
 
-GitHub Pages builds set `GITHUB_PAGES=true` so Vite uses the `/InnovationNavigator/` base path. Enable GitHub Pages with **GitHub Actions** as the source.
+GitHub Pages builds set `GITHUB_PAGES=true` so Vite uses the `/InnovationNavigator/` base path. Deployments run from `.github/workflows/deploy.yml` when `main` updates — set the repo Pages source to **GitHub Actions** if it is not already.
 
 ## Add content without redesigning the UI
 
