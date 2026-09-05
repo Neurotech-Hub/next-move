@@ -15,10 +15,39 @@ export function Header() {
           <button
             type="button"
             onClick={reset}
-            className="font-display text-left text-[1.45rem] leading-none tracking-tight text-ink transition hover:text-washu focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu sm:text-[1.7rem]"
+            className="group flex items-center gap-2.5 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu"
             aria-label="Innovation Navigator home"
           >
-            Innovation Navigator
+            <svg
+              viewBox="0 0 32 32"
+              fill="none"
+              aria-hidden
+              className="size-7 shrink-0 transition duration-200 group-hover:drop-shadow-[0_0_8px_rgba(225,75,82,0.5)] sm:size-8"
+            >
+              <circle
+                cx="10"
+                cy="16"
+                r="5.5"
+                fill="var(--color-washu)"
+                opacity="0.18"
+              />
+              <circle cx="10" cy="16" r="3" fill="var(--color-washu)" />
+              <circle cx="22" cy="10" r="2.5" fill="var(--color-gold)" />
+              <circle cx="22" cy="22" r="2.5" fill="var(--color-sage)" />
+              <path
+                d="M13 16h6.5M19 12.5L22 10M19 19.5L22 22"
+                stroke="var(--color-ink)"
+                strokeOpacity="0.55"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+            <span className="font-logo text-[12px] font-medium uppercase leading-tight tracking-[0.04em] sm:text-[13px]">
+              <span className="text-ink">Innovation</span>{" "}
+              <span className="text-ink/45 transition duration-200 group-hover:text-washu">
+                Navigator
+              </span>
+            </span>
           </button>
         </h1>
 

@@ -4,6 +4,7 @@
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-logo: "Unbounded", "Figtree", ui-sans-serif, system-ui, sans-serif;
 
   /* Dark scientific-frontier palette */
   --color-ink: #e9ecf4; /* primary text */
@@ -46,6 +47,10 @@ body {
 
 .font-mono {
   font-family: var(--font-mono);
+}
+
+.font-logo {
+  font-family: var(--font-logo);
 }
 
 /*
