@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigator } from "../../state/NavigatorContext";
-import { ResetIconButton } from "../UI/ResetIconButton";
 import type {
   AssetAnswer,
   DestinationAnswer,
@@ -204,7 +203,6 @@ export function GuideForm() {
               Back
             </button>
           )}
-          <ResetIconButton />
         </div>
         <button
           type="button"

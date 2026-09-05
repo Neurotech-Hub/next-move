@@ -3,17 +3,17 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { searchNavigator } from "../../logic/filters";
 import { APP_CHANNEL, APP_VERSION } from "../../version";
 import { useNavigator } from "../../state/NavigatorContext";
+import { ResetIconButton } from "./ResetIconButton";
 
 const iconBtn =
   "inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-line bg-card text-ink/60 transition hover:bg-raise hover:text-ink/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu";
 
 function AboutPanel() {
   return (
-    <div className="about-panel space-y-3">
+    <div className="space-y-3">
       <p className="font-display text-[19px] leading-snug text-ink">
         Innovation is how an invention changes the world.
       </p>
-      <span className="about-rule" aria-hidden />
       <p className="text-[13px] leading-relaxed text-muted">
         NextMove was developed by the Innovation Directorate in the Department
         of Neuroscience at the Washington University Medical School.
@@ -271,8 +271,8 @@ export function Header() {
 
   return (
     <header className="relative z-40 shrink-0 border-b border-line/70 bg-paper/95 px-4 py-3 backdrop-blur-sm sm:px-6">
-      <div className="flex items-center justify-between gap-3">
-        <h1 className="relative z-10 min-w-0">
+      <div className="flex items-center gap-3 md:grid md:grid-cols-[1fr_auto_1fr]">
+        <h1 className="relative z-10 min-w-0 md:justify-self-start">
           <button
             type="button"
             onClick={reset}
@@ -307,14 +307,21 @@ export function Header() {
               <span className="font-logo truncate text-[13px] font-medium uppercase leading-none tracking-[0.06em] text-ink sm:text-[14px] md:text-[17px]">
                 NextMove
               </span>
-              <span className="hidden shrink-0 text-[9px] font-medium uppercase leading-none tracking-[0.12em] text-ink/30 min-[380px]:inline sm:text-[10px] md:text-[11px]">
+              <span className="hidden shrink-0 text-[10px] font-medium uppercase leading-none tracking-[0.12em] text-ink/30 md:inline md:text-[11px]">
                 at WashU
               </span>
             </span>
           </button>
         </h1>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="hidden md:block md:justify-self-center">
+          <ResetIconButton />
+        </div>
+
+        <div className="ml-auto flex shrink-0 items-center gap-2 md:ml-0 md:justify-self-end">
+          <div className="md:hidden">
+            <ResetIconButton />
+          </div>
           <div className="hidden items-center gap-2 md:flex">
             <button
               type="button"

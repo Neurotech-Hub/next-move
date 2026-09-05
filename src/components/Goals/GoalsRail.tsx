@@ -4,7 +4,6 @@ import { destinationPlans, nodeById, nodes } from "../../data";
 import { tailoringDetails } from "../../logic/guideSummary";
 import { useNavigator } from "../../state/NavigatorContext";
 import { GuideForm } from "../Guide/GuideForm";
-import { ResetIconButton } from "../UI/ResetIconButton";
 
 const destinations = nodes.filter((node) => node.type === "destination");
 
@@ -125,7 +124,6 @@ export function GoalsRail() {
             <Sparkles className="size-4" aria-hidden />
             Update my answers
           </button>
-          <ResetIconButton />
         </div>
 
         <details className="mt-5 border-t border-line pt-4">
@@ -171,7 +169,6 @@ export function GoalsRail() {
             <Sparkles className="size-4" aria-hidden />
             Guide me
           </button>
-          <ResetIconButton />
         </div>
       </>
     );

@@ -21,7 +21,7 @@ export function ResetIconButton({ className = "" }: { className?: string }) {
       type="button"
       onClick={reset}
       aria-label="Reset"
-      className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-line text-ink/40 transition hover:bg-raise hover:text-ink/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu ${className}`}
+      className={`inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-ink/40 transition hover:bg-raise hover:text-ink/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu ${className}`}
     >
       <RotateCcw className="size-4" aria-hidden />
     </button>
