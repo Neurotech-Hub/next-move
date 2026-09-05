@@ -39,14 +39,14 @@ function PathStep({
   return (
     <li className="relative flex items-start gap-4">
       <span
-        className={`relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border text-[11px] font-semibold ${
+        className={`relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border font-mono text-[11px] font-semibold transition duration-200 ${
           isCurrent
-            ? "border-washu bg-washu text-white shadow-[0_0_0_6px_rgba(165,20,23,0.12)]"
+            ? "border-washu bg-washu text-white shadow-[0_0_0_5px_rgba(225,75,82,0.16),0_0_20px_rgba(225,75,82,0.4)]"
             : isGoal
-              ? "border-washu/50 bg-[color-mix(in_srgb,var(--color-washu)_16%,var(--color-card))] text-washu"
+              ? "border-washu/50 bg-[color-mix(in_srgb,var(--color-washu)_22%,var(--color-card))] text-washu"
               : milestone
-                ? "border-dashed border-sage bg-card text-sage"
-                : "border-gold bg-gold text-white"
+                ? "border-dashed border-sage/70 bg-card text-sage"
+                : "border-gold/80 bg-gold text-paper shadow-[0_0_14px_rgba(217,160,84,0.22)]"
         }`}
         aria-hidden
       >
@@ -57,26 +57,26 @@ function PathStep({
         onClick={() => selectNode(node.id)}
         aria-pressed={selected}
         aria-current={isCurrent ? "step" : undefined}
-        className={`flex-1 rounded-2xl border px-4 py-3 text-left transition ${
+        className={`flex-1 rounded-2xl border px-4 py-3 text-left transition duration-200 ${
           selected
-            ? "border-ink/40 bg-card shadow-[0_8px_22px_rgba(28,25,23,0.08)]"
+            ? "border-ink/35 bg-raise shadow-[0_12px_32px_rgba(0,0,0,0.4)]"
             : isCurrent
-              ? "border-washu/60 bg-card shadow-[0_10px_28px_rgba(165,20,23,0.12)]"
-              : "border-stone-200 bg-card hover:border-ink/25"
+              ? "border-washu/50 bg-raise shadow-[0_0_28px_rgba(225,75,82,0.14),0_12px_28px_rgba(0,0,0,0.35)]"
+              : "border-line/70 bg-card/80 hover:border-ink/25 hover:bg-raise/70 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
         }`}
       >
         {isCurrent && (
-          <span className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.16em] text-washu">
+          <span className="font-mono mb-1 block text-[9px] font-medium uppercase tracking-[0.18em] text-washu">
             You are here
           </span>
         )}
         {isGoal && !isCurrent && (
-          <span className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.16em] text-washu">
+          <span className="font-mono mb-1 block text-[9px] font-medium uppercase tracking-[0.18em] text-washu">
             Your goal
           </span>
         )}
         {milestone && (
-          <span className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.16em] text-sage">
+          <span className="font-mono mb-1 block text-[9px] font-medium uppercase tracking-[0.18em] text-sage">
             A useful move
           </span>
         )}
@@ -130,9 +130,9 @@ export function PathView() {
   let numberedStep = 0;
 
   return (
-    <div className="flex min-h-0 flex-col px-4 pb-10 pt-4 sm:px-8 sm:pt-6 lg:h-full lg:overflow-y-auto lg:pb-16">
+    <div className="field-bg flex min-h-0 flex-col px-4 pb-10 pt-4 sm:px-8 sm:pt-6 lg:h-full lg:overflow-y-auto lg:pb-16">
       <div className="mx-auto w-full max-w-2xl">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+        <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
           {recommendation ? "Your tailored pathway" : "Your pathway"}
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
@@ -158,7 +158,7 @@ export function PathView() {
         )}
 
         {!isolated && !showFullJourney && (
-          <div className="mt-10 rounded-3xl border border-dashed border-stone-300 bg-card/60 px-6 py-10 text-center">
+          <div className="mt-10 rounded-3xl border border-dashed border-line bg-card/60 px-6 py-10 text-center">
             <p className="font-display text-2xl text-ink">
               Choose a goal to see one path
             </p>
@@ -178,7 +178,7 @@ export function PathView() {
         {isolated && (
           <ol className="relative mt-8 space-y-3">
             <span
-              className="absolute bottom-4 left-4 top-4 w-px bg-gold/40"
+              className="absolute bottom-4 left-4 top-4 w-px bg-gradient-to-b from-washu/25 via-gold/20 to-ink/10"
               aria-hidden
             />
             {isolatedNodes.map((node) => {
@@ -216,7 +216,7 @@ export function PathView() {
                   <p className="text-sm text-muted">{region.subtitle}</p>
                   <ol className="relative mt-3 space-y-3">
                     <span
-                      className="absolute bottom-4 left-4 top-4 w-px bg-stone-300/70"
+                      className="absolute bottom-4 left-4 top-4 w-px bg-ink/10"
                       aria-hidden
                     />
                     {steps.map((node, index) => (

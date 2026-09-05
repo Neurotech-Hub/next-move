@@ -17,7 +17,7 @@ function Shell() {
       ) : (
         <div className="flex min-h-0 flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
           <GoalsRail />
-          <main className="relative min-w-0 flex-1 border-y border-stone-200 lg:min-h-0 lg:border-y-0">
+          <main className="relative min-w-0 flex-1 border-y border-line lg:min-h-0 lg:border-y-0">
             <PathView />
           </main>
           <NextMoves />

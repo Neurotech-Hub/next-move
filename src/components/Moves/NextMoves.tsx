@@ -15,33 +15,33 @@ function MoveCard({
   const resource = move.resourceId ? resourceById[move.resourceId] : undefined;
 
   return (
-    <article className="rounded-2xl border border-stone-200 bg-white px-3.5 py-3">
+    <article className="rounded-2xl border border-line/70 bg-raise/50 px-3.5 py-3">
       <h3 className="font-display text-[16px] leading-snug text-ink">
         {move.title}
       </h3>
       <p className="mt-1 text-sm leading-relaxed text-ink/85">{move.why}</p>
       <dl className="mt-3 space-y-2 text-sm">
         <div>
-          <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+          <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
             Evidence required
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.evidenceRequired}</dd>
         </div>
         <div>
-          <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+          <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
             Academic return
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.academicReturn}</dd>
         </div>
         <div>
-          <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+          <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
             You do not
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.notNeeded}</dd>
         </div>
         {move.trap && (
           <div>
-            <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+            <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-washu">
               Keep in mind
             </dt>
             <dd className="mt-0.5 text-ink/85">{move.trap}</dd>
@@ -49,8 +49,8 @@ function MoveCard({
         )}
       </dl>
       {resource && (
-        <div className="mt-3 rounded-xl border border-stone-200 bg-stone-50/70 p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-washu">
+        <div className="mt-3 rounded-xl border border-line/60 bg-paper/60 p-3">
+          <p className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-washu">
             Why this program
           </p>
           {move.resourceReason && (
@@ -61,7 +61,7 @@ function MoveCard({
           <button
             type="button"
             onClick={() => onOpenResource(resource.id)}
-            className="mt-2 w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-left text-sm transition hover:border-ink/25"
+            className="mt-2 w-full rounded-lg border border-line bg-raise px-3 py-2 text-left text-sm transition duration-200 hover:border-ink/25 hover:bg-raise/80"
           >
             <span className="block font-medium text-ink">{resource.title}</span>
             <span className="mt-0.5 block text-xs text-muted">
@@ -91,7 +91,7 @@ function DefaultMoves() {
   if (!focusedDestinationId && !recommendation) {
     return (
       <div>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+        <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
           Next steps & programs
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
@@ -107,7 +107,7 @@ function DefaultMoves() {
 
   return (
     <div>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+      <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
         Next steps & programs
       </p>
       {recommendation ? (
@@ -160,7 +160,7 @@ function NodeInspector({ nodeId }: { nodeId: string }) {
 
   return (
     <article>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+      <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-muted">
         {node.type === "destination"
           ? "Your goal"
           : node.type === "milestone"
@@ -175,7 +175,7 @@ function NodeInspector({ nodeId }: { nodeId: string }) {
       </p>
       {related.length > 0 && (
         <section className="mt-6">
-          <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+          <h3 className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
             Programs connected to this stage
           </h3>
           <p className="mt-1 text-xs leading-relaxed text-muted">
@@ -238,7 +238,7 @@ export function NextMoves() {
         <p className="sr-only">Next moves are listed in the side panel.</p>
       )}
       <aside
-        className="z-20 flex w-full shrink-0 flex-col border-stone-200 bg-card lg:h-full lg:min-h-0 lg:w-[340px] lg:border-l"
+        className="z-20 flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[340px] lg:border-l"
         aria-label="Next steps and programs"
       >
         {hasFocus && (
@@ -246,7 +246,7 @@ export function NextMoves() {
             <button
               type="button"
               onClick={close}
-              className="rounded-full p-1.5 text-muted hover:bg-stone-100"
+              className="rounded-full p-1.5 text-muted hover:bg-raise"
               aria-label="Close details"
             >
               <X className="size-4" />

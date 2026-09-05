@@ -22,10 +22,10 @@ function DestinationList() {
               type="button"
               onClick={() => focusDestination(selected ? null : node.id)}
               aria-pressed={selected}
-              className={`w-full rounded-2xl border px-3.5 py-3 text-left transition ${
+              className={`w-full rounded-2xl border px-3.5 py-3 text-left transition duration-200 ${
                 selected
-                  ? "border-washu/50 bg-washu/6 shadow-[0_8px_22px_rgba(165,20,23,0.08)]"
-                  : "border-stone-200 bg-white hover:border-ink/25"
+                  ? "border-washu/50 bg-washu/10 shadow-[0_0_20px_rgba(225,75,82,0.14)]"
+                  : "border-line bg-raise/50 hover:border-ink/25 hover:bg-raise"
               }`}
             >
               <span className="font-display block text-[15px] leading-snug text-ink">
@@ -62,7 +62,7 @@ export function GoalsRail() {
 
   if (guideOpen) {
     return (
-      <aside className="flex w-full shrink-0 flex-col border-stone-200 bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
+      <aside className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
         <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
           <GuideForm />
         </div>
@@ -80,9 +80,9 @@ export function GoalsRail() {
     );
 
     return (
-      <aside className="flex w-full shrink-0 flex-col border-stone-200 bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
+      <aside className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
         <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
             Tailored to your answers
           </p>
           <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
@@ -96,9 +96,9 @@ export function GoalsRail() {
             {details.map((detail) => (
               <div
                 key={detail.label}
-                className="rounded-xl border border-stone-200 bg-white px-3 py-2.5"
+                className="rounded-xl border border-line/70 bg-raise/50 px-3 py-2.5"
               >
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.14em] text-washu">
+                <dt className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-washu">
                   {detail.label}
                 </dt>
                 <dd className="mt-0.5 text-sm font-medium leading-snug text-ink">
@@ -120,7 +120,7 @@ export function GoalsRail() {
             Update my answers
           </button>
 
-          <details className="mt-5 border-t border-stone-200 pt-4">
+          <details className="mt-5 border-t border-line pt-4">
             <summary className="cursor-pointer text-sm font-medium text-muted hover:text-ink">
               Choose a goal directly instead
             </summary>
@@ -132,9 +132,9 @@ export function GoalsRail() {
   }
 
   return (
-    <aside className="flex w-full shrink-0 flex-col border-stone-200 bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
+    <aside className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
       <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+        <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
           Your goals
         </p>
         <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
@@ -146,7 +146,7 @@ export function GoalsRail() {
 
         <DestinationList />
 
-        <div className="mt-5 border-t border-stone-200 pt-5">
+        <div className="mt-5 border-t border-line pt-5">
           <p className="text-sm font-medium text-ink">
             Not sure which destination fits?
           </p>

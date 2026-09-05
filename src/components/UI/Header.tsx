@@ -9,13 +9,18 @@ export function Header() {
     "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu";
 
   return (
-    <header className="relative z-20 shrink-0 border-b border-stone-200/70 bg-paper/95 px-4 py-3 backdrop-blur-sm sm:px-6">
+    <header className="relative z-20 shrink-0 border-b border-line/70 bg-paper/95 px-4 py-3 backdrop-blur-sm sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="font-display text-[1.45rem] leading-none tracking-tight text-ink sm:text-[1.7rem]">
+        <h1 className="min-w-0">
+          <button
+            type="button"
+            onClick={reset}
+            className="font-display text-left text-[1.45rem] leading-none tracking-tight text-ink transition hover:text-washu focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu sm:text-[1.7rem]"
+            aria-label="Innovation Navigator home"
+          >
             Innovation Navigator
-          </h1>
-        </div>
+          </button>
+        </h1>
 
         <div className="flex flex-wrap items-center gap-2">
           <button
@@ -24,7 +29,7 @@ export function Header() {
               setView(view === "resources" ? "journey" : "resources")
             }
             aria-pressed={view === "resources"}
-            className={`${seg} text-ink/55 hover:bg-stone-100 hover:text-ink/80`}
+            className={`${seg} text-ink/55 hover:bg-raise hover:text-ink/80`}
           >
             {view === "resources" ? "Back to your path" : "View all resources"}
           </button>
@@ -35,7 +40,7 @@ export function Header() {
             <button
               type="button"
               onClick={reset}
-              className={`${seg} text-ink/70 hover:bg-stone-100`}
+              className={`${seg} text-ink/70 hover:bg-raise`}
             >
               <RotateCcw className="size-3.5" aria-hidden />
               Reset

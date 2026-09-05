@@ -15,7 +15,7 @@ const SOURCES: {
     id: "all",
     label: "All cards",
     chip: "border-ink bg-ink text-paper",
-    badge: "border-stone-200 bg-stone-100 text-muted",
+    badge: "border-line bg-raise text-muted",
   },
   {
     id: "washu",
@@ -26,19 +26,19 @@ const SOURCES: {
   {
     id: "federal",
     label: "Federal",
-    chip: "border-federal/40 bg-federal text-white",
+    chip: "border-federal/40 bg-federal text-paper",
     badge: "border-federal/25 bg-federal/10 text-federal",
   },
   {
     id: "regional",
     label: "Regional",
-    chip: "border-sage/40 bg-sage text-white",
+    chip: "border-sage/40 bg-sage text-paper",
     badge: "border-sage/25 bg-sage/10 text-sage",
   },
   {
     id: "investor",
     label: "Investor",
-    chip: "border-gold/40 bg-gold text-white",
+    chip: "border-gold/40 bg-gold text-paper",
     badge: "border-gold/25 bg-gold/10 text-gold",
   },
 ];
@@ -73,10 +73,10 @@ function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+      className={`rounded-full border px-3 py-1.5 text-sm font-medium transition duration-200 ${
         selected
           ? selectedClass
-          : "border-stone-300 bg-card text-ink/75 hover:border-ink/30"
+          : "border-line bg-card text-ink/75 hover:border-ink/30 hover:bg-raise"
       }`}
     >
       {children}
@@ -101,24 +101,26 @@ function CatalogCard({
       type="button"
       onClick={onOpen}
       aria-pressed={selected}
-      className={`flex h-full min-h-[190px] flex-col rounded-2xl border bg-card p-3.5 text-left transition hover:border-ink/25 hover:shadow-[0_10px_24px_rgba(28,25,23,0.08)] ${
+      className={`flex h-full min-h-[190px] w-full min-w-0 flex-col rounded-2xl border bg-card p-3.5 text-left transition duration-200 hover:border-ink/25 hover:bg-raise/60 hover:shadow-[0_10px_28px_rgba(0,0,0,0.35)] ${
         selected
-          ? "border-ink/40 shadow-[0_8px_20px_rgba(28,25,23,0.08)]"
-          : "border-stone-200"
+          ? "border-ink/40 bg-raise/60 shadow-[0_10px_28px_rgba(0,0,0,0.4)]"
+          : "border-line/70"
       }`}
     >
       <span
-        className={`inline-flex w-fit rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${SOURCE_BADGE[resource.internality]}`}
+        className={`font-mono inline-flex w-fit shrink-0 rounded-full border px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.14em] ${SOURCE_BADGE[resource.internality]}`}
       >
         {SOURCE_LABEL[resource.internality]}
       </span>
-      <h3 className="font-display mt-2 text-base leading-snug text-ink">
+      <h3 className="font-display mt-2 line-clamp-2 text-base leading-snug text-ink">
         {resource.title}
       </h3>
-      <p className="mt-0.5 text-xs text-muted">{resource.organization}</p>
+      <p className="mt-0.5 line-clamp-1 text-xs text-muted">
+        {resource.organization}
+      </p>
       {ret && (
         <div className="mt-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
+          <p className="font-mono text-[9px] font-medium uppercase tracking-[0.14em] text-muted">
             What you get
           </p>
           <p className="mt-0.5 line-clamp-2 text-sm leading-relaxed text-ink/85">
@@ -128,7 +130,7 @@ function CatalogCard({
       )}
       {usefulWhen && (
         <div className="mt-auto pt-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
+          <p className="font-mono text-[9px] font-medium uppercase tracking-[0.14em] text-muted">
             Useful when
           </p>
           <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-ink/70">
@@ -176,7 +178,7 @@ export function ResourcesCatalog() {
   return (
     <div className="flex h-full min-h-0">
       <div className="min-h-0 flex-1 overflow-y-auto px-4 py-6 sm:px-8">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+        <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
           Catalog
         </p>
         <h2 className="font-display mt-1 text-3xl text-ink">All resources</h2>
@@ -188,7 +190,7 @@ export function ResourcesCatalog() {
           {filtered.length} of {resources.length} programs
         </p>
 
-        <div className="sticky top-0 z-10 -mx-2 mt-3 border-b border-stone-200/70 bg-paper/95 px-2 py-3 backdrop-blur-sm">
+        <div className="sticky top-0 z-10 -mx-2 mt-3 border-b border-line/70 bg-paper/95 px-2 py-3 backdrop-blur-sm">
           <div
             className="flex flex-nowrap gap-2 overflow-x-auto pb-1"
             aria-label="Filter resources by source"
@@ -217,7 +219,7 @@ export function ResourcesCatalog() {
         <div className="mt-5 space-y-8">
           {groups.map((group) => (
             <section key={group.id} aria-labelledby={`resources-${group.id}`}>
-              <div className="mb-3 flex items-baseline justify-between gap-3 border-b border-stone-200 pb-2">
+              <div className="mb-3 flex items-baseline justify-between gap-3 border-b border-line pb-2">
                 <h3
                   id={`resources-${group.id}`}
                   className="font-display text-xl text-ink"
@@ -228,7 +230,7 @@ export function ResourcesCatalog() {
                   {group.resources.length} programs
                 </span>
               </div>
-              <ul className="grid auto-rows-fr gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <ul className="grid grid-cols-1 gap-2.5 [grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))] sm:[grid-template-columns:repeat(auto-fill,minmax(220px,1fr))]">
                 {group.resources.map((resource) => (
                   <li key={resource.id} className="min-w-0">
                     <CatalogCard
@@ -245,7 +247,7 @@ export function ResourcesCatalog() {
       </div>
 
       {open && (
-        <aside className="hidden h-full w-[380px] shrink-0 overflow-y-auto border-l border-stone-200 bg-card px-5 py-6 lg:block">
+        <aside className="hidden h-full w-[380px] shrink-0 overflow-y-auto border-l border-line bg-card px-5 py-6 lg:block">
           <button
             type="button"
             onClick={() => selectResource(null)}
@@ -263,16 +265,16 @@ export function ResourcesCatalog() {
             type="button"
             aria-label="Close program details"
             onClick={() => selectResource(null)}
-            className="fixed inset-0 z-20 bg-ink/20 lg:hidden"
+            className="fixed inset-0 z-20 bg-black/60 lg:hidden"
           />
           <div
             role="dialog"
             aria-modal="true"
             aria-label={`${open.title} details`}
-            className="fixed inset-x-0 bottom-0 z-30 max-h-[80vh] overflow-y-auto rounded-t-3xl border bg-card px-5 py-5 shadow-[0_-12px_40px_rgba(28,25,23,0.14)] lg:hidden"
+            className="fixed inset-x-0 bottom-0 z-30 max-h-[80vh] overflow-y-auto rounded-t-3xl border border-line bg-card px-5 py-5 shadow-[0_-12px_48px_rgba(0,0,0,0.6)] lg:hidden"
           >
             <div
-              className="mx-auto mb-3 h-1 w-10 rounded-full bg-stone-300"
+              className="mx-auto mb-3 h-1 w-10 rounded-full bg-line"
               aria-hidden
             />
             <button

@@ -47,7 +47,7 @@ export function ResourceCard({
       <button
         type="button"
         onClick={() => selectResource(resource.id, selectedNodeId ?? undefined)}
-        className="w-full rounded-2xl border border-stone-200 bg-white px-3.5 py-3 text-left transition hover:border-ink/20"
+        className="w-full rounded-2xl border border-line/70 bg-raise/50 px-3.5 py-3 text-left transition duration-200 hover:border-ink/25 hover:bg-raise"
       >
         <p className="text-sm font-semibold text-ink">{resource.title}</p>
         {ret && (
@@ -64,7 +64,7 @@ export function ResourceCard({
     <article className="space-y-5">
       <div>
         <span
-          className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${SOURCE_STYLE[resource.internality]}`}
+          className={`font-mono inline-flex rounded-full border px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.14em] ${SOURCE_STYLE[resource.internality]}`}
         >
           {SOURCE_LABEL[resource.internality]} program
         </span>
@@ -108,7 +108,7 @@ export function ResourceCard({
 
       {status && <p className="text-sm font-medium text-ink/80">{status}</p>}
 
-      <details className="rounded-2xl bg-stone-100/80 px-3.5 py-3">
+      <details className="rounded-2xl bg-raise/70 px-3.5 py-3">
         <summary className="cursor-pointer text-sm font-medium text-ink">
           More detail
         </summary>
@@ -126,7 +126,7 @@ export function ResourceCard({
         href={resource.url}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper"
+        className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition duration-200 hover:bg-ink/90"
       >
         Official page
         <ArrowUpRight className="size-3.5" aria-hidden />
@@ -144,7 +144,7 @@ function Section({
 }) {
   return (
     <section>
-      <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+      <h4 className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
         {title}
       </h4>
       <div className="mt-1.5 space-y-1.5 text-sm leading-relaxed text-ink/85">

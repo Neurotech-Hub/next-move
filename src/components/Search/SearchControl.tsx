@@ -52,7 +52,7 @@ export function SearchControl() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-card px-3 py-1.5 text-sm font-medium text-ink/75 transition hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu"
+        className="inline-flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5 text-sm font-medium text-ink/75 transition hover:bg-raise focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu"
         aria-expanded={open}
         aria-label="Search stages and resources"
       >
@@ -60,8 +60,8 @@ export function SearchControl() {
         <span className="hidden sm:inline">Search</span>
       </button>
       {open && (
-        <div className="absolute right-0 top-11 z-40 w-[min(88vw,22rem)] rounded-2xl border border-stone-200 bg-card p-2 shadow-[0_16px_40px_rgba(28,25,23,0.14)]">
-          <div className="flex items-center gap-2 rounded-xl bg-stone-100 px-2.5">
+        <div className="absolute right-0 top-11 z-40 w-[min(88vw,22rem)] rounded-2xl border border-line bg-card p-2 shadow-[0_16px_48px_rgba(0,0,0,0.55)]">
+          <div className="flex items-center gap-2 rounded-xl bg-raise px-2.5">
             <Search className="size-3.5 text-muted" aria-hidden />
             <input
               ref={inputRef}
@@ -78,7 +78,7 @@ export function SearchControl() {
                 <li key={`${hit.kind}-${hit.id}`}>
                   <button
                     type="button"
-                    className="w-full rounded-xl px-2.5 py-2 text-left hover:bg-stone-100"
+                    className="w-full rounded-xl px-2.5 py-2 text-left transition hover:bg-raise"
                     onClick={() => choose(hit)}
                   >
                     <p className="text-sm font-medium text-ink">{hit.title}</p>

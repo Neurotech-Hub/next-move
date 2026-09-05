@@ -84,10 +84,10 @@ function Choice({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`rounded-xl border px-3 py-2 text-left text-sm leading-snug transition ${
+      className={`rounded-xl border px-3 py-2 text-left text-sm leading-snug transition duration-200 ${
         selected
-          ? "border-washu/40 bg-washu/8 text-ink"
-          : "border-stone-200 bg-white text-ink/80 hover:border-ink/20"
+          ? "border-washu/45 bg-washu/12 text-ink"
+          : "border-line bg-raise/50 text-ink/80 hover:border-ink/25 hover:bg-raise"
       }`}
     >
       {children}
@@ -124,13 +124,13 @@ export function GuideForm() {
         {TITLES.map((_, index) => (
           <span
             key={index}
-            className={`h-1 flex-1 rounded-full ${
-              index <= step ? "bg-washu" : "bg-stone-200"
+            className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
+              index <= step ? "bg-washu" : "bg-line"
             }`}
           />
         ))}
       </div>
-      <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+      <p className="font-mono mt-3 text-[10px] font-medium uppercase tracking-[0.18em] text-muted">
         Guide me · {step + 1} of 4
       </p>
       <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
@@ -141,8 +141,8 @@ export function GuideForm() {
           ? "Choose all that apply."
           : "One answer is enough. You can change it later."}
       </p>
-      <div className="mt-3 rounded-xl border border-washu/15 bg-washu/5 px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-washu">
+      <div className="mt-3 rounded-xl border border-washu/20 bg-washu/8 px-3 py-2">
+        <p className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-washu">
           How this tailors your results
         </p>
         <p className="mt-0.5 text-xs leading-relaxed text-ink/75">
