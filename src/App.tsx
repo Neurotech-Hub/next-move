@@ -1,8 +1,8 @@
-import { ReactFlowProvider } from "@xyflow/react";
+import { GoalsRail } from "./components/Goals/GoalsRail";
+import { PathView } from "./components/Journey/PathView";
+import { NextMoves } from "./components/Moves/NextMoves";
+import { ResourcesCatalog } from "./components/Catalog/ResourcesCatalog";
 import { Header } from "./components/UI/Header";
-import { InnovationMap } from "./components/Map/InnovationMap";
-import { JourneyView } from "./components/Journey/JourneyView";
-import { SidePanel } from "./components/Panel/SidePanel";
 import { NavigatorProvider, useNavigator } from "./state/NavigatorContext";
 
 function Shell() {
@@ -10,18 +10,19 @@ function Shell() {
   return (
     <div className="flex h-full flex-col overflow-hidden bg-paper">
       <Header />
-      <div className="flex min-h-0 flex-1">
-        <SidePanel />
-        <main className="relative min-h-0 min-w-0 flex-1">
-          {view === "journey" ? (
-            <JourneyView />
-          ) : (
-            <ReactFlowProvider>
-              <InnovationMap />
-            </ReactFlowProvider>
-          )}
-        </main>
-      </div>
+      {view === "resources" ? (
+        <div className="min-h-0 flex-1">
+          <ResourcesCatalog />
+        </div>
+      ) : (
+        <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
+          <GoalsRail />
+          <main className="relative min-h-0 min-w-0 flex-1">
+            <PathView />
+          </main>
+          <NextMoves />
+        </div>
+      )}
     </div>
   );
 }

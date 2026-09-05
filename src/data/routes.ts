@@ -11,6 +11,14 @@ export const routes: Route[] = [
     destinationIds: ["dest-funding", "dest-research"],
     motivations: ["papers", "grants", "collaborators", "trainees"],
     modalities: ["general", "research-tool", "software"],
+    academicReturns: [
+      "preliminary data",
+      "grant aims",
+      "trainee projects",
+      "collaborations",
+    ],
+    facultyCommitment: "Stays inside research time.",
+    companyRequired: false,
   },
   {
     id: "research-tool-adoption",
@@ -33,6 +41,13 @@ export const routes: Route[] = [
     destinationIds: ["dest-distribution", "dest-research"],
     motivations: ["reach", "papers", "collaborators"],
     modalities: ["research-tool", "software", "reagent"],
+    academicReturns: [
+      "methods papers",
+      "labs using the tool",
+      "collaborations",
+    ],
+    facultyCommitment: "Moderate if your lab must support users.",
+    companyRequired: false,
   },
   {
     id: "device-license",
@@ -66,6 +81,15 @@ export const routes: Route[] = [
     destinationIds: ["dest-licensing"],
     motivations: ["patients", "reach", "low-time"],
     modalities: ["device", "diagnostic", "software"],
+    academicReturns: [
+      "validation data",
+      "trainee project",
+      "possible methods paper",
+      "industry collaborators",
+      "possible inventor licensing return",
+    ],
+    facultyCommitment: "Moderate during validation; usually much lower than founding.",
+    companyRequired: false,
   },
   {
     id: "therapeutic",
@@ -77,6 +101,14 @@ export const routes: Route[] = [
     destinationIds: ["dest-clinical", "dest-funding"],
     motivations: ["patients", "grants"],
     modalities: ["therapeutic"],
+    academicReturns: [
+      "drug-development expertise",
+      "milestone-driven funding",
+      "trainee industry exposure",
+      "path toward IND without founding",
+    ],
+    facultyCommitment: "Moderate on a partner path; high if you operate a company.",
+    companyRequired: false,
   },
   {
     id: "startup",
@@ -99,5 +131,12 @@ export const routes: Route[] = [
     destinationIds: ["dest-startup"],
     motivations: ["financial", "reach", "patients"],
     modalities: ["device", "therapeutic", "software", "research-tool"],
+    academicReturns: [
+      "a vehicle for deployment",
+      "entrepreneurial learning",
+      "possible equity — high uncertainty",
+    ],
+    facultyCommitment: "High if you operate it; moderate with an external CEO.",
+    companyRequired: true,
   },
 ];

@@ -5,13 +5,13 @@ import { useNavigator } from "../../state/NavigatorContext";
 
 function StatusNote({ resource }: { resource: Resource }) {
   if (resource.status === "closed_verify") {
-    return "The current application window is closed. Treat this as a likely future milestone and verify before planning around it.";
+    return "The current window is closed. Treat this as a likely future milestone and verify before planning around it.";
   }
   if (resource.nextDeadline) {
-    return `Current noted deadline: ${resource.nextDeadline}. Confirm on the official page.`;
+    return `Noted deadline: ${resource.nextDeadline}. Confirm on the official page.`;
   }
   if (resource.status === "evergreen_program_verify_current_call") {
-    return "This is an ongoing program with cycle-specific calls. Verify current timing before applying.";
+    return "Ongoing program with cycle-specific calls. Verify current timing before applying.";
   }
   return null;
 }
@@ -25,6 +25,8 @@ export function ResourceCard({
 }) {
   const { selectResource, selectedNodeId } = useNavigator();
   const status = StatusNote({ resource });
+  const trap = resource.caveats[0];
+  const ret = resource.investigatorReturns[0];
 
   if (compact) {
     return (
@@ -34,7 +36,12 @@ export function ResourceCard({
         className="w-full rounded-2xl border border-stone-200 bg-white px-3.5 py-3 text-left transition hover:border-ink/20"
       >
         <p className="text-sm font-semibold text-ink">{resource.title}</p>
-        <p className="mt-0.5 text-xs text-muted">{resource.organization}</p>
+        {ret && (
+          <p className="mt-1 text-xs leading-relaxed text-ink/80">{ret}</p>
+        )}
+        {trap && (
+          <p className="mt-1 text-xs leading-relaxed text-washu/80">{trap}</p>
+        )}
       </button>
     );
   }
@@ -43,7 +50,7 @@ export function ResourceCard({
     <article className="space-y-5">
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-          Program / resource
+          Program
         </p>
         <h3 className="font-display mt-1 text-2xl leading-snug text-ink">
           {resource.title}
@@ -51,18 +58,17 @@ export function ResourceCard({
         <p className="mt-1 text-sm text-muted">{resource.organization}</p>
       </div>
 
-      <Section title="Useful when">
-        <ul className="list-disc space-y-1 pl-4">
-          {resource.usefulWhen.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </Section>
+      {resource.investigatorReturns.length > 0 && (
+        <Section title="What this can return to you">
+          <ul className="list-disc space-y-1 pl-4">
+            {resource.investigatorReturns.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
-      <Section title="What you get">{resource.whatYouGet}</Section>
-      <Section title="Why you might care">{resource.whyYouMightCare}</Section>
-
-      <Section title="You do NOT necessarily need to…">
+      <Section title="You do not need to…">
         <ul className="list-disc space-y-1 pl-4">
           {resource.notFor.map((item) => (
             <li key={item}>{item}</li>
@@ -72,32 +78,33 @@ export function ResourceCard({
 
       <Section title="What you need first">{resource.eligibility}</Section>
 
-      {resource.investigatorReturns.length > 0 && (
-        <Section title="Possible academic returns">
-          <ul className="list-disc space-y-1 pl-4">
-            {resource.investigatorReturns.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+      {resource.contact && (
+        <Section title="Who to contact">{resource.contact}</Section>
+      )}
+
+      {resource.caveats.length > 0 && (
+        <Section title="Watch for">
+          {resource.caveats.map((caveat) => (
+            <p key={caveat}>{caveat}</p>
+          ))}
         </Section>
       )}
 
-      <Section title="Details">
-        {resource.funding && <p>Funding: {resource.funding}</p>}
-        {resource.contact && <p>Contact: {resource.contact}</p>}
-        <p>
-          Company required: {resource.companyRequired ? "Yes" : "No"}. Disclosure
-          typically needed: {resource.requiresDisclosure ? "Yes" : "No"}.
-        </p>
-        {resource.caveats.map((caveat) => (
-          <p key={caveat}>{caveat}</p>
-        ))}
-        {status && <p className="font-medium text-ink/80">{status}</p>}
-        <p className="text-xs text-muted">
-          Last verified {resource.lastVerified}. Program details change — use the
-          official link.
-        </p>
-      </Section>
+      {status && <p className="text-sm font-medium text-ink/80">{status}</p>}
+
+      <details className="rounded-2xl bg-stone-100/80 px-3.5 py-3">
+        <summary className="cursor-pointer text-sm font-medium text-ink">
+          More detail
+        </summary>
+        <div className="mt-3 space-y-3 text-sm leading-relaxed text-ink/85">
+          <p>{resource.whatYouGet}</p>
+          <p>{resource.whyYouMightCare}</p>
+          {resource.funding && <p>Funding: {resource.funding}</p>}
+          <p className="text-xs text-muted">
+            Last verified {resource.lastVerified}. Confirm on the official page.
+          </p>
+        </div>
+      </details>
 
       <a
         href={resource.url}
@@ -105,7 +112,7 @@ export function ResourceCard({
         rel="noreferrer"
         className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper"
       >
-        Learn more
+        Official page
         <ArrowUpRight className="size-3.5" aria-hidden />
       </a>
     </article>

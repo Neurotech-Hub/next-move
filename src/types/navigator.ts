@@ -15,7 +15,16 @@ export type VisualState =
   | "current"
   | "dimmed";
 
-export type Internality = "washu" | "regional" | "federal";
+export type Internality = "washu" | "regional" | "federal" | "investor";
+
+export type ResourcePurpose =
+  | "funding"
+  | "expertise"
+  | "ip"
+  | "company"
+  | "research";
+
+export type ResourcePriority = "core" | "second";
 
 export type AssetAnswer =
   | "observation"
@@ -96,7 +105,7 @@ export interface MapEdge {
   kind: EdgeKind;
 }
 
-export type ViewMode = "journey" | "overview";
+export type ViewMode = "journey" | "resources";
 
 export type NodeEmphasis = "current" | "primary" | "secondary" | "muted" | "none";
 
@@ -109,6 +118,9 @@ export interface Route {
   destinationIds: string[];
   motivations: MotivationAnswer[];
   modalities: string[];
+  academicReturns: string[];
+  facultyCommitment: string;
+  companyRequired: boolean;
 }
 
 export interface Resource {
@@ -137,6 +149,8 @@ export interface Resource {
   lastVerified: string;
   sourceUrls: string[];
   contact?: string;
+  priority?: ResourcePriority;
+  purposes?: ResourcePurpose[];
 }
 
 export interface GuideAnswers {
@@ -146,10 +160,55 @@ export interface GuideAnswers {
   involvement?: InvolvementAnswer;
 }
 
+export interface NextMove {
+  id: string;
+  title: string;
+  why: string;
+  evidenceRequired: string;
+  academicReturn: string;
+  resourceId?: string;
+  notNeeded: string;
+  trap?: string;
+  contact?: string;
+  fromStateId?: string;
+  toStateId?: string;
+}
+
 export interface Recommendation {
   currentStateId: string;
   routeIds: string[];
   destinationIds: string[];
   summary: string;
   youAreHereLabel: string;
+  nextMoves: NextMove[];
+}
+
+export interface Transition {
+  id: string;
+  from: string;
+  to: string;
+  question: string;
+  evidence: string;
+  resourceIds: string[];
+  modalities?: string[];
+}
+
+export interface DestinationPlanItem {
+  title: string;
+  why: string;
+  evidenceRequired: string;
+  academicReturn: string;
+  resourceId?: string;
+  notNeeded: string;
+  trap?: string;
+}
+
+export interface DestinationPlan {
+  destinationId: string;
+  oneLiner: string;
+  academicReturns: string[];
+  facultyCommitment: string;
+  companyRequired: boolean;
+  defaultRouteId: string;
+  checklist: DestinationPlanItem[];
 }

@@ -51,9 +51,9 @@ const INVOLVEMENT: { id: InvolvementAnswer; label: string }[] = [
 ];
 
 const TITLES = [
-  "What do you have?",
   "What would success look like?",
   "What would make this worth your time?",
+  "What do you have?",
   "How involved do you want to be?",
 ];
 
@@ -96,9 +96,9 @@ export function GuideForm() {
   const update = (next: GuideAnswers) => setGuideAnswers(next);
 
   const canAdvance =
-    (step === 0 && Boolean(answers.asset)) ||
-    (step === 1 && answers.destinations.length > 0) ||
-    (step === 2 && answers.motivations.length > 0) ||
+    (step === 0 && answers.destinations.length > 0) ||
+    (step === 1 && answers.motivations.length > 0) ||
+    (step === 2 && Boolean(answers.asset)) ||
     step === 3;
 
   const next = () => {
@@ -129,23 +129,13 @@ export function GuideForm() {
         {TITLES[step]}
       </h2>
       <p className="mt-2 text-sm text-muted">
-        {step === 1 || step === 2
+        {step === 0 || step === 1
           ? "Choose all that apply."
           : "One answer is enough. You can change it later."}
       </p>
 
       <div className="mt-4 grid gap-2">
         {step === 0 &&
-          ASSETS.map((item) => (
-            <Choice
-              key={item.id}
-              selected={answers.asset === item.id}
-              onClick={() => update({ ...answers, asset: item.id })}
-            >
-              {item.label}
-            </Choice>
-          ))}
-        {step === 1 &&
           DESTINATIONS.map((item) => (
             <Choice
               key={item.id}
@@ -160,7 +150,7 @@ export function GuideForm() {
               {item.label}
             </Choice>
           ))}
-        {step === 2 &&
+        {step === 1 &&
           MOTIVATIONS.map((item) => (
             <Choice
               key={item.id}
@@ -171,6 +161,16 @@ export function GuideForm() {
                   motivations: toggle(answers.motivations, item.id),
                 })
               }
+            >
+              {item.label}
+            </Choice>
+          ))}
+        {step === 2 &&
+          ASSETS.map((item) => (
+            <Choice
+              key={item.id}
+              selected={answers.asset === item.id}
+              onClick={() => update({ ...answers, asset: item.id })}
             >
               {item.label}
             </Choice>
@@ -201,7 +201,7 @@ export function GuideForm() {
           onClick={next}
           className="rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper disabled:opacity-40"
         >
-          {step === 3 ? "Show my place" : "Continue"}
+          {step === 3 ? "Show how the community can help" : "Continue"}
         </button>
       </div>
     </div>

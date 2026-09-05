@@ -1,4 +1,4 @@
-import { List, Map as MapIcon, RotateCcw, Sparkles } from "lucide-react";
+import { RotateCcw, Sparkles } from "lucide-react";
 import { useNavigator } from "../../state/NavigatorContext";
 import { SearchControl } from "../Search/SearchControl";
 
@@ -16,36 +16,22 @@ export function Header() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-washu">
             Innovation Navigator
           </p>
-          <h1 className="font-display mt-0.5 text-[1.45rem] leading-none tracking-tight text-ink sm:text-[1.7rem]">
-            Where could your idea go?
+          <h1 className="font-display mt-0.5 text-[1.35rem] leading-none tracking-tight text-ink sm:text-[1.55rem]">
+            How can the innovation community serve your goals?
           </h1>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <div
-            className="inline-flex rounded-full border border-stone-200 bg-card p-0.5"
-            role="group"
-            aria-label="View"
+          <button
+            type="button"
+            onClick={() =>
+              setView(view === "resources" ? "journey" : "resources")
+            }
+            aria-pressed={view === "resources"}
+            className={`${seg} text-ink/55 hover:bg-stone-100 hover:text-ink/80`}
           >
-            <button
-              type="button"
-              onClick={() => setView("journey")}
-              aria-pressed={view === "journey"}
-              className={`${seg} ${view === "journey" ? "bg-ink text-paper" : "text-ink/75 hover:bg-stone-100"}`}
-            >
-              <List className="size-3.5" aria-hidden />
-              Journey
-            </button>
-            <button
-              type="button"
-              onClick={() => setView("overview")}
-              aria-pressed={view === "overview"}
-              className={`${seg} ${view === "overview" ? "bg-ink text-paper" : "text-ink/75 hover:bg-stone-100"}`}
-            >
-              <MapIcon className="size-3.5" aria-hidden />
-              Overview map
-            </button>
-          </div>
+            {view === "resources" ? "Back to your path" : "View all resources"}
+          </button>
 
           <SearchControl />
 
@@ -59,7 +45,7 @@ export function Header() {
             {recommendation ? "Adjust answers" : "Guide me"}
           </button>
 
-          {(recommendation || guideOpen) && (
+          {(recommendation || guideOpen || view === "resources") && (
             <button
               type="button"
               onClick={reset}

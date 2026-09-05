@@ -4,7 +4,7 @@ import { searchNavigator } from "../../logic/filters";
 import { useNavigator } from "../../state/NavigatorContext";
 
 export function SearchControl() {
-  const { searchQuery, setSearchQuery, selectNode, selectResource } =
+  const { searchQuery, setSearchQuery, selectNode, selectResource, setView } =
     useNavigator();
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,6 +40,7 @@ export function SearchControl() {
     if (hit.kind === "resource" && hit.resourceId) {
       selectResource(hit.resourceId, hit.nodeId);
     } else {
+      setView("journey");
       selectNode(hit.nodeId);
     }
     setOpen(false);
