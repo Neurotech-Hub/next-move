@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { destinationPlans, nodeById, nodes } from "../../data";
 import { tailoringDetails } from "../../logic/guideSummary";
 import { useNavigator } from "../../state/NavigatorContext";
@@ -59,18 +60,22 @@ export function GoalsRail() {
     recommendation,
     guideAnswers,
   } = useNavigator();
+  const railRef = useRef<HTMLElement>(null);
+  const previousGuideOpen = useRef(guideOpen);
+
+  // On mobile the journey column scrolls as one page, so swapping the guide
+  // in/out can leave the viewport mid-section. Bring the rail back into view.
+  useEffect(() => {
+    if (previousGuideOpen.current === guideOpen) return;
+    previousGuideOpen.current = guideOpen;
+    railRef.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }, [guideOpen]);
+
+  let body: ReactNode;
 
   if (guideOpen) {
-    return (
-      <aside className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
-        <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
-          <GuideForm />
-        </div>
-      </aside>
-    );
-  }
-
-  if (recommendation && focusedDestinationId) {
+    body = <GuideForm />;
+  } else if (recommendation && focusedDestinationId) {
     const destination = nodeById[focusedDestinationId];
     const current = nodeById[recommendation.currentStateId];
     const details = tailoringDetails(
@@ -79,61 +84,57 @@ export function GoalsRail() {
       current?.title ?? recommendation.youAreHereLabel,
     );
 
-    return (
-      <aside className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
-        <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
-          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
-            Based on your answers
-          </p>
-          <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
-            Your path to {destination?.title ?? "your goal"}
-          </h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted">
-            Each answer updates a different part of your path:
-          </p>
+    body = (
+      <>
+        <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
+          Based on your answers
+        </p>
+        <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
+          Your path to {destination?.title ?? "your goal"}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted">
+          Each answer updates a different part of your path:
+        </p>
 
-          <dl className="mt-4 space-y-3">
-            {details.map((detail) => (
-              <div
-                key={detail.label}
-                className="rounded-xl border border-line/70 bg-raise/50 px-3 py-2.5"
-              >
-                <dt className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-washu">
-                  {detail.label}
-                </dt>
-                <dd className="mt-0.5 text-sm font-medium leading-snug text-ink">
-                  {detail.answer}
-                </dd>
-                <dd className="mt-1 text-xs leading-relaxed text-muted">
-                  {detail.effect}
-                </dd>
-              </div>
-            ))}
-          </dl>
+        <dl className="mt-4 space-y-3">
+          {details.map((detail) => (
+            <div
+              key={detail.label}
+              className="rounded-xl border border-line/70 bg-raise/50 px-3 py-2.5"
+            >
+              <dt className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-washu">
+                {detail.label}
+              </dt>
+              <dd className="mt-0.5 text-sm font-medium leading-snug text-ink">
+                {detail.answer}
+              </dd>
+              <dd className="mt-1 text-xs leading-relaxed text-muted">
+                {detail.effect}
+              </dd>
+            </div>
+          ))}
+        </dl>
 
-          <button
-            type="button"
-            onClick={openGuide}
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-washu px-4 py-2.5 text-sm font-medium text-white transition hover:bg-washu/90"
-          >
-            <Sparkles className="size-4" aria-hidden />
-            Update my answers
-          </button>
+        <button
+          type="button"
+          onClick={openGuide}
+          className="mt-5 inline-flex items-center gap-2 rounded-full bg-washu px-4 py-2.5 text-sm font-medium text-white transition hover:bg-washu/90"
+        >
+          <Sparkles className="size-4" aria-hidden />
+          Update my answers
+        </button>
 
-          <details className="mt-5 border-t border-line pt-4">
-            <summary className="cursor-pointer text-sm font-medium text-muted hover:text-ink">
-              Choose a goal directly instead
-            </summary>
-            <DestinationList />
-          </details>
-        </div>
-      </aside>
+        <details className="mt-5 border-t border-line pt-4">
+          <summary className="cursor-pointer text-sm font-medium text-muted hover:text-ink">
+            Choose a goal directly instead
+          </summary>
+          <DestinationList />
+        </details>
+      </>
     );
-  }
-
-  return (
-    <aside className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
-      <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
+  } else {
+    body = (
+      <>
         <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
           Your goals
         </p>
@@ -162,6 +163,17 @@ export function GoalsRail() {
           <Sparkles className="size-4" aria-hidden />
           Guide me
         </button>
+      </>
+    );
+  }
+
+  return (
+    <aside
+      ref={railRef}
+      className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r"
+    >
+      <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
+        {body}
       </div>
     </aside>
   );
