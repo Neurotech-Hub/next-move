@@ -232,7 +232,7 @@ export function PathView() {
               <button
                 type="button"
                 onClick={() => setShowFullJourney(true)}
-                className="mt-8 inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:bg-ink/90"
+                className="mt-8 inline-flex items-center rounded-full border border-line bg-transparent px-5 py-2.5 text-sm font-medium text-ink/75 transition hover:border-ink/30 hover:bg-raise/50 hover:text-ink"
               >
                 Explore every path
               </button>
