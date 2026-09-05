@@ -184,24 +184,17 @@ export function PathView() {
         )}
 
         {!isolated && !showFullJourney && (
-          <div className="cosmos mt-10">
-            <div className="cosmos-panel min-h-[340px] px-6 py-14 text-center sm:min-h-[400px] sm:py-16">
-              <span className="cosmos-layer cosmos-nebula" aria-hidden />
-              <span className="cosmos-layer cosmos-nebula cosmos-nebula-2" aria-hidden />
-              <span className="cosmos-layer cosmos-stars" aria-hidden />
-              <span className="cosmos-layer cosmos-stars cosmos-stars-near" aria-hidden />
-              <span className="cosmos-layer cosmos-disc" aria-hidden />
-              <span className="cosmos-layer cosmos-wave" aria-hidden />
-              <span className="cosmos-layer cosmos-wave cosmos-wave-2" aria-hidden />
-              <span className="cosmos-layer cosmos-core" aria-hidden />
-              <span className="cosmos-layer cosmos-comet" aria-hidden />
-              <span className="cosmos-layer cosmos-ring" aria-hidden />
-              <div className="cosmos-content">
-                <p className="cosmos-title font-display text-2xl text-ink sm:text-3xl">
+          <div className="aurora mt-10">
+            <div className="aurora-panel min-h-[340px] px-6 py-14 text-center sm:min-h-[400px] sm:py-16">
+              <span className="aurora-layer aurora-glow" aria-hidden />
+              <span className="aurora-layer aurora-band aurora-band-3" aria-hidden />
+              <span className="aurora-layer aurora-band aurora-band-1" aria-hidden />
+              <span className="aurora-layer aurora-band aurora-band-2" aria-hidden />
+              <span className="aurora-layer aurora-horizon" aria-hidden />
+              <span className="aurora-layer aurora-edge" aria-hidden />
+              <div className="aurora-content">
+                <p className="aurora-title font-display text-2xl text-ink sm:text-3xl">
                   Choose a goal to visualize the path.
-                </p>
-                <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink/70">
-                  Choose a goal, and we’ll plan backwards from there.
                 </p>
                 <button
                   type="button"
