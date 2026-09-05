@@ -156,9 +156,13 @@ export function PathView() {
     <div
       ref={pathRef}
       className="field-bg flex min-h-0 flex-col px-4 pb-10 pt-4 sm:px-8 sm:pt-6 lg:h-full lg:overflow-y-auto lg:pb-16"
+      aria-label={
+        recommendation ? "B. Your tailored pathway" : "B. Your pathway"
+      }
     >
       <div className="mx-auto w-full max-w-2xl">
         <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
+          <span aria-hidden="true">B. </span>
           {recommendation ? "Your tailored pathway" : "Your pathway"}
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
@@ -184,26 +188,54 @@ export function PathView() {
         )}
 
         {!isolated && !showFullJourney && (
-          <div className="aurora mt-10">
-            <div className="aurora-panel min-h-[340px] px-6 py-14 text-center sm:min-h-[400px] sm:py-16">
-              <span className="aurora-layer aurora-glow" aria-hidden />
-              <span className="aurora-layer aurora-band aurora-band-3" aria-hidden />
-              <span className="aurora-layer aurora-band aurora-band-1" aria-hidden />
-              <span className="aurora-layer aurora-band aurora-band-2" aria-hidden />
-              <span className="aurora-layer aurora-horizon" aria-hidden />
-              <span className="aurora-layer aurora-edge" aria-hidden />
-              <div className="aurora-content">
-                <p className="aurora-title font-display text-2xl text-ink sm:text-3xl">
-                  Choose a goal to visualize the path.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setShowFullJourney(true)}
-                  className="mt-6 text-sm font-medium text-ink/70 underline-offset-4 hover:text-ink hover:underline"
-                >
-                  See the full journey
-                </button>
-              </div>
+          <div className="roadmap-empty mt-10">
+            <div className="roadmap-panel flex flex-col items-center px-6 py-10 sm:py-12">
+              <svg
+                className="roadmap-sketch h-28 w-full max-w-[280px] sm:h-32"
+                viewBox="0 0 280 120"
+                preserveAspectRatio="xMidYMid meet"
+                aria-hidden
+              >
+                {/* Horizontal spine — abstract inventor's roadmap */}
+                <path
+                  className="roadmap-spine"
+                  d="M28 60 H252"
+                  fill="none"
+                  strokeWidth="1.25"
+                />
+                {/* Optional spur upward */}
+                <path
+                  className="roadmap-spur"
+                  d="M140 60 c0 -18 8 -28 22 -34"
+                  fill="none"
+                  strokeWidth="1"
+                  strokeDasharray="3 5"
+                />
+                <circle
+                  className="roadmap-node roadmap-node--muted"
+                  cx="166"
+                  cy="24"
+                  r="4.5"
+                />
+                <circle className="roadmap-node roadmap-node--1" cx="28" cy="60" r="5.5" />
+                <circle className="roadmap-node roadmap-node--2" cx="84" cy="60" r="5" />
+                <circle className="roadmap-node roadmap-node--3" cx="140" cy="60" r="5" />
+                <circle className="roadmap-node roadmap-node--4" cx="196" cy="60" r="5" />
+                <circle className="roadmap-node roadmap-node--goal" cx="252" cy="60" r="8" />
+              </svg>
+              <p className="roadmap-awaiting mt-6 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-muted">
+                Awaiting your goals
+                <span className="roadmap-awaiting-dots" aria-hidden>
+                  …
+                </span>
+              </p>
+              <button
+                type="button"
+                onClick={() => setShowFullJourney(true)}
+                className="mt-8 inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:bg-ink/90"
+              >
+                Explore every path
+              </button>
             </div>
           </div>
         )}
@@ -287,7 +319,7 @@ export function PathView() {
             onClick={() => setShowFullJourney(!showFullJourney)}
             className="mt-8 text-sm font-medium text-muted underline-offset-4 hover:text-ink hover:underline"
           >
-            {showFullJourney ? "Show only this path" : "See the full journey"}
+            {showFullJourney ? "Show only this path" : "Explore every path"}
           </button>
         )}
       </div>

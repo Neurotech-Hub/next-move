@@ -140,13 +140,16 @@ export function GoalsRail() {
     body = (
       <>
         <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
+          <span className="goals-step" aria-hidden="true">
+            A.{" "}
+          </span>
           Your goals
         </p>
         <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
           What's your goal?
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Choose a goal to reveal one path forward.
+          Start here — choose a goal to reveal one path forward.
         </p>
 
         <DestinationList />
@@ -174,10 +177,15 @@ export function GoalsRail() {
     );
   }
 
+  const awaitingGoal = !focusedDestinationId && !recommendation;
+
   return (
     <aside
       ref={railRef}
-      className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r"
+      className={`flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r ${
+        awaitingGoal && !guideOpen ? "goals-invite" : ""
+      }`}
+      aria-label="A. Your goals"
     >
       <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
         {body}

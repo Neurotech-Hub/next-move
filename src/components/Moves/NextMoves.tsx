@@ -92,14 +92,15 @@ function DefaultMoves() {
     return (
       <div>
         <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
+          <span aria-hidden="true">C. </span>
           Next steps & programs
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
           Get excited, get started.
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Each move shows required evidence, its benefit, a relevant program,
-          and what you can skip.
+          Pick a goal first — then we’ll show what to do next, and which
+          programs can help.
         </p>
       </div>
     );
@@ -108,6 +109,7 @@ function DefaultMoves() {
   return (
     <div>
       <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
+        <span aria-hidden="true">C. </span>
         Next steps & programs
       </p>
       {recommendation ? (
@@ -239,7 +241,7 @@ export function NextMoves() {
       )}
       <aside
         className="relative z-10 flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[340px] lg:border-l"
-        aria-label="Next steps and programs"
+        aria-label="C. Next steps and programs"
       >
         {hasFocus && (
           <div className="flex justify-end px-4 pt-3 lg:hidden">

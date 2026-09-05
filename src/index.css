@@ -90,390 +90,163 @@ body {
 }
 
 /*
- * Aurora pathway hero — the empty "Your pathway" state.
- *
- * Soft curtains of light drift across a dark sky: three blurred ribbons in
- * teal and cyan with a faint high-altitude crimson edge, a warm horizon glow,
- * and a lit top edge. Every animation moves only transform/opacity so phones
- * stay smooth; blurs and masks are static per layer.
+ * Empty pathway — abstract roadmap sketch (spine, steps, optional spur, goal).
+ * Quiet, slightly unfinished; previews the path UI without competing with Goals.
  */
-.aurora {
+.roadmap-empty {
   position: relative;
-  isolation: isolate;
 }
 
-/* Cool aura that bleeds past the card into the field */
-.aurora::before {
-  content: "";
-  position: absolute;
-  inset: -26% 0;
-  z-index: -1;
-  border-radius: 40%;
-  background:
-    radial-gradient(ellipse at 50% 40%, rgba(86, 161, 137, 0.42), transparent 86%),
-    radial-gradient(ellipse at 22% 30%, rgba(91, 141, 214, 0.36), transparent 70%),
-    radial-gradient(ellipse at 80% 90%, rgba(217, 160, 84, 0.16), transparent 62%);
-  filter: blur(30px);
-  animation: aurora-breathe 11s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.aurora-panel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+.roadmap-panel {
   border-radius: 1.5rem;
   background:
-    linear-gradient(to bottom, #0b1120 0%, #0c1119 55%, #0e1116 100%);
-  /* Halo lives in box-shadow so it never adds scroll overflow on phones */
+    linear-gradient(165deg, #10151f 0%, #0c1017 55%, #0b0f16 100%);
   box-shadow:
-    0 0 80px -20px rgba(86, 161, 137, 0.38),
-    0 -12px 70px -30px rgba(91, 141, 214, 0.32),
-    0 30px 80px -24px rgba(0, 0, 0, 0.8),
-    inset 0 0 0 1px rgba(233, 236, 244, 0.05);
+    inset 0 0 0 1px rgba(233, 236, 244, 0.05),
+    0 18px 40px -28px rgba(0, 0, 0, 0.55);
 }
 
-.aurora-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-/* A curtain: drifting vertical rays, brightest along the lower edge, inside a soft ellipse */
-.aurora-band {
-  inset: auto;
-  overflow: hidden;
-  mix-blend-mode: screen;
-  filter: blur(14px) saturate(1.25);
-  -webkit-mask: radial-gradient(
-    ellipse 50% 50% at 50% 50%,
-    #000 28%,
-    rgba(0, 0, 0, 0.6) 56%,
-    transparent 100%
-  );
-  mask: radial-gradient(
-    ellipse 50% 50% at 50% 50%,
-    #000 28%,
-    rgba(0, 0, 0, 0.6) 56%,
-    transparent 100%
-  );
-  will-change: transform, opacity;
-}
-
-/*
- * Rays layered at 120/60/40px periods so their overlap looks irregular while
- * still tiling seamlessly across the 120px drift.
- */
-.aurora-band::before {
-  content: "";
-  position: absolute;
-  inset: 0 -240px;
-  -webkit-mask: linear-gradient(
-    to top,
-    #000 12%,
-    rgba(0, 0, 0, 0.4) 70%,
-    transparent 100%
-  );
-  mask: linear-gradient(
-    to top,
-    #000 12%,
-    rgba(0, 0, 0, 0.4) 70%,
-    transparent 100%
-  );
-  animation: aurora-rays 12s linear infinite;
-  will-change: transform;
-}
-
-/* Second ray sheet at a 90px period drifting the other way, so the two beat */
-.aurora-band::after {
-  content: "";
-  position: absolute;
-  inset: 0 -240px;
-  -webkit-mask: linear-gradient(
-    to top,
-    #000 8%,
-    rgba(0, 0, 0, 0.3) 65%,
-    transparent 100%
-  );
-  mask: linear-gradient(
-    to top,
-    #000 8%,
-    rgba(0, 0, 0, 0.3) 65%,
-    transparent 100%
-  );
-  animation: aurora-rays-alt 19s linear infinite;
-  will-change: transform;
-}
-
-.aurora-band-1::after {
-  background: repeating-linear-gradient(
-    93deg,
-    rgba(86, 161, 137, 0) 0px,
-    rgba(120, 190, 200, 0.6) 10px,
-    rgba(86, 161, 137, 0) 26px,
-    rgba(91, 141, 214, 0.5) 58px,
-    rgba(91, 141, 214, 0) 90px
-  );
-}
-
-.aurora-band-2::after {
-  background: repeating-linear-gradient(
-    89deg,
-    rgba(91, 141, 214, 0) 0px,
-    rgba(120, 190, 200, 0.55) 12px,
-    rgba(91, 141, 214, 0) 30px,
-    rgba(86, 161, 137, 0.45) 62px,
-    rgba(86, 161, 137, 0) 90px
-  );
-  animation-duration: 25s;
-  animation-direction: reverse;
-}
-
-.aurora-band-3::after {
-  background: repeating-linear-gradient(
-    91deg,
-    rgba(225, 75, 82, 0) 0px,
-    rgba(225, 75, 82, 0.4) 16px,
-    rgba(225, 75, 82, 0) 44px,
-    rgba(225, 75, 82, 0) 90px
-  );
-  animation-duration: 31s;
-}
-
-/* Broad soft sheet of light beneath the rays */
-.aurora-glow {
-  inset: -20%;
-  background:
-    radial-gradient(ellipse 34% 26% at 30% 34%, rgba(86, 161, 137, 0.5), transparent 100%),
-    radial-gradient(ellipse 38% 24% at 68% 52%, rgba(91, 141, 214, 0.45), transparent 100%),
-    radial-gradient(ellipse 30% 18% at 50% 22%, rgba(225, 75, 82, 0.16), transparent 100%);
-  filter: blur(34px);
-  mix-blend-mode: screen;
-  animation: aurora-sheet 21s ease-in-out infinite alternate;
-  will-change: transform, opacity;
-}
-
-.aurora-band-1 {
-  left: -28%;
-  top: 0;
-  width: 156%;
-  height: 54%;
-  transform: rotate(-6deg);
-  animation: aurora-sway-1 17s ease-in-out infinite alternate;
-}
-
-.aurora-band-1::before {
-  background:
-    repeating-linear-gradient(
-      94deg,
-      rgba(86, 161, 137, 0) 0px,
-      rgba(86, 161, 137, 0.85) 14px,
-      rgba(86, 161, 137, 0) 42px,
-      rgba(91, 141, 214, 0.7) 74px,
-      rgba(91, 141, 214, 0) 120px
-    ),
-    repeating-linear-gradient(
-      91deg,
-      rgba(233, 236, 244, 0) 0px,
-      rgba(233, 236, 244, 0.22) 7px,
-      rgba(233, 236, 244, 0) 18px,
-      rgba(233, 236, 244, 0) 60px
-    ),
-    repeating-linear-gradient(
-      97deg,
-      rgba(86, 161, 137, 0) 0px,
-      rgba(86, 161, 137, 0.5) 5px,
-      rgba(86, 161, 137, 0) 13px,
-      rgba(86, 161, 137, 0) 40px
-    );
-}
-
-.aurora-band-2 {
-  left: -12%;
-  top: 34%;
-  width: 136%;
-  height: 46%;
-  opacity: 0.85;
-  transform: rotate(4deg);
-  filter: blur(12px) saturate(1.3);
-  animation: aurora-sway-2 23s ease-in-out infinite alternate;
-}
-
-.aurora-band-2::before {
-  background:
-    repeating-linear-gradient(
-      88deg,
-      rgba(91, 141, 214, 0) 0px,
-      rgba(91, 141, 214, 0.8) 18px,
-      rgba(91, 141, 214, 0) 50px,
-      rgba(86, 161, 137, 0.55) 88px,
-      rgba(86, 161, 137, 0) 120px
-    ),
-    repeating-linear-gradient(
-      86deg,
-      rgba(233, 236, 244, 0) 0px,
-      rgba(233, 236, 244, 0.16) 6px,
-      rgba(233, 236, 244, 0) 16px,
-      rgba(233, 236, 244, 0) 60px
-    ),
-    repeating-linear-gradient(
-      92deg,
-      rgba(91, 141, 214, 0) 0px,
-      rgba(91, 141, 214, 0.45) 6px,
-      rgba(91, 141, 214, 0) 15px,
-      rgba(91, 141, 214, 0) 40px
-    );
-  animation-duration: 16s;
-  animation-direction: reverse;
-}
-
-/* The faint red fringe real aurorae carry along their upper edge */
-.aurora-band-3 {
-  left: -34%;
-  top: -14%;
-  width: 170%;
-  height: 40%;
+.roadmap-sketch {
   opacity: 0.7;
-  transform: rotate(-3deg);
-  filter: blur(22px);
-  animation: aurora-sway-3 29s ease-in-out infinite alternate;
 }
 
-.aurora-band-3::before {
-  background:
-    repeating-linear-gradient(
-      92deg,
-      rgba(225, 75, 82, 0) 0px,
-      rgba(225, 75, 82, 0.6) 30px,
-      rgba(225, 75, 82, 0) 66px,
-      rgba(225, 75, 82, 0.45) 96px,
-      rgba(225, 75, 82, 0) 120px
-    ),
-    repeating-linear-gradient(
-      95deg,
-      rgba(225, 75, 82, 0) 0px,
-      rgba(225, 75, 82, 0.35) 8px,
-      rgba(225, 75, 82, 0) 20px,
-      rgba(225, 75, 82, 0) 60px
-    );
-  animation-duration: 21s;
+.roadmap-awaiting-dots {
+  display: inline-block;
+  min-width: 1.1em;
+  animation: roadmap-awaiting-pulse 1.6s ease-in-out infinite;
 }
 
-/* Warm glimmer along the horizon */
-.aurora-horizon {
-  background:
-    radial-gradient(
-      ellipse 90% 42% at 50% 108%,
-      rgba(217, 160, 84, 0.26),
-      rgba(225, 75, 82, 0.08) 50%,
-      transparent 72%
-    ),
-    linear-gradient(to top, rgba(86, 161, 137, 0.06), transparent 40%);
-  animation: aurora-breathe 13s ease-in-out infinite;
-}
-
-/* Lit top edge: a static 1px ring, bright where the sky is */
-.aurora-edge {
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    to bottom,
-    rgba(86, 161, 137, 0.7),
-    rgba(91, 141, 214, 0.4) 38%,
-    rgba(35, 42, 56, 0.9) 100%
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-}
-
-.aurora-content {
-  position: relative;
-  z-index: 1;
-  text-shadow:
-    0 1px 3px rgba(10, 13, 20, 0.85),
-    0 2px 28px rgba(10, 13, 20, 0.95);
-}
-
-.aurora-title {
-  text-shadow:
-    0 1px 3px rgba(10, 13, 20, 0.85),
-    0 0 32px rgba(86, 161, 137, 0.5),
-    0 2px 24px rgba(10, 13, 20, 0.95);
-}
-
-@keyframes aurora-rays {
-  to {
-    transform: translate3d(120px, 0, 0);
-  }
-}
-
-@keyframes aurora-rays-alt {
-  to {
-    transform: translate3d(-90px, 0, 0);
-  }
-}
-
-@keyframes aurora-sheet {
-  from {
-    transform: translate3d(-4%, 1%, 0) scale(1);
-    opacity: 0.8;
-  }
-  to {
-    transform: translate3d(4%, -2%, 0) scale(1.08);
-    opacity: 1;
-  }
-}
-
-@keyframes aurora-breathe {
+@keyframes roadmap-awaiting-pulse {
   0%,
   100% {
-    opacity: 0.7;
-    transform: scale(0.98);
+    opacity: 0.35;
   }
   50% {
     opacity: 1;
-    transform: scale(1.03);
   }
 }
 
-@keyframes aurora-sway-1 {
-  from {
-    transform: translate3d(-4%, 0, 0) rotate(-7deg) scaleY(0.94);
-    opacity: 0.85;
+.roadmap-spine {
+  stroke: rgba(233, 236, 244, 0.14);
+}
+
+.roadmap-spur {
+  stroke: rgba(212, 175, 55, 0.28);
+}
+
+.roadmap-node {
+  fill: #0c1017;
+  stroke: rgba(233, 236, 244, 0.22);
+  stroke-width: 1.25;
+}
+
+.roadmap-node--muted {
+  stroke: rgba(212, 175, 55, 0.35);
+  stroke-dasharray: 2.5 2;
+}
+
+.roadmap-node--goal {
+  fill: rgba(225, 75, 82, 0.12);
+  stroke: rgba(225, 75, 82, 0.4);
+}
+
+.roadmap-node--1 {
+  animation: roadmap-signal 5.5s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.roadmap-node--2 {
+  animation: roadmap-signal 5.5s ease-in-out infinite;
+  animation-delay: 0.7s;
+}
+
+.roadmap-node--3 {
+  animation: roadmap-signal 5.5s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+
+.roadmap-node--4 {
+  animation: roadmap-signal 5.5s ease-in-out infinite;
+  animation-delay: 2.1s;
+}
+
+.roadmap-node--goal {
+  animation: roadmap-goal 5.5s ease-in-out infinite;
+  animation-delay: 2.8s;
+}
+
+@keyframes roadmap-signal {
+  0%,
+  12%,
+  100% {
+    stroke: rgba(233, 236, 244, 0.2);
+    fill: #0c1017;
   }
-  to {
-    transform: translate3d(4%, 2%, 0) rotate(-4deg) scaleY(1.1);
+  6% {
+    stroke: rgba(86, 161, 137, 0.75);
+    fill: rgba(86, 161, 137, 0.18);
+  }
+}
+
+@keyframes roadmap-goal {
+  0%,
+  12%,
+  100% {
+    stroke: rgba(225, 75, 82, 0.35);
+    fill: rgba(225, 75, 82, 0.1);
+  }
+  6% {
+    stroke: rgba(225, 75, 82, 0.7);
+    fill: rgba(225, 75, 82, 0.22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roadmap-node--1,
+  .roadmap-node--2,
+  .roadmap-node--3,
+  .roadmap-node--4,
+  .roadmap-node--goal,
+  .roadmap-awaiting-dots {
+    animation: none;
+  }
+}
+
+/* First-land focus: lift Goals until the user engages (goal, guide, or path). */
+.goals-invite {
+  position: relative;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-washu) 9%, var(--color-card)) 0%,
+      var(--color-card) 42%
+    );
+  box-shadow:
+    inset 3px 0 0 rgb(225 75 82 / 0.9),
+    0 0 0 1px rgb(225 75 82 / 0.12),
+    0 12px 36px -20px rgb(225 75 82 / 0.28);
+}
+
+.goals-invite .goals-step {
+  animation: goals-nudge 2.8s ease-in-out infinite;
+}
+
+@keyframes goals-nudge {
+  0%,
+  100% {
     opacity: 1;
+    text-shadow: 0 0 0 transparent;
   }
-}
-
-@keyframes aurora-sway-2 {
-  from {
-    transform: translate3d(5%, 0, 0) rotate(5deg) scaleY(1.08);
+  50% {
     opacity: 0.7;
-  }
-  to {
-    transform: translate3d(-5%, -3%, 0) rotate(2deg) scaleY(0.92);
-    opacity: 0.95;
+    text-shadow: 0 0 14px rgb(225 75 82 / 0.5);
   }
 }
 
-@keyframes aurora-sway-3 {
-  from {
-    transform: translate3d(-3%, 0, 0) rotate(-4deg) scaleY(1);
-    opacity: 0.4;
-  }
-  to {
-    transform: translate3d(3%, 3%, 0) rotate(-1deg) scaleY(1.16);
-    opacity: 0.65;
+@media (prefers-reduced-motion: reduce) {
+  .goals-invite .goals-step {
+    animation: none;
   }
 }
 
