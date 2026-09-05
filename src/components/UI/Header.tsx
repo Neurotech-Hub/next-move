@@ -58,7 +58,7 @@ function SearchPanel({
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
           placeholder="patent, funding, prototype, clinical…"
-          className="h-9 w-full bg-transparent text-sm outline-none placeholder:text-muted/70"
+          className="h-9 w-full bg-transparent text-base outline-none placeholder:text-muted/70 md:text-sm"
           aria-label="Search stages and resources"
         />
       </div>
