@@ -22,7 +22,7 @@ export const regions: Region[] = [
   {
     id: "translate",
     title: "Translate",
-    subtitle: "Choose a vehicle — not a destination",
+    subtitle: "Choose a vehicle — not a goal",
     bounds: { x: 1850, y: 20, width: 380, height: 940 },
   },
   {

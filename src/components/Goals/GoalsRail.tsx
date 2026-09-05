@@ -83,13 +83,13 @@ export function GoalsRail() {
       <aside className="flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r">
         <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
           <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
-            Tailored to your answers
+            Based on your answers
           </p>
           <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
             Your path to {destination?.title ?? "your goal"}
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted">
-            Each answer changes a different part of the path:
+            Each answer updates a different part of your path:
           </p>
 
           <dl className="mt-4 space-y-3">
@@ -138,21 +138,20 @@ export function GoalsRail() {
           Your goals
         </p>
         <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
-          What's your end goal?
+          What's your ultimate goal?
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Pick a destination. We will isolate one path and the next useful moves.
+          Choose a goal to reveal one path forward.
         </p>
 
         <DestinationList />
 
         <div className="mt-5 border-t border-line pt-5">
           <p className="text-sm font-medium text-ink">
-            Not sure which destination fits?
+            Not sure which goal is right?
           </p>
           <p className="mt-1 text-xs leading-relaxed text-muted">
-            Answer four questions to tailor your starting point, route, next
-            moves, and recommended programs.
+            Answer a few questions to personalize your path and next steps.
           </p>
         </div>
         <button

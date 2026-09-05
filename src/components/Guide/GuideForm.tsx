@@ -58,7 +58,7 @@ const TITLES = [
 ];
 
 const EFFECTS = [
-  "Sets the destination at the end of your path.",
+  "Sets the goal at the end of your path.",
   "Prioritizes routes, academic returns, and programs.",
   "Places your “You are here” marker and skips earlier stages.",
   "Favors programs that fit the role you want to play.",

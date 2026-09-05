@@ -7,18 +7,18 @@ const milestoneNodes = nodes.filter((node) => node.type === "milestone");
 
 function captionFor(node: MapNode | undefined, isCurrent: boolean): string {
   if (!node) {
-    return "Choose a goal on the left to isolate one path.";
+    return "Choose a goal to reveal one path forward.";
   }
   if (node.type === "destination") {
     return "This is your goal. The steps above are what would get you there.";
   }
   if (node.type === "milestone") {
-    return "You’re looking at a useful move — optional work at this stage, not a numbered requirement.";
+    return "You’re looking at an optional step — useful work at this stage, not a numbered requirement.";
   }
   if (isCurrent) {
     return "You’re likely here. The next moves on the right start from this stage.";
   }
-  return "A stage on this path. Open it to see the next evidence to collect.";
+  return "Step on this path. Open it to see the next evidence to collect.";
 }
 
 function PathStep({
@@ -77,7 +77,7 @@ function PathStep({
         )}
         {milestone && (
           <span className="font-mono mb-1 block text-[9px] font-medium uppercase tracking-[0.18em] text-sage">
-            A useful move
+            Optional step
           </span>
         )}
         <span className="font-display block text-[17px] leading-snug text-ink">
@@ -136,14 +136,14 @@ export function PathView() {
           {recommendation ? "Your tailored pathway" : "Your pathway"}
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
-          {activeRoute?.title ?? "Plan backward from a goal"}
+          {activeRoute?.title ?? "Plan backwards from a goal"}
         </h2>
         <div className="mt-4 flex flex-wrap items-center gap-3 text-[12px] text-muted">
           <Legend swatch="bg-washu" label="You are here" />
           <Legend swatch="bg-gold" label="On this path" />
           <Legend
             swatch="border border-dashed border-sage bg-transparent"
-            label="A useful move"
+            label="Optional step"
           />
           <Legend swatch="bg-washu/20" label="Your goal" />
         </div>
@@ -163,7 +163,7 @@ export function PathView() {
               Choose a goal to see one path
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
-              Pick a goal on the left — we will plan backward from there.
+              Choose a goal, and we’ll plan backwards from there.
             </p>
             <button
               type="button"
