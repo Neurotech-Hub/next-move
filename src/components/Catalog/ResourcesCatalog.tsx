@@ -1,54 +1,54 @@
 import { useMemo, useState } from "react";
 import { resources, resourceById } from "../../data";
-import { filterResources } from "../../logic/filters";
+import { resourcePriority } from "../../logic/filters";
 import { useNavigator } from "../../state/NavigatorContext";
-import type { Internality, Resource } from "../../types/navigator";
+import type {
+  Internality,
+  Resource,
+  ResourceInventionType,
+  ResourceLocation,
+  ResourceNeed,
+} from "../../types/navigator";
 import { ResourceCard } from "../Drawer/ResourceCard";
 
-const SOURCES: {
-  id: Internality | "all";
-  label: string;
-  chip: string;
-  badge: string;
-}[] = [
-  {
-    id: "all",
-    label: "All",
-    chip: "border-ink bg-ink text-paper",
-    badge: "border-line bg-raise text-muted",
-  },
-  {
-    id: "washu",
-    label: "WashU",
-    chip: "border-washu/40 bg-washu text-white",
-    badge: "border-washu/25 bg-washu/10 text-washu",
-  },
-  {
-    id: "federal",
-    label: "Federal",
-    chip: "border-federal/40 bg-federal text-paper",
-    badge: "border-federal/25 bg-federal/10 text-federal",
-  },
-  {
-    id: "regional",
-    label: "Regional",
-    chip: "border-sage/40 bg-sage text-paper",
-    badge: "border-sage/25 bg-sage/10 text-sage",
-  },
-  {
-    id: "investor",
-    label: "Investor",
-    chip: "border-gold/40 bg-gold text-paper",
-    badge: "border-gold/25 bg-gold/10 text-gold",
-  },
+type ViewBy = "needs" | "inventionTypes" | "locations";
+
+const VIEW_BY_OPTIONS: { id: ViewBy; label: string }[] = [
+  { id: "locations", label: "Location" },
+  { id: "needs", label: "What I Need" },
+  { id: "inventionTypes", label: "Invention Type" },
 ];
 
-const SOURCE_BADGE = Object.fromEntries(
-  SOURCES.filter((item) => item.id !== "all").map((item) => [
-    item.id,
-    item.badge,
-  ]),
-) as Record<Internality, string>;
+const NEED_SECTIONS: { id: ResourceNeed; label: string }[] = [
+  { id: "funding", label: "Funding" },
+  { id: "expertise-mentorship", label: "Advice & Expertise" },
+  { id: "build-test", label: "Build & Test" },
+  { id: "ip-licensing", label: "IP & Licensing" },
+  { id: "industry-connections", label: "Industry Connections" },
+  { id: "startup-support", label: "Startup Support" },
+];
+
+const INVENTION_SECTIONS: { id: ResourceInventionType; label: string }[] = [
+  { id: "therapeutics", label: "Therapeutics" },
+  { id: "devices-diagnostics", label: "Devices & Diagnostics" },
+  { id: "software-digital", label: "Software & Digital" },
+  { id: "research-tools", label: "Research Tools" },
+  { id: "broad", label: "Broad / Any Type" },
+];
+
+const LOCATION_SECTIONS: { id: ResourceLocation; label: string }[] = [
+  { id: "washu", label: "WashU" },
+  { id: "st-louis", label: "St. Louis" },
+  { id: "regional", label: "Regional" },
+  { id: "national", label: "National" },
+];
+
+const SOURCE_BADGE: Record<Internality, string> = {
+  washu: "border-washu/25 bg-washu/10 text-washu",
+  federal: "border-federal/25 bg-federal/10 text-federal",
+  regional: "border-sage/25 bg-sage/10 text-sage",
+  investor: "border-gold/25 bg-gold/10 text-gold",
+};
 
 const SOURCE_LABEL: Record<Internality, string> = {
   washu: "WashU",
@@ -57,31 +57,43 @@ const SOURCE_LABEL: Record<Internality, string> = {
   investor: "Investor",
 };
 
-function Chip({
-  selected,
-  onClick,
-  selectedClass,
-  children,
-}: {
-  selected: boolean;
-  onClick: () => void;
-  selectedClass: string;
-  children: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={selected}
-      className={`rounded-full border px-3 py-1.5 text-sm font-medium transition duration-200 ${
-        selected
-          ? selectedClass
-          : "border-line bg-card text-ink/75 hover:border-ink/30 hover:bg-raise"
-      }`}
-    >
-      {children}
-    </button>
-  );
+function sectionsFor(viewBy: ViewBy) {
+  if (viewBy === "needs") return NEED_SECTIONS;
+  if (viewBy === "inventionTypes") return INVENTION_SECTIONS;
+  return LOCATION_SECTIONS;
+}
+
+function compareCatalogResources(a: Resource, b: Resource) {
+  const priorityRank = { core: 0, second: 1 } as const;
+  const byPriority =
+    priorityRank[resourcePriority(a)] - priorityRank[resourcePriority(b)];
+  if (byPriority !== 0) return byPriority;
+  return a.title.localeCompare(b.title);
+}
+
+function groupResources(viewBy: ViewBy) {
+  const sections = sectionsFor(viewBy);
+  return sections
+    .map((section) => ({
+      id: section.id,
+      label: section.label,
+      resources: resources
+        .filter((resource) => {
+          if (viewBy === "needs") {
+            return resource.needs.includes(section.id as ResourceNeed);
+          }
+          if (viewBy === "inventionTypes") {
+            // "broad" is its own section — never expand into every type.
+            return resource.inventionTypes.includes(
+              section.id as ResourceInventionType,
+            );
+          }
+          // Location uses one primary bucket; ignore any extra tags.
+          return resource.locations[0] === section.id;
+        })
+        .sort(compareCatalogResources),
+    }))
+    .filter((section) => section.resources.length > 0);
 }
 
 function CatalogCard({
@@ -146,31 +158,10 @@ function CatalogCard({
 }
 
 export function ResourcesCatalog() {
-  const [source, setSource] = useState<Internality | "all">("all");
+  const [viewBy, setViewBy] = useState<ViewBy>("locations");
   const { selectedResourceId, selectResource } = useNavigator();
 
-  const filtered = useMemo(() => filterResources({ source }), [source]);
-  const groups = useMemo(() => {
-    const order: Internality[] = ["washu", "federal", "regional", "investor"];
-    if (source !== "all") {
-      return [
-        {
-          id: source,
-          label: SOURCE_LABEL[source],
-          resources: [...filtered].sort((a, b) =>
-            a.title.localeCompare(b.title),
-          ),
-        },
-      ];
-    }
-    return order.map((id) => ({
-      id,
-      label: SOURCE_LABEL[id],
-      resources: filtered
-        .filter((resource) => resource.internality === id)
-        .sort((a, b) => a.title.localeCompare(b.title)),
-    }));
-  }, [filtered, source]);
+  const groups = useMemo(() => groupResources(viewBy), [viewBy]);
   const open = selectedResourceId
     ? resourceById[selectedResourceId]
     : undefined;
@@ -184,32 +175,39 @@ export function ResourcesCatalog() {
         <h2 className="font-display mt-1 text-3xl text-ink">All resources</h2>
 
         <div className="sticky top-0 z-10 -mx-2 mt-3 border-b border-line/70 bg-paper/95 px-2 py-3 backdrop-blur-sm">
-          <div
-            className="flex flex-nowrap gap-2 overflow-x-auto pb-1"
-            aria-label="Filter resources by source"
+          <p
+            id="view-resources-by-label"
+            className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted"
           >
-            {SOURCES.map((item) => {
-              const count =
-                item.id === "all"
-                  ? resources.length
-                  : resources.filter(
-                      (resource) => resource.internality === item.id,
-                    ).length;
-              return (
-                <Chip
-                  key={item.id}
-                  selected={source === item.id}
-                  selectedClass={item.chip}
-                  onClick={() => setSource(item.id)}
-                >
-                  {`${item.label} · ${count}`}
-                </Chip>
-              );
-            })}
+            View resources by
+          </p>
+          <div
+            className="mt-2 flex flex-nowrap gap-2 overflow-x-auto pb-1"
+            role="group"
+            aria-labelledby="view-resources-by-label"
+          >
+            {VIEW_BY_OPTIONS.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={viewBy === option.id}
+                onClick={() => setViewBy(option.id)}
+                className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition duration-200 ${
+                  viewBy === option.id
+                    ? "border-ink bg-ink text-paper"
+                    : "border-line bg-card text-ink/75 hover:border-ink/30 hover:bg-raise"
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
           </div>
         </div>
 
-        <div className="mt-5 space-y-8">
+        <div
+          key={viewBy}
+          className="resource-groups mt-5 space-y-8"
+        >
           {groups.map((group) => (
             <section key={group.id} aria-labelledby={`resources-${group.id}`}>
               <div className="mb-3 flex items-baseline justify-between gap-3 border-b border-line pb-2">
@@ -220,12 +218,13 @@ export function ResourcesCatalog() {
                   {group.label}
                 </h3>
                 <span className="text-xs text-muted">
-                  {group.resources.length} programs
+                  {group.resources.length}{" "}
+                  {group.resources.length === 1 ? "program" : "programs"}
                 </span>
               </div>
               <ul className="grid grid-cols-1 gap-2.5 [grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))] sm:[grid-template-columns:repeat(auto-fill,minmax(220px,1fr))]">
                 {group.resources.map((resource) => (
-                  <li key={resource.id} className="min-w-0">
+                  <li key={`${group.id}-${resource.id}`} className="min-w-0">
                     <CatalogCard
                       resource={resource}
                       selected={selectedResourceId === resource.id}

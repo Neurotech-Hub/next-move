@@ -26,6 +26,30 @@ export type ResourcePurpose =
 
 export type ResourcePriority = "core" | "second";
 
+/** Catalog “What I Need” grouping. Display “expertise-mentorship” as Advice & Expertise. */
+export type ResourceNeed =
+  | "funding"
+  | "expertise-mentorship"
+  | "build-test"
+  | "ip-licensing"
+  | "industry-connections"
+  | "startup-support";
+
+/** Catalog “Invention Type” grouping. “broad” is its own section, not a wildcard. */
+export type ResourceInventionType =
+  | "therapeutics"
+  | "devices-diagnostics"
+  | "software-digital"
+  | "research-tools"
+  | "broad";
+
+/** Catalog “Location” grouping — one primary location per resource. */
+export type ResourceLocation =
+  | "washu"
+  | "st-louis"
+  | "regional"
+  | "national";
+
 export type AssetAnswer =
   | "observation"
   | "idea"
@@ -151,6 +175,10 @@ export interface Resource {
   contact?: string;
   priority?: ResourcePriority;
   purposes?: ResourcePurpose[];
+  /** Catalog lenses — a resource may belong to multiple groups per lens. */
+  needs: ResourceNeed[];
+  inventionTypes: ResourceInventionType[];
+  locations: ResourceLocation[];
 }
 
 export interface GuideAnswers {
