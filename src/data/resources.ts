@@ -51,6 +51,55 @@ export const resources: Resource[] = [
     contact: "otm@wustl.edu · 314-747-1700",
   },
   {
+    id: "otm-inventor-companion",
+    type: "resource",
+    title: "AI companion for new inventions",
+    organization: "Neurotech Hub · Department of Neuroscience, WashU",
+    url: "https://neurotechhub.wustl.edu/an-ai-companion-for-new-inventions/",
+    internality: "washu",
+    domains: ["therapeutic", "device", "diagnostic", "software", "research-tool"],
+    states: ["s3", "s4", "s5"],
+    problemsSolved: ["disclosure", "ip", "transfer", "clarity"],
+    whatYouGet:
+      "A short, structured AI interview (about 10 minutes) that produces a companion brief you can attach when filing an invention disclosure in InnovateIP. The preferred agent file includes interview instructions plus a periodically refreshed snapshot of public OTM pages.",
+    whyYouMightCare:
+      "Helps you clarify claims, novelty, evidence, and how the invention advances your professional goals before or while you talk with OTM — without replacing InnovateIP or OTM’s assessment.",
+    usefulWhen: [
+      "You are preparing an invention disclosure or exploring whether to disclose",
+      "You want a clearer story for an OTM case manager",
+      "You have a nascent idea and want structured feedback before filing",
+    ],
+    notFor: [
+      "treat this as a substitute for filing in InnovateIP",
+      "use a consumer AI chat that may store or train on unpublished inventions",
+      "treat the brief as legal advice, a patent search, or OTM’s formal evaluation",
+    ],
+    eligibility:
+      "Any WashU inventor preparing disclosure context. Use only a WashU-supported AI tool approved for institutional use with confidentiality controls for unpublished inventions.",
+    requiresDisclosure: false,
+    companyRequired: false,
+    funding: null,
+    caveats: [
+      "Alpha tool from the Neurotech Hub — not an official WashU or OTM product; workflows may change.",
+      "Use only an institutionally approved AI tool. Consumer ChatGPT and similar tools can create a public-disclosure risk.",
+      "The official record remains the InnovateIP disclosure; attach the brief as a companion document.",
+    ],
+    investigatorReturns: [
+      "a short companion brief for OTM",
+      "clearer invention story before disclosure",
+      "preliminary landscape and goal-routing context",
+    ],
+    nextStates: ["s5"],
+    status: "evergreen",
+    nextDeadline: null,
+    lastVerified: "2026-09-05",
+    sourceUrls: [
+      "https://neurotechhub.wustl.edu/an-ai-companion-for-new-inventions/",
+      "https://github.com/Neurotech-Hub/WashU-OTM-Inventor-Companion",
+    ],
+    contact: "otm@wustl.edu · Neurotech Hub",
+  },
+  {
     id: "neurotech-hub",
     type: "resource",
     title: "Neurotech Hub",

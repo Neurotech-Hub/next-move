@@ -134,7 +134,7 @@ export const nodes: MapNode[] = [
     shortDescription: "OTM has helped you understand protection and transfer options.",
     position: { x: 1100, y: 600 },
     tags: ["ip", "patent", "disclosure", "license", "otm"],
-    resourceIds: ["otm-core"],
+    resourceIds: ["otm-core", "otm-inventor-companion"],
     details: {
       whyItMatters:
         "A patent is a vehicle. The useful outcome here is a strategy: protect, license, distribute, partner, open-release — or combine them.",
@@ -284,7 +284,7 @@ export const nodes: MapNode[] = [
     shortDescription: "Understand what publishing or presenting would change.",
     position: { x: 1100, y: 780 },
     tags: ["ip", "patent", "disclosure", "otm"],
-    resourceIds: ["otm-core"],
+    resourceIds: ["otm-core", "otm-inventor-companion"],
     details: {
       whyItMatters:
         "OTM evaluates WashU inventions and, when warranted, files patents. A conversation keeps options open and does not require you to found a company.",

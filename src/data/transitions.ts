@@ -41,7 +41,7 @@ export const transitions: Transition[] = [
     question:
       "Should we protect, license, distribute, partner, open-release — or combine these?",
     evidence: "An OTM evaluation and a transfer strategy.",
-    resourceIds: ["otm-core"],
+    resourceIds: ["otm-core", "otm-inventor-companion"],
   },
   {
     id: "t-s4-s5",
@@ -50,7 +50,7 @@ export const transitions: Transition[] = [
     question:
       "Should we protect, license, distribute, partner, open-release — or combine these?",
     evidence: "An OTM evaluation and a transfer strategy.",
-    resourceIds: ["otm-core"],
+    resourceIds: ["otm-core", "otm-inventor-companion"],
   },
   {
     id: "t-s4-s6",
