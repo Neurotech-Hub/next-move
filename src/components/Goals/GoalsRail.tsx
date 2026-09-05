@@ -138,7 +138,7 @@ export function GoalsRail() {
           Your goals
         </p>
         <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
-          How can the innovation community serve you?
+          What's your end goal?
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           Pick a destination. We will isolate one path and the next useful moves.

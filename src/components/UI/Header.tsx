@@ -3,13 +3,24 @@ import { useNavigator } from "../../state/NavigatorContext";
 import { SearchControl } from "../Search/SearchControl";
 
 export function Header() {
-  const { reset, view, setView, recommendation, guideOpen } = useNavigator();
+  const {
+    reset,
+    view,
+    setView,
+    recommendation,
+    guideOpen,
+    focusedDestinationId,
+  } = useNavigator();
 
   const seg =
     "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu";
 
+  const canReset = Boolean(
+    recommendation || guideOpen || focusedDestinationId,
+  );
+
   return (
-    <header className="relative z-20 shrink-0 border-b border-line/70 bg-paper/95 px-4 py-3 backdrop-blur-sm sm:px-6">
+    <header className="relative z-40 shrink-0 border-b border-line/70 bg-paper/95 px-4 py-3 backdrop-blur-sm sm:px-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="min-w-0">
           <button
@@ -65,7 +76,7 @@ export function Header() {
 
           <SearchControl />
 
-          {(recommendation || guideOpen || view === "resources") && (
+          {canReset && (
             <button
               type="button"
               onClick={reset}

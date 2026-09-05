@@ -238,7 +238,7 @@ export function NextMoves() {
         <p className="sr-only">Next moves are listed in the side panel.</p>
       )}
       <aside
-        className="z-20 flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[340px] lg:border-l"
+        className="relative z-10 flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[340px] lg:border-l"
         aria-label="Next steps and programs"
       >
         {hasFocus && (
