@@ -9,8 +9,12 @@ const iconBtn =
 
 function AboutPanel() {
   return (
-    <div className="space-y-3">
-      <p className="text-sm leading-relaxed text-ink/85">
+    <div className="about-panel space-y-3">
+      <p className="font-display text-[19px] leading-snug text-ink">
+        Innovation is how an invention changes the world.
+      </p>
+      <span className="about-rule" aria-hidden />
+      <p className="text-[13px] leading-relaxed text-muted">
         NextMove was developed by the Innovation Directorate in the Department
         of Neuroscience at the Washington University Medical School.
       </p>
