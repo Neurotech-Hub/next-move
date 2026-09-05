@@ -75,7 +75,7 @@ export function ResourceCard({
       </div>
 
       {resource.investigatorReturns.length > 0 && (
-        <Section title="What this can return to you">
+        <Section title="Benefits of this program">
           <ul className="list-disc space-y-1 pl-4">
             {resource.investigatorReturns.map((item) => (
               <li key={item}>{item}</li>
@@ -84,7 +84,7 @@ export function ResourceCard({
         </Section>
       )}
 
-      <Section title="Not a fit for">
+      <Section title="Not suitable for">
         <ul className="list-disc space-y-1 pl-4">
           {resource.notFor.map((item) => (
             <li key={item}>{item}</li>

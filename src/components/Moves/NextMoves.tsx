@@ -95,11 +95,11 @@ function DefaultMoves() {
           Next steps & programs
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
-          Next moves appear after you pick a goal
+          Choose a goal to see your next steps.
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Each move includes the evidence to collect, the academic return, a
-          named program, and what you can skip.
+          Each move shows required evidence, its benefit, a relevant program,
+          and what you can skip.
         </p>
       </div>
     );
@@ -120,7 +120,7 @@ function DefaultMoves() {
         </button>
       ) : (
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
-          Plan backward from this goal
+          Plan backwards from this goal
         </h2>
       )}
       <p className="mt-2 text-sm leading-relaxed text-ink/85">
@@ -164,8 +164,8 @@ function NodeInspector({ nodeId }: { nodeId: string }) {
         {node.type === "destination"
           ? "Your goal"
           : node.type === "milestone"
-            ? "A useful move"
-            : "A stage on this path"}
+            ? "Optional step"
+            : "Step on this path."}
       </p>
       <h2 className="font-display mt-1 text-[1.65rem] leading-tight text-ink">
         {node.title}
@@ -176,11 +176,11 @@ function NodeInspector({ nodeId }: { nodeId: string }) {
       {related.length > 0 && (
         <section className="mt-6">
           <h3 className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
-            Programs connected to this stage
+            Related programs
           </h3>
           <p className="mt-1 text-xs leading-relaxed text-muted">
-            These are broad stage-level options. Return to your next steps for
-            recommendations matched to all four answers.
+            These are general programs for this stage. Return to Next Steps for
+            tailored recommendations.
           </p>
           <div className="mt-2 space-y-2">
             {related.map((item) => (
