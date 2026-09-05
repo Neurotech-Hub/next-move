@@ -90,318 +90,300 @@ body {
 }
 
 /*
- * Cosmic pathway hero — the empty "Your pathway" state.
+ * Aurora pathway hero — the empty "Your pathway" state.
  *
- * Layers, back to front: ambient aura (outside the card), nebula swirls,
- * starfield, emergence waves, core, comet, rotating gradient ring, content.
- * Every animation moves only transform/opacity so phones stay smooth; blurs
- * and masks are static per layer.
+ * Soft curtains of light drift across a dark sky: three blurred ribbons in
+ * teal and cyan with a faint high-altitude crimson edge, a warm horizon glow,
+ * and a lit top edge. Every animation moves only transform/opacity so phones
+ * stay smooth; blurs and masks are static per layer.
  */
-.cosmos {
+.aurora {
   position: relative;
   isolation: isolate;
 }
 
-/* Aura that bleeds past the card into the field */
-.cosmos::before {
+/* Cool aura that bleeds past the card into the field */
+.aurora::before {
   content: "";
   position: absolute;
-  inset: -28% 0;
+  inset: -26% 0;
   z-index: -1;
   border-radius: 40%;
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(91, 141, 214, 0.55), transparent 88%),
-    radial-gradient(ellipse at 18% 82%, rgba(225, 75, 82, 0.5), transparent 70%),
-    radial-gradient(ellipse at 84% 18%, rgba(86, 161, 137, 0.42), transparent 70%),
-    radial-gradient(ellipse at 76% 88%, rgba(217, 160, 84, 0.36), transparent 66%);
+    radial-gradient(ellipse at 50% 40%, rgba(86, 161, 137, 0.42), transparent 86%),
+    radial-gradient(ellipse at 22% 30%, rgba(91, 141, 214, 0.36), transparent 70%),
+    radial-gradient(ellipse at 80% 90%, rgba(217, 160, 84, 0.16), transparent 62%);
   filter: blur(30px);
-  animation: cosmos-aura 9s ease-in-out infinite;
+  animation: aurora-breathe 11s ease-in-out infinite;
   pointer-events: none;
 }
 
-.cosmos-panel {
+.aurora-panel {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-radius: 1.5rem;
-  perspective: 900px;
-  background: radial-gradient(
-    ellipse 90% 80% at 50% 50%,
-    #151c2f 0%,
-    #0d1119 62%,
-    #090c12 100%
-  );
-  /* Coloured halo lives in box-shadow so it never adds scroll overflow on phones */
+  background:
+    linear-gradient(to bottom, #0b1120 0%, #0c1119 55%, #0e1116 100%);
+  /* Halo lives in box-shadow so it never adds scroll overflow on phones */
   box-shadow:
-    0 0 90px -16px rgba(91, 141, 214, 0.45),
-    -30px 30px 90px -30px rgba(225, 75, 82, 0.35),
-    30px -24px 80px -30px rgba(86, 161, 137, 0.32),
+    0 0 80px -20px rgba(86, 161, 137, 0.38),
+    0 -12px 70px -30px rgba(91, 141, 214, 0.32),
     0 30px 80px -24px rgba(0, 0, 0, 0.8),
     inset 0 0 0 1px rgba(233, 236, 244, 0.05);
 }
 
-.cosmos-layer {
+.aurora-layer {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-/* Nebula: a stationary elliptical mask over a slowly rotating colour wheel */
-.cosmos-nebula {
-  -webkit-mask: radial-gradient(
-    ellipse 58% 56% at 50% 50%,
-    #000 0%,
-    rgba(0, 0, 0, 0.7) 40%,
-    transparent 100%
-  );
-  mask: radial-gradient(
-    ellipse 58% 56% at 50% 50%,
-    #000 0%,
-    rgba(0, 0, 0, 0.7) 40%,
-    transparent 100%
-  );
-  filter: blur(28px) saturate(1.25);
-  transform: scale(1.3, 0.82) rotate(-8deg);
-}
-
-/* Uneven arm widths keep the swirl organic rather than a pinwheel */
-.cosmos-nebula::before {
-  content: "";
-  position: absolute;
-  inset: -100%;
-  background: conic-gradient(
-    from 0deg,
-    rgba(91, 141, 214, 0.95) 0deg,
-    rgba(91, 141, 214, 0.25) 34deg,
-    transparent 58deg,
-    rgba(225, 75, 82, 0.78) 84deg,
-    rgba(225, 75, 82, 0.2) 122deg,
-    transparent 138deg,
-    rgba(86, 161, 137, 0.72) 168deg,
-    rgba(86, 161, 137, 0.15) 206deg,
-    rgba(217, 160, 84, 0.82) 246deg,
-    rgba(217, 160, 84, 0.18) 292deg,
-    transparent 318deg,
-    rgba(91, 141, 214, 0.95) 360deg
-  );
-  animation: cosmos-spin 80s linear infinite;
-  will-change: transform;
-}
-
-.cosmos-nebula-2 {
-  -webkit-mask: radial-gradient(
-    ellipse 40% 36% at 50% 52%,
-    #000 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    transparent 100%
-  );
-  mask: radial-gradient(
-    ellipse 40% 36% at 50% 52%,
-    #000 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    transparent 100%
-  );
-  filter: blur(18px) saturate(1.3);
-  opacity: 0.9;
-  mix-blend-mode: screen;
-  transform: scale(1.15, 0.9) rotate(12deg);
-}
-
-.cosmos-nebula-2::before {
-  background: conic-gradient(
-    from 120deg,
-    rgba(217, 160, 84, 0.7) 0deg,
-    transparent 50deg,
-    rgba(91, 141, 214, 0.9) 118deg,
-    transparent 176deg,
-    rgba(225, 75, 82, 0.75) 236deg,
-    transparent 312deg,
-    rgba(217, 160, 84, 0.7) 360deg
-  );
-  animation: cosmos-spin 52s linear infinite reverse;
-}
-
-/* Galaxy disc: a tilted spiral of arms turning behind the core */
-.cosmos-disc {
+/* A curtain: drifting vertical rays, brightest along the lower edge, inside a soft ellipse */
+.aurora-band {
   inset: auto;
-  left: 50%;
-  top: 50%;
-  width: 620px;
-  height: 620px;
-  margin: -310px;
-  border-radius: 50%;
-  transform: rotateX(64deg) rotateZ(-14deg);
-  transform-style: preserve-3d;
+  overflow: hidden;
+  mix-blend-mode: screen;
+  filter: blur(14px) saturate(1.25);
   -webkit-mask: radial-gradient(
-    circle,
-    #000 0%,
-    rgba(0, 0, 0, 0.85) 30%,
-    rgba(0, 0, 0, 0.3) 52%,
-    transparent 68%
+    ellipse 50% 50% at 50% 50%,
+    #000 28%,
+    rgba(0, 0, 0, 0.6) 56%,
+    transparent 100%
   );
   mask: radial-gradient(
-    circle,
-    #000 0%,
-    rgba(0, 0, 0, 0.85) 30%,
-    rgba(0, 0, 0, 0.3) 52%,
-    transparent 68%
+    ellipse 50% 50% at 50% 50%,
+    #000 28%,
+    rgba(0, 0, 0, 0.6) 56%,
+    transparent 100%
   );
-  filter: blur(4px);
-  opacity: 0.95;
-  mix-blend-mode: screen;
+  will-change: transform, opacity;
 }
 
-.cosmos-disc::before {
+/*
+ * Rays layered at 120/60/40px periods so their overlap looks irregular while
+ * still tiling seamlessly across the 120px drift.
+ */
+.aurora-band::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: repeating-conic-gradient(
-    from 0deg,
-    rgba(233, 236, 244, 0) 0deg,
-    rgba(91, 141, 214, 0.7) 22deg,
-    rgba(233, 236, 244, 0.28) 30deg,
-    rgba(225, 75, 82, 0.5) 40deg,
-    rgba(233, 236, 244, 0) 60deg
+  inset: 0 -240px;
+  -webkit-mask: linear-gradient(
+    to top,
+    #000 12%,
+    rgba(0, 0, 0, 0.4) 70%,
+    transparent 100%
   );
-  animation: cosmos-spin 36s linear infinite;
+  mask: linear-gradient(
+    to top,
+    #000 12%,
+    rgba(0, 0, 0, 0.4) 70%,
+    transparent 100%
+  );
+  animation: aurora-rays 12s linear infinite;
   will-change: transform;
 }
 
-.cosmos-disc::after {
+/* Second ray sheet at a 90px period drifting the other way, so the two beat */
+.aurora-band::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: 50%;
+  inset: 0 -240px;
+  -webkit-mask: linear-gradient(
+    to top,
+    #000 8%,
+    rgba(0, 0, 0, 0.3) 65%,
+    transparent 100%
+  );
+  mask: linear-gradient(
+    to top,
+    #000 8%,
+    rgba(0, 0, 0, 0.3) 65%,
+    transparent 100%
+  );
+  animation: aurora-rays-alt 19s linear infinite;
+  will-change: transform;
+}
+
+.aurora-band-1::after {
+  background: repeating-linear-gradient(
+    93deg,
+    rgba(86, 161, 137, 0) 0px,
+    rgba(120, 190, 200, 0.6) 10px,
+    rgba(86, 161, 137, 0) 26px,
+    rgba(91, 141, 214, 0.5) 58px,
+    rgba(91, 141, 214, 0) 90px
+  );
+}
+
+.aurora-band-2::after {
+  background: repeating-linear-gradient(
+    89deg,
+    rgba(91, 141, 214, 0) 0px,
+    rgba(120, 190, 200, 0.55) 12px,
+    rgba(91, 141, 214, 0) 30px,
+    rgba(86, 161, 137, 0.45) 62px,
+    rgba(86, 161, 137, 0) 90px
+  );
+  animation-duration: 25s;
+  animation-direction: reverse;
+}
+
+.aurora-band-3::after {
+  background: repeating-linear-gradient(
+    91deg,
+    rgba(225, 75, 82, 0) 0px,
+    rgba(225, 75, 82, 0.4) 16px,
+    rgba(225, 75, 82, 0) 44px,
+    rgba(225, 75, 82, 0) 90px
+  );
+  animation-duration: 31s;
+}
+
+/* Broad soft sheet of light beneath the rays */
+.aurora-glow {
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 34% 26% at 30% 34%, rgba(86, 161, 137, 0.5), transparent 100%),
+    radial-gradient(ellipse 38% 24% at 68% 52%, rgba(91, 141, 214, 0.45), transparent 100%),
+    radial-gradient(ellipse 30% 18% at 50% 22%, rgba(225, 75, 82, 0.16), transparent 100%);
+  filter: blur(34px);
+  mix-blend-mode: screen;
+  animation: aurora-sheet 21s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.aurora-band-1 {
+  left: -28%;
+  top: 0;
+  width: 156%;
+  height: 54%;
+  transform: rotate(-6deg);
+  animation: aurora-sway-1 17s ease-in-out infinite alternate;
+}
+
+.aurora-band-1::before {
+  background:
+    repeating-linear-gradient(
+      94deg,
+      rgba(86, 161, 137, 0) 0px,
+      rgba(86, 161, 137, 0.85) 14px,
+      rgba(86, 161, 137, 0) 42px,
+      rgba(91, 141, 214, 0.7) 74px,
+      rgba(91, 141, 214, 0) 120px
+    ),
+    repeating-linear-gradient(
+      91deg,
+      rgba(233, 236, 244, 0) 0px,
+      rgba(233, 236, 244, 0.22) 7px,
+      rgba(233, 236, 244, 0) 18px,
+      rgba(233, 236, 244, 0) 60px
+    ),
+    repeating-linear-gradient(
+      97deg,
+      rgba(86, 161, 137, 0) 0px,
+      rgba(86, 161, 137, 0.5) 5px,
+      rgba(86, 161, 137, 0) 13px,
+      rgba(86, 161, 137, 0) 40px
+    );
+}
+
+.aurora-band-2 {
+  left: -12%;
+  top: 34%;
+  width: 136%;
+  height: 46%;
+  opacity: 0.85;
+  transform: rotate(4deg);
+  filter: blur(12px) saturate(1.3);
+  animation: aurora-sway-2 23s ease-in-out infinite alternate;
+}
+
+.aurora-band-2::before {
+  background:
+    repeating-linear-gradient(
+      88deg,
+      rgba(91, 141, 214, 0) 0px,
+      rgba(91, 141, 214, 0.8) 18px,
+      rgba(91, 141, 214, 0) 50px,
+      rgba(86, 161, 137, 0.55) 88px,
+      rgba(86, 161, 137, 0) 120px
+    ),
+    repeating-linear-gradient(
+      86deg,
+      rgba(233, 236, 244, 0) 0px,
+      rgba(233, 236, 244, 0.16) 6px,
+      rgba(233, 236, 244, 0) 16px,
+      rgba(233, 236, 244, 0) 60px
+    ),
+    repeating-linear-gradient(
+      92deg,
+      rgba(91, 141, 214, 0) 0px,
+      rgba(91, 141, 214, 0.45) 6px,
+      rgba(91, 141, 214, 0) 15px,
+      rgba(91, 141, 214, 0) 40px
+    );
+  animation-duration: 16s;
+  animation-direction: reverse;
+}
+
+/* The faint red fringe real aurorae carry along their upper edge */
+.aurora-band-3 {
+  left: -34%;
+  top: -14%;
+  width: 170%;
+  height: 40%;
+  opacity: 0.7;
+  transform: rotate(-3deg);
+  filter: blur(22px);
+  animation: aurora-sway-3 29s ease-in-out infinite alternate;
+}
+
+.aurora-band-3::before {
+  background:
+    repeating-linear-gradient(
+      92deg,
+      rgba(225, 75, 82, 0) 0px,
+      rgba(225, 75, 82, 0.6) 30px,
+      rgba(225, 75, 82, 0) 66px,
+      rgba(225, 75, 82, 0.45) 96px,
+      rgba(225, 75, 82, 0) 120px
+    ),
+    repeating-linear-gradient(
+      95deg,
+      rgba(225, 75, 82, 0) 0px,
+      rgba(225, 75, 82, 0.35) 8px,
+      rgba(225, 75, 82, 0) 20px,
+      rgba(225, 75, 82, 0) 60px
+    );
+  animation-duration: 21s;
+}
+
+/* Warm glimmer along the horizon */
+.aurora-horizon {
   background:
     radial-gradient(
-      circle,
-      rgba(217, 160, 84, 0.8) 0%,
-      rgba(217, 160, 84, 0.4) 6%,
-      rgba(91, 141, 214, 0.35) 16%,
-      transparent 32%
+      ellipse 90% 42% at 50% 108%,
+      rgba(217, 160, 84, 0.26),
+      rgba(225, 75, 82, 0.08) 50%,
+      transparent 72%
     ),
-    repeating-radial-gradient(
-      circle,
-      rgba(233, 236, 244, 0) 0,
-      rgba(233, 236, 244, 0) 34px,
-      rgba(91, 141, 214, 0.16) 36px,
-      rgba(233, 236, 244, 0) 40px
-    );
-  animation: cosmos-spin 48s linear infinite reverse;
+    linear-gradient(to top, rgba(86, 161, 137, 0.06), transparent 40%);
+  animation: aurora-breathe 13s ease-in-out infinite;
 }
 
-/* Starfield: tiled pinpricks in two parallax layers */
-.cosmos-stars {
-  inset: -8%;
-  background-image:
-    radial-gradient(circle at 12% 18%, rgba(233, 236, 244, 1) 0 0.9px, transparent 1.7px),
-    radial-gradient(circle at 78% 26%, rgba(233, 236, 244, 0.85) 0 0.7px, transparent 1.5px),
-    radial-gradient(circle at 44% 62%, rgba(91, 141, 214, 1) 0 1px, transparent 2px),
-    radial-gradient(circle at 88% 74%, rgba(233, 236, 244, 0.9) 0 0.7px, transparent 1.5px),
-    radial-gradient(circle at 26% 84%, rgba(217, 160, 84, 1) 0 0.9px, transparent 1.7px),
-    radial-gradient(circle at 60% 8%, rgba(233, 236, 244, 0.8) 0 0.6px, transparent 1.3px),
-    radial-gradient(circle at 6% 52%, rgba(233, 236, 244, 0.7) 0 0.6px, transparent 1.3px),
-    radial-gradient(circle at 66% 90%, rgba(86, 161, 137, 1) 0 0.8px, transparent 1.6px),
-    radial-gradient(circle at 36% 40%, rgba(233, 236, 244, 0.7) 0 0.5px, transparent 1.2px),
-    radial-gradient(circle at 94% 12%, rgba(225, 75, 82, 0.9) 0 0.7px, transparent 1.5px),
-    radial-gradient(circle at 54% 78%, rgba(233, 236, 244, 0.75) 0 0.5px, transparent 1.2px),
-    radial-gradient(circle at 18% 66%, rgba(233, 236, 244, 0.6) 0 0.5px, transparent 1.1px);
-  background-size: 300px 300px;
-  animation:
-    cosmos-drift 42s ease-in-out infinite alternate,
-    cosmos-twinkle 5.2s ease-in-out infinite;
-}
-
-.cosmos-stars-near {
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(233, 236, 244, 1) 0 1.2px, transparent 2.4px),
-    radial-gradient(circle at 70% 64%, rgba(233, 236, 244, 0.95) 0 1px, transparent 2.1px),
-    radial-gradient(circle at 48% 14%, rgba(91, 141, 214, 1) 0 1.3px, transparent 2.6px),
-    radial-gradient(circle at 90% 40%, rgba(225, 75, 82, 1) 0 1px, transparent 2.1px),
-    radial-gradient(circle at 34% 88%, rgba(233, 236, 244, 0.9) 0 0.9px, transparent 1.9px),
-    radial-gradient(circle at 8% 76%, rgba(217, 160, 84, 1) 0 1.1px, transparent 2.2px),
-    radial-gradient(circle at 62% 42%, rgba(233, 236, 244, 0.85) 0 0.8px, transparent 1.7px);
-  background-size: 480px 480px;
-  animation:
-    cosmos-drift 28s ease-in-out infinite alternate-reverse,
-    cosmos-twinkle 3.6s ease-in-out 1.4s infinite;
-}
-
-/* Emergence: the point where a path begins to coalesce */
-.cosmos-core {
-  inset: auto;
-  left: 50%;
-  top: 50%;
-  width: 420px;
-  height: 420px;
-  margin: -210px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(233, 236, 244, 0.3) 0%,
-    rgba(217, 160, 84, 0.38) 6%,
-    rgba(91, 141, 214, 0.48) 14%,
-    rgba(91, 141, 214, 0.22) 28%,
-    rgba(225, 75, 82, 0.12) 46%,
-    transparent 68%
-  );
-  mix-blend-mode: screen;
-  animation: cosmos-breathe 5.6s ease-in-out infinite;
-  will-change: transform, opacity;
-}
-
-.cosmos-wave {
-  inset: auto;
-  left: 50%;
-  top: 50%;
-  width: 320px;
-  height: 320px;
-  margin: -160px;
-  border-radius: 50%;
-  border: 1px solid rgba(91, 141, 214, 0.6);
-  box-shadow:
-    0 0 20px rgba(91, 141, 214, 0.3),
-    inset 0 0 24px rgba(91, 141, 214, 0.18);
-  opacity: 0;
-  animation: cosmos-emerge 6.4s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
-  will-change: transform, opacity;
-}
-
-.cosmos-wave-2 {
-  border-color: rgba(225, 75, 82, 0.5);
-  box-shadow:
-    0 0 20px rgba(225, 75, 82, 0.26),
-    inset 0 0 24px rgba(225, 75, 82, 0.14);
-  animation-delay: 3.2s;
-}
-
-/* An occasional comet crossing the upper field */
-.cosmos-comet {
-  inset: auto;
-  top: 16%;
-  left: -220px;
-  width: 200px;
-  height: 1.5px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(91, 141, 214, 0.5) 55%,
-    rgba(233, 236, 244, 1)
-  );
-  filter: drop-shadow(0 0 6px rgba(91, 141, 214, 0.9));
-  opacity: 0;
-  animation: cosmos-comet 13s ease-in infinite;
-}
-
-/* 1px ring whose colour wheel slowly turns around the card */
-.cosmos-ring {
+/* Lit top edge: a static 1px ring, bright where the sky is */
+.aurora-edge {
   border-radius: inherit;
   padding: 1px;
-  opacity: 0.85;
+  background: linear-gradient(
+    to bottom,
+    rgba(86, 161, 137, 0.7),
+    rgba(91, 141, 214, 0.4) 38%,
+    rgba(35, 42, 56, 0.9) 100%
+  );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -412,24 +394,7 @@ body {
   mask-composite: exclude;
 }
 
-.cosmos-ring::before {
-  content: "";
-  position: absolute;
-  inset: -100%;
-  background: conic-gradient(
-    from 0deg,
-    rgba(91, 141, 214, 0.95),
-    rgba(86, 161, 137, 0.55),
-    rgba(217, 160, 84, 0.9),
-    rgba(225, 75, 82, 0.95),
-    rgba(91, 141, 214, 0.35),
-    rgba(91, 141, 214, 0.95)
-  );
-  animation: cosmos-spin 14s linear infinite;
-  will-change: transform;
-}
-
-.cosmos-content {
+.aurora-content {
   position: relative;
   z-index: 1;
   text-shadow:
@@ -437,90 +402,110 @@ body {
     0 2px 28px rgba(10, 13, 20, 0.95);
 }
 
-.cosmos-title {
+.aurora-title {
   text-shadow:
     0 1px 3px rgba(10, 13, 20, 0.85),
-    0 0 28px rgba(91, 141, 214, 0.5),
+    0 0 32px rgba(86, 161, 137, 0.5),
     0 2px 24px rgba(10, 13, 20, 0.95);
 }
 
-@keyframes cosmos-spin {
+@keyframes aurora-rays {
   to {
-    transform: rotate(360deg);
+    transform: translate3d(120px, 0, 0);
   }
 }
 
-@keyframes cosmos-aura {
-  0%,
-  100% {
-    opacity: 0.6;
-    transform: scale(0.96);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
+@keyframes aurora-rays-alt {
+  to {
+    transform: translate3d(-90px, 0, 0);
   }
 }
 
-@keyframes cosmos-drift {
+@keyframes aurora-sheet {
   from {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-4%, 1%, 0) scale(1);
+    opacity: 0.8;
   }
   to {
-    transform: translate3d(-16px, 10px, 0);
+    transform: translate3d(4%, -2%, 0) scale(1.08);
+    opacity: 1;
   }
 }
 
-@keyframes cosmos-twinkle {
+@keyframes aurora-breathe {
   0%,
   100% {
-    opacity: 0.55;
+    opacity: 0.7;
+    transform: scale(0.98);
   }
   50% {
     opacity: 1;
+    transform: scale(1.03);
   }
 }
 
-@keyframes cosmos-breathe {
-  0%,
-  100% {
-    opacity: 0.75;
-    transform: scale(0.9);
+@keyframes aurora-sway-1 {
+  from {
+    transform: translate3d(-4%, 0, 0) rotate(-7deg) scaleY(0.94);
+    opacity: 0.85;
   }
-  50% {
-    opacity: 1;
-    transform: scale(1.12);
-  }
-}
-
-@keyframes cosmos-emerge {
-  0% {
-    opacity: 0;
-    transform: scale(0.12);
-  }
-  14% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(2.9);
-  }
-}
-
-@keyframes cosmos-comet {
-  0%,
-  74% {
-    opacity: 0;
-    transform: translate3d(0, 0, 0) rotate(14deg);
-  }
-  77% {
+  to {
+    transform: translate3d(4%, 2%, 0) rotate(-4deg) scaleY(1.1);
     opacity: 1;
   }
-  90%,
-  100% {
-    opacity: 0;
-    transform: translate3d(1100px, 275px, 0) rotate(14deg);
+}
+
+@keyframes aurora-sway-2 {
+  from {
+    transform: translate3d(5%, 0, 0) rotate(5deg) scaleY(1.08);
+    opacity: 0.7;
   }
+  to {
+    transform: translate3d(-5%, -3%, 0) rotate(2deg) scaleY(0.92);
+    opacity: 0.95;
+  }
+}
+
+@keyframes aurora-sway-3 {
+  from {
+    transform: translate3d(-3%, 0, 0) rotate(-4deg) scaleY(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: translate3d(3%, 3%, 0) rotate(-1deg) scaleY(1.16);
+    opacity: 0.65;
+  }
+}
+
+/* About panel: a quiet aurora wash behind the mission line */
+.about-panel {
+  position: relative;
+  isolation: isolate;
+}
+
+.about-panel::before {
+  content: "";
+  position: absolute;
+  inset: -0.75rem -0.875rem auto -0.875rem;
+  z-index: -1;
+  height: 5.5rem;
+  border-radius: 1rem 1rem 0 0;
+  background:
+    radial-gradient(ellipse 70% 90% at 12% 0%, rgba(86, 161, 137, 0.22), transparent 70%),
+    radial-gradient(ellipse 60% 80% at 88% 10%, rgba(91, 141, 214, 0.16), transparent 70%);
+  pointer-events: none;
+}
+
+.about-rule {
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(86, 161, 137, 0.8),
+    rgba(91, 141, 214, 0.6) 45%,
+    rgba(225, 75, 82, 0.35) 80%,
+    transparent
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
