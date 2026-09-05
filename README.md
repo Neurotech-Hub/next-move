@@ -1,4 +1,4 @@
-# Innovation Navigator
+# NEXTMOVE
 
 A static, client-side navigator for WashU investigators: **how can the innovation community serve your goals?**
 
@@ -7,7 +7,7 @@ A static, client-side navigator for WashU investigators: **how can the innovatio
 
 The primary experience starts from **academic destinations** (research impact, funding, distribution, clinical use, licensing, startup). Choosing a goal isolates one path and shows the next 1–3 moves from the research snapshot — evidence required, academic return, recommended program, what you do not need to do, and eligibility traps.
 
-**View all resources** is a separate catalog of every program collected in the research report, filterable by source (WashU, Federal, Regional, Investor).
+**View resources** is a separate catalog of every program collected in the research report, filterable by source (WashU, Federal, Regional, Investor).
 
 ## Develop
 

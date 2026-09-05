@@ -27,7 +27,7 @@ export function Header() {
             type="button"
             onClick={reset}
             className="group flex items-center gap-2.5 text-left transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu"
-            aria-label="Innovation Navigator home"
+            aria-label="NEXTMOVE at WashU home"
           >
             <svg
               viewBox="0 0 32 32"
@@ -53,10 +53,15 @@ export function Header() {
                 strokeLinecap="round"
               />
             </svg>
-            <span className="font-logo text-[12px] font-medium uppercase leading-tight tracking-[0.04em] sm:text-[13px]">
-              <span className="text-ink">Innovation</span>{" "}
-              <span className="text-ink/45 transition duration-200 group-hover:text-washu">
-                Navigator
+            <span className="flex min-w-0 flex-col items-start leading-none">
+              <span className="font-logo text-[13px] font-medium uppercase tracking-[0.05em] sm:text-[14px]">
+                <span className="text-ink">Next</span>
+                <span className="text-ink/45 transition duration-200 group-hover:text-washu">
+                  Move
+                </span>
+              </span>
+              <span className="mt-[3px] origin-left scale-x-[0.86] text-[8px] font-medium uppercase tracking-[0.14em] text-ink/32 sm:text-[8.5px]">
+                At WashU
               </span>
             </span>
           </button>
@@ -84,7 +89,7 @@ export function Header() {
             aria-pressed={view === "resources"}
             className={`${seg} text-ink/55 hover:bg-raise hover:text-ink/80`}
           >
-            {view === "resources" ? "Back to your path" : "View all resources"}
+            {view === "resources" ? "Back to your path" : "View resources"}
           </button>
 
           <SearchControl />
