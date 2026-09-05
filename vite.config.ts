@@ -9,7 +9,7 @@ const env = globalThis as typeof globalThis & {
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: env.process?.env?.GITHUB_PAGES === "true" ? "/InnovationNavigator/" : "/",
+  base: env.process?.env?.GITHUB_PAGES === "true" ? "/next-move/" : "/",
   test: {
     environment: "node",
     include: ["src/**/*.test.ts"],

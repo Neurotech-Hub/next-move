@@ -1,7 +1,7 @@
-# WashU Innovation Navigator
+# NEXTMOVE at WashU
 ## MVP Product & Technical Specification
 
-**Working title:** Innovation Navigator  
+**Working title:** NEXTMOVE (formerly Innovation Navigator)  
 **Initial audience:** Washington University in St. Louis faculty and academic inventors, initially emphasizing neuroscience and biomedical innovation  
 **Deployment target:** GitHub Pages  
 **Application type:** Static, client-side web application  
@@ -15,7 +15,7 @@ Build a beautiful, modern, exploratory web application that helps an academic in
 
 > **Where am I, where could this go, and what should I do next?**
 
-The Innovation Navigator should make the broader innovation landscape visible rather than hiding it behind a questionnaire or linear wizard.
+NEXTMOVE should make the broader innovation landscape visible rather than hiding it behind a questionnaire or linear wizard.
 
 An investigator may arrive without knowing:
 
@@ -412,7 +412,7 @@ Do not begin with a modal questionnaire.
 
 Header:
 
-# Innovation Navigator
+# NEXTMOVE
 
 Supporting copy:
 
@@ -1199,7 +1199,7 @@ No server-side runtime may be required.
 # 37. Suggested repository structure
 
 ```text
-innovation-navigator/
+next-move/
 │
 ├── .github/
 │   └── workflows/
@@ -1360,7 +1360,7 @@ Keep copy extremely short.
 
 Possible initial structure:
 
-**Innovation Navigator**
+**NEXTMOVE**
 
 # Where could your idea go?
 

@@ -2,8 +2,8 @@
 
 A static, client-side navigator for WashU investigators: **how can the innovation community serve your goals?**
 
-**Live site:** [https://neurotech-hub.github.io/InnovationNavigator/](https://neurotech-hub.github.io/InnovationNavigator/)  
-**Repository:** [https://github.com/Neurotech-Hub/InnovationNavigator](https://github.com/Neurotech-Hub/InnovationNavigator)
+**Live site:** [https://neurotech-hub.github.io/next-move/](https://neurotech-hub.github.io/next-move/)  
+**Repository:** [https://github.com/Neurotech-Hub/next-move](https://github.com/Neurotech-Hub/next-move)
 
 The primary experience starts from **academic destinations** (research impact, funding, distribution, clinical use, licensing, startup). Choosing a goal isolates one path and shows the next 1–3 moves from the research snapshot — evidence required, academic return, recommended program, what you do not need to do, and eligibility traps.
 
@@ -24,7 +24,7 @@ npm run build
 npm run preview
 ```
 
-GitHub Pages builds set `GITHUB_PAGES=true` so Vite uses the `/InnovationNavigator/` base path. Deployments run from `.github/workflows/deploy.yml` when `main` updates — set the repo Pages source to **GitHub Actions** if it is not already.
+GitHub Pages builds set `GITHUB_PAGES=true` so Vite uses the `/next-move/` base path. Deployments run from `.github/workflows/deploy.yml` when `main` updates — set the repo Pages source to **GitHub Actions** if it is not already.
 
 ## Add content without redesigning the UI
 
