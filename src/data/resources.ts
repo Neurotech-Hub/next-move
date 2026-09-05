@@ -16,7 +16,7 @@ export const resources: Resource[] = [
     whatYouGet:
       "Disclosure intake, evaluation, patent/IP strategy, marketing, licensing, and commercialization support. The disclosure asks for an invention description, creators, funding, and related information.",
     whyYouMightCare:
-      "Lets you understand transfer options without deciding to become an entrepreneur. A conversation with OTM can preserve options before a talk or paper — it is not a commitment to patent or found.",
+      "Lets you understand transfer options without deciding to become an entrepreneur. OTM evaluates WashU inventions, handles patent strategy, and files when warranted — a conversation before a talk or paper is how that process starts.",
     usefulWhen: [
       "Something developed in the lab may have utility outside it",
       "You want to preserve transfer or commercialization options",
@@ -32,7 +32,7 @@ export const resources: Resource[] = [
     companyRequired: false,
     funding: null,
     caveats: [
-      "Talking with OTM is not the same as filing a patent.",
+      "OTM evaluates WashU inventions and, when warranted, files and manages the patents.",
       "A startup is not required.",
     ],
     investigatorReturns: [

@@ -13,7 +13,7 @@ const SOURCES: {
 }[] = [
   {
     id: "all",
-    label: "All cards",
+    label: "All",
     chip: "border-ink bg-ink text-paper",
     badge: "border-line bg-raise text-muted",
   },
@@ -182,13 +182,6 @@ export function ResourcesCatalog() {
           Catalog
         </p>
         <h2 className="font-display mt-1 text-3xl text-ink">All resources</h2>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
-          Browse every program in the navigator. Filtering here does not change
-          your path.
-        </p>
-        <p className="mt-1 text-xs text-muted">
-          {filtered.length} of {resources.length} programs
-        </p>
 
         <div className="sticky top-0 z-10 -mx-2 mt-3 border-b border-line/70 bg-paper/95 px-2 py-3 backdrop-blur-sm">
           <div

@@ -287,7 +287,7 @@ export const nodes: MapNode[] = [
     resourceIds: ["otm-core"],
     details: {
       whyItMatters:
-        "Talking with OTM does not commit you to a patent or a startup. It keeps options open while you decide what this work is for.",
+        "OTM evaluates WashU inventions and, when warranted, files patents. A conversation keeps options open and does not require you to found a company.",
       youMayBeHereIf: [
         "A manuscript, talk, poster, or demo is approaching",
         "You suspect this could be useful outside the lab",

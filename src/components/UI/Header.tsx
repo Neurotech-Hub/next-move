@@ -15,14 +15,14 @@ export function Header() {
   const seg =
     "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu";
 
-  const canReset = Boolean(
-    recommendation || guideOpen || focusedDestinationId,
-  );
+  const showReset =
+    view === "journey" &&
+    Boolean(recommendation || guideOpen || focusedDestinationId);
 
   return (
     <header className="relative z-40 shrink-0 border-b border-line/70 bg-paper/95 px-4 py-3 backdrop-blur-sm sm:px-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="min-w-0">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+        <h1 className="min-w-0 justify-self-start">
           <button
             type="button"
             onClick={reset}
@@ -62,7 +62,20 @@ export function Header() {
           </button>
         </h1>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="justify-self-center">
+          {showReset && (
+            <button
+              type="button"
+              onClick={reset}
+              className={`${seg} text-ink/40 hover:bg-raise hover:text-ink/70`}
+            >
+              <RotateCcw className="size-3.5" aria-hidden />
+              Reset
+            </button>
+          )}
+        </div>
+
+        <div className="flex flex-wrap items-center justify-end gap-2 justify-self-end">
           <button
             type="button"
             onClick={() =>
@@ -75,17 +88,6 @@ export function Header() {
           </button>
 
           <SearchControl />
-
-          {canReset && (
-            <button
-              type="button"
-              onClick={reset}
-              className={`${seg} text-ink/70 hover:bg-raise`}
-            >
-              <RotateCcw className="size-3.5" aria-hidden />
-              Reset
-            </button>
-          )}
         </div>
       </div>
     </header>
