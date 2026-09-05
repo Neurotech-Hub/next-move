@@ -162,7 +162,7 @@ export function PathView() {
           {recommendation ? "Your tailored pathway" : "Your pathway"}
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
-          {activeRoute?.title ?? "Plan backwards from a goal"}
+          {activeRoute?.title ?? "The inventor's roadmap"}
         </h2>
         <div className="mt-4 flex flex-wrap items-center gap-3 text-[12px] text-muted">
           <Legend swatch="bg-washu" label="You are here" />
@@ -184,9 +184,9 @@ export function PathView() {
         )}
 
         {!isolated && !showFullJourney && (
-          <div className="mt-10 rounded-3xl border border-dashed border-line bg-card/60 px-6 py-10 text-center">
+          <div className="awaiting-path mt-10 rounded-3xl border border-dashed border-line bg-card/60 px-6 py-10 text-center">
             <p className="font-display text-2xl text-ink">
-              Choose a goal to see one path
+              Choose a goal to visualize the path.
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
               Choose a goal, and we’ll plan backwards from there.

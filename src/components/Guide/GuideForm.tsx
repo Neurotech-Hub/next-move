@@ -91,8 +91,7 @@ function Choice({
 }
 
 export function GuideForm() {
-  const { applyGuide, guideAnswers, setGuideAnswers, closeGuide } =
-    useNavigator();
+  const { applyGuide, guideAnswers, setGuideAnswers } = useNavigator();
   const [step, setStep] = useState(0);
   const answers = guideAnswers;
   const update = (next: GuideAnswers) => setGuideAnswers(next);
@@ -196,13 +195,15 @@ export function GuideForm() {
 
       <div className="mt-6 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={step === 0 ? closeGuide : () => setStep(step - 1)}
-            className="text-sm font-medium text-muted hover:text-ink"
-          >
-            {step === 0 ? "Not now" : "Back"}
-          </button>
+          {step > 0 && (
+            <button
+              type="button"
+              onClick={() => setStep(step - 1)}
+              className="text-sm font-medium text-muted hover:text-ink"
+            >
+              Back
+            </button>
+          )}
           <ResetIconButton />
         </div>
         <button

@@ -143,7 +143,7 @@ export function GoalsRail() {
           Your goals
         </p>
         <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
-          What's your ultimate goal?
+          What's your goal?
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           Choose a goal to reveal one path forward.

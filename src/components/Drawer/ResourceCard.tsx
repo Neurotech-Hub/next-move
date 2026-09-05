@@ -54,7 +54,7 @@ export function ResourceCard({
           <p className="mt-1 text-xs leading-relaxed text-ink/80">{ret}</p>
         )}
         {trap && (
-          <p className="mt-1 text-xs leading-relaxed text-washu/80">{trap}</p>
+          <p className="mt-1 text-xs leading-relaxed text-federal/80">{trap}</p>
         )}
       </button>
     );

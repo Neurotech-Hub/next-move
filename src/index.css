@@ -89,6 +89,60 @@ body {
   box-shadow: 0 0 16px rgba(217, 160, 84, 0.18);
 }
 
+/* Soft “awaiting input” breath for the empty pathway panel */
+@keyframes await-pulse {
+  0%,
+  100% {
+    border-color: color-mix(in srgb, var(--color-line) 100%, transparent);
+    box-shadow:
+      0 0 0 0 transparent,
+      inset 0 0 36px rgba(91, 141, 214, 0.02);
+  }
+  50% {
+    border-color: color-mix(in srgb, var(--color-federal) 38%, var(--color-line));
+    box-shadow:
+      0 0 28px rgba(91, 141, 214, 0.1),
+      inset 0 0 52px rgba(91, 141, 214, 0.06);
+  }
+}
+
+@keyframes await-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.awaiting-path {
+  position: relative;
+  overflow: hidden;
+  animation: await-pulse 4.8s var(--ease-out-soft) infinite;
+}
+
+.awaiting-path::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(91, 141, 214, 0.1),
+    rgba(225, 75, 82, 0.03) 42%,
+    transparent 68%
+  );
+  animation: await-glow 5.6s var(--ease-out-soft) infinite;
+  pointer-events: none;
+}
+
+.awaiting-path > * {
+  position: relative;
+  z-index: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

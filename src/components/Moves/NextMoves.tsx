@@ -95,7 +95,7 @@ function DefaultMoves() {
           Next steps & programs
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
-          Choose a goal to see your next steps.
+          Get excited, get started.
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
           Each move shows required evidence, its benefit, a relevant program,
