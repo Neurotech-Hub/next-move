@@ -4,6 +4,7 @@ import { destinationPlans, nodeById, nodes } from "../../data";
 import { tailoringDetails } from "../../logic/guideSummary";
 import { useNavigator } from "../../state/NavigatorContext";
 import { GuideForm } from "../Guide/GuideForm";
+import { ResetIconButton } from "../UI/ResetIconButton";
 
 const destinations = nodes.filter((node) => node.type === "destination");
 
@@ -115,14 +116,17 @@ export function GoalsRail() {
           ))}
         </dl>
 
-        <button
-          type="button"
-          onClick={openGuide}
-          className="mt-5 inline-flex items-center gap-2 rounded-full bg-washu px-4 py-2.5 text-sm font-medium text-white transition hover:bg-washu/90"
-        >
-          <Sparkles className="size-4" aria-hidden />
-          Update my answers
-        </button>
+        <div className="mt-5 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={openGuide}
+            className="inline-flex items-center gap-2 rounded-full bg-washu px-4 py-2.5 text-sm font-medium text-white transition hover:bg-washu/90"
+          >
+            <Sparkles className="size-4" aria-hidden />
+            Update my answers
+          </button>
+          <ResetIconButton />
+        </div>
 
         <details className="mt-5 border-t border-line pt-4">
           <summary className="cursor-pointer text-sm font-medium text-muted hover:text-ink">
@@ -155,14 +159,17 @@ export function GoalsRail() {
             Answer a few questions to personalize your path and next steps.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={openGuide}
-          className="mt-3 inline-flex items-center gap-2 rounded-full bg-washu px-4 py-2.5 text-sm font-medium text-white transition hover:bg-washu/90"
-        >
-          <Sparkles className="size-4" aria-hidden />
-          Guide me
-        </button>
+        <div className="mt-3 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={openGuide}
+            className="inline-flex items-center gap-2 rounded-full bg-washu px-4 py-2.5 text-sm font-medium text-white transition hover:bg-washu/90"
+          >
+            <Sparkles className="size-4" aria-hidden />
+            Guide me
+          </button>
+          <ResetIconButton />
+        </div>
       </>
     );
   }

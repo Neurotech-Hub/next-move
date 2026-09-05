@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigator } from "../../state/NavigatorContext";
+import { ResetIconButton } from "../UI/ResetIconButton";
 import type {
   AssetAnswer,
   DestinationAnswer,
@@ -63,12 +64,6 @@ const EFFECTS = [
   "Places your “You are here” marker and skips earlier stages.",
   "Favors programs that fit the role you want to play.",
 ];
-
-function toggle<T>(list: T[], value: T): T[] {
-  return list.includes(value)
-    ? list.filter((item) => item !== value)
-    : [...list, value];
-}
 
 function Choice({
   selected,
@@ -136,11 +131,7 @@ export function GuideForm() {
       <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
         {TITLES[step]}
       </h2>
-      <p className="mt-2 text-sm text-muted">
-        {step === 0 || step === 1
-          ? "Choose all that apply."
-          : "One answer is enough. You can change it later."}
-      </p>
+      <p className="mt-2 text-sm text-muted">Select the most relevant.</p>
       <div className="mt-3 rounded-xl border border-washu/20 bg-washu/8 px-3 py-2">
         <p className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-washu">
           How this tailors your results
@@ -155,11 +146,11 @@ export function GuideForm() {
           DESTINATIONS.map((item) => (
             <Choice
               key={item.id}
-              selected={answers.destinations.includes(item.id)}
+              selected={answers.destinations[0] === item.id}
               onClick={() =>
                 update({
                   ...answers,
-                  destinations: toggle(answers.destinations, item.id),
+                  destinations: [item.id],
                 })
               }
             >
@@ -170,11 +161,11 @@ export function GuideForm() {
           MOTIVATIONS.map((item) => (
             <Choice
               key={item.id}
-              selected={answers.motivations.includes(item.id)}
+              selected={answers.motivations[0] === item.id}
               onClick={() =>
                 update({
                   ...answers,
-                  motivations: toggle(answers.motivations, item.id),
+                  motivations: [item.id],
                 })
               }
             >
@@ -203,14 +194,17 @@ export function GuideForm() {
           ))}
       </div>
 
-      <div className="mt-6 flex items-center justify-between">
-        <button
-          type="button"
-          onClick={step === 0 ? closeGuide : () => setStep(step - 1)}
-          className="text-sm font-medium text-muted hover:text-ink"
-        >
-          {step === 0 ? "Not now" : "Back"}
-        </button>
+      <div className="mt-6 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={step === 0 ? closeGuide : () => setStep(step - 1)}
+            className="text-sm font-medium text-muted hover:text-ink"
+          >
+            {step === 0 ? "Not now" : "Back"}
+          </button>
+          <ResetIconButton />
+        </div>
         <button
           type="button"
           disabled={!canAdvance}

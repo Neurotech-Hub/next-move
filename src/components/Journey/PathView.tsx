@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { nodes, regions } from "../../data";
 import { useNavigator } from "../../state/NavigatorContext";
 import type { MapNode } from "../../types/navigator";
@@ -5,12 +6,19 @@ import type { MapNode } from "../../types/navigator";
 const stateNodes = nodes.filter((node) => node.type === "state");
 const milestoneNodes = nodes.filter((node) => node.type === "milestone");
 
+function isStackedLayout() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 1023px)").matches
+  );
+}
+
 function captionFor(node: MapNode | undefined, isCurrent: boolean): string {
   if (!node) {
     return "Choose a goal to reveal one path forward.";
   }
   if (node.type === "destination") {
-    return "This is your goal. The steps above are what would get you there.";
+    return "";
   }
   if (node.type === "milestone") {
     return "You’re looking at an optional step — useful work at this stage, not a numbered requirement.";
@@ -115,6 +123,20 @@ export function PathView() {
     showFullJourney,
     setShowFullJourney,
   } = useNavigator();
+  const pathRef = useRef<HTMLDivElement>(null);
+  const previousGoal = useRef(focusedDestinationId);
+
+  // On mobile the journey is a single scrolling column. Selecting a goal should
+  // bring "Your pathway" into view instead of leaving the user on the goals list.
+  useEffect(() => {
+    if (!focusedDestinationId || previousGoal.current === focusedDestinationId) {
+      previousGoal.current = focusedDestinationId;
+      return;
+    }
+    previousGoal.current = focusedDestinationId;
+    if (!isStackedLayout()) return;
+    pathRef.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }, [focusedDestinationId]);
 
   const pathIds = activeRoute?.nodeIds ?? [];
   const isolated = pathIds.length > 0 && !showFullJourney;
@@ -128,9 +150,13 @@ export function PathView() {
     : [];
 
   let numberedStep = 0;
+  const caption = captionFor(selected, selected?.id === currentId);
 
   return (
-    <div className="field-bg flex min-h-0 flex-col px-4 pb-10 pt-4 sm:px-8 sm:pt-6 lg:h-full lg:overflow-y-auto lg:pb-16">
+    <div
+      ref={pathRef}
+      className="field-bg flex min-h-0 flex-col px-4 pb-10 pt-4 sm:px-8 sm:pt-6 lg:h-full lg:overflow-y-auto lg:pb-16"
+    >
       <div className="mx-auto w-full max-w-2xl">
         <p className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-washu">
           {recommendation ? "Your tailored pathway" : "Your pathway"}
@@ -147,9 +173,9 @@ export function PathView() {
           />
           <Legend swatch="bg-washu/20" label="Your goal" />
         </div>
-        <p className="mt-2 text-sm leading-relaxed text-ink/80">
-          {captionFor(selected, selected?.id === currentId)}
-        </p>
+        {caption && (
+          <p className="mt-2 text-sm leading-relaxed text-ink/80">{caption}</p>
+        )}
 
         {activeRoute && isolated && (
           <p className="mt-4 text-sm leading-relaxed text-muted">

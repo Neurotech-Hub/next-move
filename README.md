@@ -1,13 +1,25 @@
-# NEXTMOVE
+# NextMove
 
 A static, client-side navigator for WashU investigators: **how can the innovation community serve your goals?**
 
 **Live site:** [https://neurotech-hub.github.io/next-move/](https://neurotech-hub.github.io/next-move/)  
-**Repository:** [https://github.com/Neurotech-Hub/next-move](https://github.com/Neurotech-Hub/next-move)
+**Repository:** [https://github.com/Neurotech-Hub/next-move](https://github.com/Neurotech-Hub/next-move)  
+**Version:** `0.2.0` · **channel:** beta
+
+NextMove was developed by the Innovation Directorate in the Department of Neuroscience at the Washington University Medical School.
 
 The primary experience starts from **academic destinations** (research impact, funding, distribution, clinical use, licensing, startup). Choosing a goal isolates one path and shows the next 1–3 moves from the research snapshot — evidence required, academic return, recommended program, what you do not need to do, and eligibility traps.
 
-**View resources** is a separate catalog of every program collected in the research report, filterable by source (WashU, Federal, Regional, Investor).
+**Resources** is a separate catalog of every program collected in the research report, filterable by source (WashU, Federal, Regional, Investor).
+
+## Versioning
+
+The app is in **beta**. Semver lives in `package.json` and `src/version.ts` (keep them in sync). The about control in the header shows the current channel and version.
+
+| Version | Notes |
+| --- | --- |
+| 0.2.0 | Beta channel; NextMove branding; mobile header and reset placement |
+| 0.1.0 | Initial public GitHub Pages release |
 
 ## Develop
 
