@@ -3,6 +3,20 @@ import { ArrowUpRight } from "lucide-react";
 import type { Resource } from "../../types/navigator";
 import { useNavigator } from "../../state/NavigatorContext";
 
+const SOURCE_LABEL = {
+  washu: "WashU",
+  federal: "Federal",
+  regional: "Regional",
+  investor: "Investor",
+} as const;
+
+const SOURCE_STYLE = {
+  washu: "border-washu/25 bg-washu/10 text-washu",
+  federal: "border-federal/25 bg-federal/10 text-federal",
+  regional: "border-sage/25 bg-sage/10 text-sage",
+  investor: "border-gold/25 bg-gold/10 text-gold",
+} as const;
+
 function StatusNote({ resource }: { resource: Resource }) {
   if (resource.status === "closed_verify") {
     return "The current window is closed. Treat this as a likely future milestone and verify before planning around it.";
@@ -49,9 +63,11 @@ export function ResourceCard({
   return (
     <article className="space-y-5">
       <div>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-          Program
-        </p>
+        <span
+          className={`inline-flex rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] ${SOURCE_STYLE[resource.internality]}`}
+        >
+          {SOURCE_LABEL[resource.internality]} program
+        </span>
         <h3 className="font-display mt-1 text-2xl leading-snug text-ink">
           {resource.title}
         </h3>
@@ -68,7 +84,7 @@ export function ResourceCard({
         </Section>
       )}
 
-      <Section title="You do not need to…">
+      <Section title="Not a fit for">
         <ul className="list-disc space-y-1 pl-4">
           {resource.notFor.map((item) => (
             <li key={item}>{item}</li>
@@ -83,7 +99,7 @@ export function ResourceCard({
       )}
 
       {resource.caveats.length > 0 && (
-        <Section title="Watch for">
+        <Section title="Keep in mind">
           {resource.caveats.map((caveat) => (
             <p key={caveat}>{caveat}</p>
           ))}

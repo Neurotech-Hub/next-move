@@ -21,20 +21,12 @@ import {
   recommend,
 } from "../logic/recommendations";
 import type {
-  AssetAnswer,
   GuideAnswers,
   NextMove,
   Recommendation,
   Route,
   ViewMode,
 } from "../types/navigator";
-
-const ASSET_TO_MODALITY: Partial<Record<AssetAnswer, string>> = {
-  software: "software",
-  therapeutic: "therapeutic",
-  device: "device",
-  "research-tool": "research-tool",
-};
 
 interface NavigatorContextValue {
   view: ViewMode;
@@ -143,26 +135,25 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
   }, [activeRouteId, focusedDestinationId, suggestedRoutes]);
 
   const nextMoves = useMemo(() => {
-    const modality = guideAnswers.asset
-      ? ASSET_TO_MODALITY[guideAnswers.asset]
-      : undefined;
     if (recommendation && activeRoute) {
       return nextMovesForRoute(
         recommendation.currentStateId,
         activeRoute,
-        modality,
+        guideAnswers,
+        focusedDestinationId,
       );
     }
     if (focusedDestinationId) {
       return nextMovesForDestination(focusedDestinationId);
     }
     return [];
-  }, [activeRoute, focusedDestinationId, guideAnswers.asset, recommendation]);
+  }, [activeRoute, focusedDestinationId, guideAnswers, recommendation]);
 
   const focusDestination = useCallback((id: string | null) => {
     setFocusedDestinationId(id);
     setSelectedResourceId(null);
     setGuideOpen(false);
+    setRecommendation(null);
     if (id) {
       const plan = destinationPlanById[id];
       if (plan) setActiveRouteId(plan.defaultRouteId);
@@ -170,6 +161,7 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
       setShowFullJourney(false);
     } else {
       setSelectedNodeId(null);
+      setActiveRouteId(null);
     }
   }, []);
 
@@ -201,10 +193,11 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
   const applyGuide = useCallback((answers: GuideAnswers) => {
     if (!isGuideComplete(answers)) return;
     const next = recommend(answers);
+    const primaryDestination = next.destinationIds[0] ?? null;
     setRecommendation(next);
     setActiveRouteId(next.routeIds[0] ?? null);
-    setFocusedDestinationId(next.destinationIds[0] ?? null);
-    setSelectedNodeId(null);
+    setFocusedDestinationId(primaryDestination);
+    setSelectedNodeId(primaryDestination);
     setSelectedResourceId(null);
     setGuideOpen(false);
     setGuideAnswers(answers);

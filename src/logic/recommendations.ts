@@ -5,6 +5,7 @@ import type {
   GuideAnswers,
   InvolvementAnswer,
   Recommendation,
+  Route,
 } from "../types/navigator";
 import { nextMovesForRoute, summarizeRoute } from "./nextMoves";
 
@@ -28,7 +29,10 @@ const ASSET_TO_MODALITY: Partial<Record<AssetAnswer, string>> = {
   "research-tool": "research-tool",
 };
 
-const DESTINATION_NODES: Record<Exclude<DestinationAnswer, "unsure">, string> = {
+export const DESTINATION_NODES: Record<
+  Exclude<DestinationAnswer, "unsure">,
+  string
+> = {
   "clinical-use": "dest-clinical",
   licensing: "dest-licensing",
   startup: "dest-startup",
@@ -42,7 +46,7 @@ function modalityOf(answers: GuideAnswers): string | undefined {
   return ASSET_TO_MODALITY[answers.asset];
 }
 
-function wantsStartup(
+export function wantsStartup(
   destinations: DestinationAnswer[],
   involvement?: InvolvementAnswer,
 ): boolean {
@@ -90,7 +94,11 @@ function scoreRoute(routeId: string, answers: GuideAnswers): number {
 
   if (route.id === "therapeutic") {
     if (modality === "therapeutic" || dests.includes("clinical-use")) score += 4;
-    if (modality && modality !== "therapeutic" && !dests.includes("clinical-use")) {
+    if (
+      modality &&
+      modality !== "therapeutic" &&
+      !dests.includes("clinical-use")
+    ) {
       score -= 4;
     }
   }
@@ -122,7 +130,37 @@ function scoreRoute(routeId: string, answers: GuideAnswers): number {
     }
   }
 
+  // Low-time / research-focus involvement should favor non-operator paths.
+  if (
+    (answers.involvement === "research-focus" ||
+      answers.involvement === "advise" ||
+      motives.includes("low-time")) &&
+    !route.companyRequired
+  ) {
+    score += 2;
+  }
+
   return score;
+}
+
+function explicitDestinationIds(answers: GuideAnswers): string[] {
+  return answers.destinations
+    .filter(
+      (dest): dest is Exclude<DestinationAnswer, "unsure"> => dest !== "unsure",
+    )
+    .map((dest) => DESTINATION_NODES[dest]);
+}
+
+/** Prefer the user's stated destination when a route ends at more than one. */
+export function primaryDestinationFor(
+  route: Route,
+  answers: GuideAnswers,
+): string {
+  const explicit = explicitDestinationIds(answers);
+  const onRoute = explicit.find((id) => route.destinationIds.includes(id));
+  if (onRoute) return onRoute;
+  if (explicit[0]) return explicit[0];
+  return route.destinationIds[0];
 }
 
 export function recommend(answers: GuideAnswers): Recommendation {
@@ -135,48 +173,36 @@ export function recommend(answers: GuideAnswers): Recommendation {
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score);
 
-  const selected = ranked.slice(0, 3).map((item) => item.route);
-  const routeIds = selected.map((route) => route.id);
+  const primary = ranked[0]?.route ?? routes.find((r) => r.id === "strengthen-research")!;
+  const routeIds = [primary.id];
 
-  if (routeIds.length === 0) {
-    routeIds.push("strengthen-research");
+  // Keep secondary suggestions only for hash/history; UI no longer switches paths.
+  for (const item of ranked.slice(1, 3)) {
+    if (!routeIds.includes(item.route.id)) routeIds.push(item.route.id);
   }
 
-  const destinationIds = [
-    ...new Set(
-      routeIds.flatMap(
-        (id) => routes.find((route) => route.id === id)?.destinationIds ?? [],
-      ),
-    ),
-  ];
-
-  const explicitDestinations = answers.destinations
-    .filter((dest): dest is Exclude<DestinationAnswer, "unsure"> => dest !== "unsure")
-    .map((dest) => DESTINATION_NODES[dest]);
-
-  for (const dest of explicitDestinations) {
-    if (!destinationIds.includes(dest)) destinationIds.push(dest);
-  }
+  const primaryDestinationId = primaryDestinationFor(primary, answers);
+  const destinationIds = [primaryDestinationId];
 
   const here = nodeById[currentStateId];
-  const primary = routes.find((route) => route.id === routeIds[0]);
   const suppressedStartup =
     answers.destinations.includes("startup") &&
     !wantsStartup(answers.destinations, answers.involvement);
 
   const summary = suppressedStartup
-    ? "A company is optional from here. These paths emphasize getting the work used without you becoming the operator."
-    : primary
-      ? summarizeRoute(primary)
-      : "Here is a path that matches what you said success looks like.";
+    ? "A company is optional from here. This path emphasizes getting the work used without you becoming the operator."
+    : summarizeRoute(primary);
 
-  const nextMoves = primary
-    ? nextMovesForRoute(currentStateId, primary, modalityOf(answers))
-    : [];
+  const nextMoves = nextMovesForRoute(
+    currentStateId,
+    primary,
+    answers,
+    primaryDestinationId,
+  );
 
   return {
     currentStateId,
-    routeIds: routeIds.slice(0, 3),
+    routeIds,
     destinationIds,
     summary,
     youAreHereLabel: here?.title ?? "Concept / discovery",
@@ -194,6 +220,7 @@ export function emptyGuideAnswers(): GuideAnswers {
 export function isGuideComplete(answers: GuideAnswers): boolean {
   return Boolean(
     answers.asset &&
+      answers.involvement &&
       answers.destinations.length > 0 &&
       answers.motivations.length > 0,
   );

@@ -167,6 +167,7 @@ export interface NextMove {
   evidenceRequired: string;
   academicReturn: string;
   resourceId?: string;
+  resourceReason?: string;
   notNeeded: string;
   trap?: string;
   contact?: string;

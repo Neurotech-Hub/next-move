@@ -23,8 +23,8 @@ export const resources: Resource[] = [
       "You are choosing among protect, license, distribute, or open-release",
     ],
     notFor: [
-      "A required first step for every research idea",
-      "A substitute for deciding what success looks like to you",
+      "need this as a required first step for every research idea",
+      "treat this as a substitute for deciding what success looks like to you",
     ],
     eligibility:
       "WashU inventions; assignment and contact depend on academic unit. OTM’s department lookup includes neuroscience-related units.",
@@ -109,8 +109,8 @@ export const resources: Resource[] = [
       "You want external judgment without founding a company",
     ],
     notFor: [
-      "General business-plan tutoring (see Skandalaris Venture Development)",
-      "Founder coaching (see OTM New Ventures / EIR)",
+      "use this for general business-plan tutoring (see Skandalaris Venture Development)",
+      "use this for founder coaching (see OTM New Ventures / EIR)",
     ],
     eligibility:
       "OTM-mediated selection and referral. Complete researcher-facing public eligibility criteria are unspecified.",

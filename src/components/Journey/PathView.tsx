@@ -43,7 +43,7 @@ function PathStep({
           isCurrent
             ? "border-washu bg-washu text-white shadow-[0_0_0_6px_rgba(165,20,23,0.12)]"
             : isGoal
-              ? "border-washu/40 bg-washu/10 text-washu"
+              ? "border-washu/50 bg-[color-mix(in_srgb,var(--color-washu)_16%,var(--color-card))] text-washu"
               : milestone
                 ? "border-dashed border-sage bg-card text-sage"
                 : "border-gold bg-gold text-white"
@@ -91,11 +91,24 @@ function PathStep({
   );
 }
 
+/** Keep path stages plus only the focused destination (not sibling goals). */
+export function nodesForIsolatedPath(
+  pathIds: string[],
+  focusedDestinationId: string | null,
+): MapNode[] {
+  return pathIds
+    .filter((id) => {
+      if (!id.startsWith("dest-")) return true;
+      if (!focusedDestinationId) return false;
+      return id === focusedDestinationId;
+    })
+    .map((id) => nodes.find((node) => node.id === id))
+    .filter((node): node is MapNode => Boolean(node));
+}
+
 export function PathView() {
   const {
     activeRoute,
-    suggestedRoutes,
-    setActiveRouteId,
     recommendation,
     focusedDestinationId,
     selectedNodeId,
@@ -106,18 +119,26 @@ export function PathView() {
   const pathIds = activeRoute?.nodeIds ?? [];
   const isolated = pathIds.length > 0 && !showFullJourney;
   const currentId = recommendation?.currentStateId;
-  const selected = selectedNodeId ? nodes.find((node) => node.id === selectedNodeId) : undefined;
+  const selected = selectedNodeId
+    ? nodes.find((node) => node.id === selectedNodeId)
+    : undefined;
 
   const isolatedNodes = isolated
-    ? pathIds
-        .map((id) => nodes.find((node) => node.id === id))
-        .filter((node): node is MapNode => Boolean(node))
+    ? nodesForIsolatedPath(pathIds, focusedDestinationId)
     : [];
 
+  let numberedStep = 0;
+
   return (
-    <div className="flex h-full min-h-0 flex-col overflow-y-auto px-4 pb-16 pt-4 sm:px-8 sm:pt-6">
+    <div className="flex min-h-0 flex-col px-4 pb-10 pt-4 sm:px-8 sm:pt-6 lg:h-full lg:overflow-y-auto lg:pb-16">
       <div className="mx-auto w-full max-w-2xl">
-        <div className="flex flex-wrap items-center gap-3 text-[12px] text-muted">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
+          {recommendation ? "Your tailored pathway" : "Your pathway"}
+        </p>
+        <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
+          {activeRoute?.title ?? "Plan backward from a goal"}
+        </h2>
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-[12px] text-muted">
           <Legend swatch="bg-washu" label="You are here" />
           <Legend swatch="bg-gold" label="On this path" />
           <Legend
@@ -130,36 +151,10 @@ export function PathView() {
           {captionFor(selected, selected?.id === currentId)}
         </p>
 
-        {suggestedRoutes.length > 1 && (
-          <div className="mt-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-              Show this path
-            </p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {suggestedRoutes.map((route) => {
-                const active = activeRoute?.id === route.id;
-                return (
-                  <button
-                    key={route.id}
-                    type="button"
-                    onClick={() => setActiveRouteId(route.id)}
-                    className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition ${
-                      active
-                        ? "border-gold bg-gold text-white"
-                        : "border-stone-300 bg-card text-ink/80 hover:border-ink/30"
-                    }`}
-                  >
-                    {route.title}
-                  </button>
-                );
-              })}
-            </div>
-            {activeRoute && (
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                {activeRoute.summary}
-              </p>
-            )}
-          </div>
+        {activeRoute && isolated && (
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            {recommendation?.summary ?? activeRoute.summary}
+          </p>
         )}
 
         {!isolated && !showFullJourney && (
@@ -168,8 +163,7 @@ export function PathView() {
               Choose a goal to see one path
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
-              Destinations on the left are the starting point. We will not show
-              every stage at once.
+              Pick a goal on the left — we will plan backward from there.
             </p>
             <button
               type="button"
@@ -187,32 +181,38 @@ export function PathView() {
               className="absolute bottom-4 left-4 top-4 w-px bg-gold/40"
               aria-hidden
             />
-            {isolatedNodes.map((node, index) => (
-              <PathStep
-                key={node.id}
-                node={node}
-                index={node.type === "state" || node.type === "destination" ? index + 1 : null}
-                isCurrent={node.id === currentId}
-                isGoal={
-                  node.id === focusedDestinationId ||
-                  node.type === "destination"
-                }
-              />
-            ))}
+            {isolatedNodes.map((node) => {
+              const numbered =
+                node.type === "state" || node.type === "destination";
+              if (numbered) numberedStep += 1;
+              return (
+                <PathStep
+                  key={node.id}
+                  node={node}
+                  index={numbered ? numberedStep : null}
+                  isCurrent={node.id === currentId}
+                  isGoal={node.id === focusedDestinationId}
+                />
+              );
+            })}
           </ol>
         )}
 
         {showFullJourney && (
           <ol className="mt-8 space-y-10">
             {regions.map((region) => {
-              const steps = stateNodes.filter((node) => node.region === region.id);
+              const steps = stateNodes.filter(
+                (node) => node.region === region.id,
+              );
               const milestones = milestoneNodes.filter(
                 (node) => node.region === region.id,
               );
               if (!steps.length) return null;
               return (
                 <li key={region.id}>
-                  <h2 className="font-display text-2xl text-ink">{region.title}</h2>
+                  <h2 className="font-display text-2xl text-ink">
+                    {region.title}
+                  </h2>
                   <p className="text-sm text-muted">{region.subtitle}</p>
                   <ol className="relative mt-3 space-y-3">
                     <span

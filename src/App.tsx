@@ -8,16 +8,16 @@ import { NavigatorProvider, useNavigator } from "./state/NavigatorContext";
 function Shell() {
   const { view } = useNavigator();
   return (
-    <div className="flex h-full flex-col overflow-hidden bg-paper">
+    <div className="flex h-full flex-col bg-paper lg:overflow-hidden">
       <Header />
       {view === "resources" ? (
-        <div className="min-h-0 flex-1">
+        <div className="min-h-0 flex-1 overflow-y-auto lg:overflow-hidden">
           <ResourcesCatalog />
         </div>
       ) : (
-        <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
           <GoalsRail />
-          <main className="relative min-h-0 min-w-0 flex-1">
+          <main className="relative min-w-0 flex-1 border-y border-stone-200 lg:min-h-0 lg:border-y-0">
             <PathView />
           </main>
           <NextMoves />

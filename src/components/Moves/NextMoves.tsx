@@ -35,30 +35,41 @@ function MoveCard({
         </div>
         <div>
           <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-            You do not need to
+            You do not
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.notNeeded}</dd>
         </div>
         {move.trap && (
           <div>
             <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
-              Watch for
+              Keep in mind
             </dt>
             <dd className="mt-0.5 text-ink/85">{move.trap}</dd>
           </div>
         )}
       </dl>
       {resource && (
-        <button
-          type="button"
-          onClick={() => onOpenResource(resource.id)}
-          className="mt-3 w-full rounded-xl border border-stone-200 px-3 py-2 text-left text-sm hover:border-ink/25"
-        >
-          <span className="block font-medium text-ink">{resource.title}</span>
-          {move.contact && (
-            <span className="mt-0.5 block text-xs text-muted">{move.contact}</span>
+        <div className="mt-3 rounded-xl border border-stone-200 bg-stone-50/70 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-washu">
+            Why this program
+          </p>
+          {move.resourceReason && (
+            <p className="mt-1 text-xs leading-relaxed text-ink/75">
+              {move.resourceReason}
+            </p>
           )}
-        </button>
+          <button
+            type="button"
+            onClick={() => onOpenResource(resource.id)}
+            className="mt-2 w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-left text-sm transition hover:border-ink/25"
+          >
+            <span className="block font-medium text-ink">{resource.title}</span>
+            <span className="mt-0.5 block text-xs text-muted">
+              View program details
+              {move.contact ? ` · ${move.contact}` : ""}
+            </span>
+          </button>
+        </div>
       )}
     </article>
   );
@@ -81,14 +92,14 @@ function DefaultMoves() {
     return (
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
-          What to do now
+          Next steps & programs
         </p>
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
           Next moves appear after you pick a goal
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted">
-          Each move will include the evidence to collect, the academic return,
-          and a named program — including what you do not need to do.
+          Each move includes the evidence to collect, the academic return, a
+          named program, and what you can skip.
         </p>
       </div>
     );
@@ -97,7 +108,7 @@ function DefaultMoves() {
   return (
     <div>
       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-washu">
-        What to do now
+        Next steps & programs
       </p>
       {recommendation ? (
         <button
@@ -115,10 +126,14 @@ function DefaultMoves() {
       <p className="mt-2 text-sm leading-relaxed text-ink/85">
         {recommendation?.summary ??
           (activeRoute
-            ? `${activeRoute.summary} Company required: ${activeRoute.companyRequired ? "yes" : "no"}.`
+            ? `${activeRoute.summary} ${
+                activeRoute.companyRequired
+                  ? "A company is the vehicle."
+                  : "A company is not required."
+              }`
             : "")}
       </p>
-      {plan && (
+      {plan && !recommendation && (
         <p className="mt-2 text-sm text-muted">
           Likely returns: {plan.academicReturns.slice(0, 3).join(", ")}.
         </p>
@@ -161,15 +176,15 @@ function NodeInspector({ nodeId }: { nodeId: string }) {
       {related.length > 0 && (
         <section className="mt-6">
           <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
-            Programs that can help
+            Programs connected to this stage
           </h3>
+          <p className="mt-1 text-xs leading-relaxed text-muted">
+            These are broad stage-level options. Return to your next steps for
+            recommendations matched to all four answers.
+          </p>
           <div className="mt-2 space-y-2">
             {related.map((item) => (
-              <ResourceCard
-                key={item.id}
-                resource={item}
-                compact
-              />
+              <ResourceCard key={item.id} resource={item} compact />
             ))}
           </div>
         </section>
@@ -223,8 +238,8 @@ export function NextMoves() {
         <p className="sr-only">Next moves are listed in the side panel.</p>
       )}
       <aside
-        className="z-20 flex h-full min-h-0 w-full shrink-0 flex-col border-stone-200 bg-card lg:w-[340px] lg:border-l"
-        aria-label="What to do now"
+        className="z-20 flex w-full shrink-0 flex-col border-stone-200 bg-card lg:h-full lg:min-h-0 lg:w-[340px] lg:border-l"
+        aria-label="Next steps and programs"
       >
         {hasFocus && (
           <div className="flex justify-end px-4 pt-3 lg:hidden">
@@ -238,7 +253,9 @@ export function NextMoves() {
             </button>
           </div>
         )}
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">{body}</div>
+        <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
+          {body}
+        </div>
       </aside>
     </>
   );
