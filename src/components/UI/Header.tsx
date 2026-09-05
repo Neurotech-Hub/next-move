@@ -244,7 +244,7 @@ function MobileMenu() {
             }}
             className="w-full rounded-xl border border-line bg-raise/50 px-3 py-2.5 text-left text-sm font-medium text-ink transition hover:bg-raise"
           >
-            {view === "resources" ? "Your path" : "Resources"}
+            {view === "resources" ? "Your path" : "All resources"}
           </button>
 
           <div className="mt-3 border-t border-line pt-3">
@@ -324,7 +324,7 @@ export function Header() {
               aria-pressed={view === "resources"}
               className="inline-flex items-center rounded-full px-3 py-1.5 text-sm font-medium text-ink/55 transition hover:bg-raise hover:text-ink/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-washu"
             >
-              {view === "resources" ? "Your path" : "Resources"}
+              {view === "resources" ? "Your path" : "All resources"}
             </button>
             <DesktopSearch />
             <DesktopAbout />
