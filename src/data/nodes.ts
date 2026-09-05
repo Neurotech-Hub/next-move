@@ -130,7 +130,7 @@ export const nodes: MapNode[] = [
     id: "s5",
     type: "state",
     region: "de-risk",
-    title: "Transfer / IP strategy defined",
+    title: "A transfer plan with OTM",
     shortDescription: "OTM has helped you understand protection and transfer options.",
     position: { x: 1100, y: 600 },
     tags: ["ip", "patent", "disclosure", "license", "otm"],

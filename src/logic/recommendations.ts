@@ -6,6 +6,7 @@ import type {
   InvolvementAnswer,
   Recommendation,
 } from "../types/navigator";
+import { nextMovesForRoute, summarizeRoute } from "./nextMoves";
 
 const ASSET_TO_STATE: Record<AssetAnswer, string> = {
   observation: "s0",
@@ -158,17 +159,20 @@ export function recommend(answers: GuideAnswers): Recommendation {
   }
 
   const here = nodeById[currentStateId];
-  const routeTitles = routeIds
-    .map((id) => routes.find((route) => route.id === id)?.title)
-    .filter(Boolean);
-
+  const primary = routes.find((route) => route.id === routeIds[0]);
   const suppressedStartup =
     answers.destinations.includes("startup") &&
     !wantsStartup(answers.destinations, answers.involvement);
 
   const summary = suppressedStartup
-    ? "A company is optional from here. These routes emphasize getting the work used without you becoming the operator."
-    : `Based on what you told us, ${routeTitles.join(" · ")} ${routeTitles.length === 1 ? "is" : "are"} worth exploring.`;
+    ? "A company is optional from here. These paths emphasize getting the work used without you becoming the operator."
+    : primary
+      ? summarizeRoute(primary)
+      : "Here is a path that matches what you said success looks like.";
+
+  const nextMoves = primary
+    ? nextMovesForRoute(currentStateId, primary, modalityOf(answers))
+    : [];
 
   return {
     currentStateId,
@@ -176,6 +180,7 @@ export function recommend(answers: GuideAnswers): Recommendation {
     destinationIds,
     summary,
     youAreHereLabel: here?.title ?? "Concept / discovery",
+    nextMoves,
   };
 }
 

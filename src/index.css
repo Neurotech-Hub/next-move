@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "@xyflow/react/dist/style.css";
 
 @theme {
   --font-display: "Fraunces", ui-serif, Georgia, serif;
@@ -30,31 +29,6 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-}
-
-.react-flow__attribution {
-  background: transparent !important;
-  color: #78716c !important;
-  font-size: 10px !important;
-}
-
-.react-flow__node {
-  cursor: pointer;
-}
-
-.react-flow__node-region {
-  pointer-events: none;
-  cursor: default;
-}
-
-.react-flow__handle {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.react-flow__edge-path,
-.react-flow__connection-path {
-  stroke-linecap: round;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -6,6 +6,7 @@ export interface HashState {
   resource: string | null;
   route: string | null;
   view: ViewMode;
+  goal: string | null;
 }
 
 export function parseHash(hash = window.location.hash): HashState {
@@ -20,7 +21,8 @@ export function parseHash(hash = window.location.hash): HashState {
     routes,
     resource: params.get("resource"),
     route: params.get("route"),
-    view: params.get("view") === "overview" ? "overview" : "journey",
+    view: params.get("view") === "resources" ? "resources" : "journey",
+    goal: params.get("goal"),
   };
 }
 
@@ -30,7 +32,8 @@ export function writeHash(state: HashState): void {
   if (state.routes.length) params.set("routes", state.routes.join(","));
   if (state.route) params.set("route", state.route);
   if (state.resource) params.set("resource", state.resource);
-  if (state.view === "overview") params.set("view", "overview");
+  if (state.view === "resources") params.set("view", "resources");
+  if (state.goal) params.set("goal", state.goal);
   const next = params.toString();
   const hash = next ? `#${next}` : "";
   if (window.location.hash !== hash) {
