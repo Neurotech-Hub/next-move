@@ -137,7 +137,16 @@ export interface Route {
   id: string;
   title: string;
   summary: string;
+  /**
+   * Nodes to highlight for this pathway — not a sequential instruction list.
+   * Chronology for “what should I do next?” comes from destinationPlans.
+   */
   nodeIds: string[];
+  /**
+   * Edges to highlight for this pathway — not an ordered walk.
+   * Prefer fork edges (e.g. s7 → milestone → s8) over the direct spine when
+   * both exist, so the overview spine can stay but recede on active routes.
+   */
   edgeIds: string[];
   destinationIds: string[];
   motivations: MotivationAnswer[];

@@ -6,6 +6,17 @@ import {
   recommend,
   wantsStartup,
 } from "./recommendations";
+import {
+  formatNotNeeded,
+  nextMovesForDestination,
+  resolveChecklistResource,
+  resourceFitsAsset,
+  routeForDestination,
+} from "./nextMoves";
+import {
+  shouldShowVehicleBridge,
+  VEHICLE_BRIDGE_ID,
+} from "./vehicleBridge";
 import type { GuideAnswers, Route } from "../types/navigator";
 import { resourceById, routes } from "../data";
 
@@ -158,20 +169,65 @@ describe("nodesForIsolatedPath", () => {
   });
 });
 
-describe("stepsForRegion", () => {
-  it("places License or found? under De-risked translational asset, indented", () => {
-    const items = stepsForRegion("de-risk");
-    const ids = items.map((item) => item.node.id);
-    const s7At = ids.indexOf("s7");
-    const licenseAt = ids.indexOf("ms-license-vs-startup");
-    expect(licenseAt).toBe(s7At + 1);
-    expect(items[licenseAt]?.indented).toBe(true);
-    expect(items[s7At]?.indented).toBe(false);
+const pathWithBridge = ["s7", VEHICLE_BRIDGE_ID, "s8", "dest-startup"];
+
+describe("vehicle bridge visibility", () => {
+  it("hides the bridge when startup or licensing already answers the vehicle question", () => {
+    expect(shouldShowVehicleBridge("dest-startup")).toBe(false);
+    expect(shouldShowVehicleBridge("dest-licensing")).toBe(false);
+    expect(
+      nodesForIsolatedPath(pathWithBridge, "dest-startup").map((n) => n.id),
+    ).toEqual(["s7", "s8", "dest-startup"]);
+    expect(
+      nodesForIsolatedPath(
+        ["s7", VEHICLE_BRIDGE_ID, "s8", "dest-licensing"],
+        "dest-licensing",
+      ).map((n) => n.id),
+    ).toEqual(["s7", "s8", "dest-licensing"]);
   });
 
-  it("does not float License above Vehicle ready in Translate", () => {
+  it("retains the bridge for distribution (vehicle still unresolved)", () => {
+    expect(shouldShowVehicleBridge("dest-distribution")).toBe(true);
+    expect(
+      nodesForIsolatedPath(
+        ["s7", VEHICLE_BRIDGE_ID, "s8", "dest-distribution"],
+        "dest-distribution",
+      ).map((n) => n.id),
+    ).toEqual(["s7", VEHICLE_BRIDGE_ID, "s8", "dest-distribution"]);
+  });
+
+  it("startup and device-license routes highlight the spine, not the fork", () => {
+    const startup = routes.find((r) => r.id === "startup") as Route;
+    expect(startup.nodeIds).not.toContain(VEHICLE_BRIDGE_ID);
+    expect(startup.nodeIds).toEqual(["s7", "s8", "dest-startup"]);
+    expect(startup.edgeIds).toContain("e-s7-s8");
+    expect(startup.edgeIds).not.toContain("e-s7-vehicle");
+
+    const license = routes.find((r) => r.id === "device-license") as Route;
+    expect(license.nodeIds).not.toContain(VEHICLE_BRIDGE_ID);
+    expect(license.edgeIds).toContain("e-s7-s8");
+    expect(license.edgeIds).not.toContain("e-s7-vehicle");
+    expect(license.edgeIds).not.toContain("e-vehicle-s8");
+  });
+});
+
+describe("stepsForRegion", () => {
+  it("keeps Choose how it reaches users out of De-risk (not under s7)", () => {
+    const items = stepsForRegion("de-risk");
+    const ids = items.map((item) => item.node.id);
+    expect(ids).toContain("s7");
+    expect(ids).not.toContain("ms-license-vs-startup");
+  });
+
+  it("places the vehicle bridge in Translate before Path to users defined (full journey)", () => {
     const items = stepsForRegion("translate");
-    expect(items.map((item) => item.node.id)).toEqual(["s8"]);
+    expect(items.map((item) => item.node.id)).toEqual([
+      "ms-license-vs-startup",
+      "s8",
+    ]);
+    expect(items[0]?.bridge).toBe(true);
+    expect(items[0]?.indented).toBe(false);
+    expect(items[1]?.indented).toBe(false);
   });
 
   it("places optional milestones under the states they branch from", () => {
@@ -179,5 +235,84 @@ describe("stepsForRegion", () => {
     const ids = items.map((item) => item.node.id);
     expect(ids.indexOf("ms-validate-need")).toBe(ids.indexOf("s3") + 1);
     expect(ids.indexOf("ms-preserve-ip")).toBe(ids.indexOf("s3") + 2);
+  });
+});
+
+describe("checklist resource integration", () => {
+  it("hides Needleman when the invention is not a therapeutic", () => {
+    expect(
+      resourceFitsAsset(resourceById["needleman-npic"]!, "device"),
+    ).toBe(false);
+    expect(
+      resourceFitsAsset(resourceById["ninds-devices"]!, "therapeutic"),
+    ).toBe(false);
+    expect(
+      resourceFitsAsset(resourceById["needleman-npic"]!, "therapeutic"),
+    ).toBe(true);
+  });
+
+  it("overrides modality-locked clinical fallbacks for device inventors", () => {
+    const moves = nextMovesForDestination(
+      "dest-clinical",
+      answers({
+        destinations: ["clinical-use"],
+        asset: "device",
+        motivations: ["patients"],
+      }),
+    );
+    const resourceIds = moves.map((move) => move.resourceId);
+    expect(resourceIds).not.toContain("needleman-npic");
+    // NINDS Devices may fit a device inventor; Needleman must not.
+    for (const id of resourceIds) {
+      if (!id) continue;
+      expect(resourceFitsAsset(resourceById[id]!, "device")).toBe(true);
+    }
+  });
+
+  it("does not suggest NINDS Devices for software inventors", () => {
+    const moves = nextMovesForDestination(
+      "dest-clinical",
+      answers({
+        destinations: ["clinical-use"],
+        asset: "software",
+        motivations: ["patients"],
+      }),
+    );
+    expect(moves.map((move) => move.resourceId)).not.toContain("ninds-devices");
+    expect(moves.map((move) => move.resourceId)).not.toContain("needleman-npic");
+  });
+
+  it("keeps the checklist fallback when no invention type is known", () => {
+    const resolved = resolveChecklistResource(
+      "needleman-npic",
+      undefined,
+      new Set(),
+    );
+    expect(resolved.resourceId).toBe("needleman-npic");
+    expect(resolved.overridden).toBe(false);
+  });
+
+  it("selects clinical routes from invention type rather than the therapeutic default", () => {
+    expect(
+      routeForDestination(
+        "dest-clinical",
+        answers({ destinations: ["clinical-use"], asset: "device" }),
+      )?.id,
+    ).toBe("device-license");
+    expect(
+      routeForDestination(
+        "dest-clinical",
+        answers({ destinations: ["clinical-use"], asset: "therapeutic" }),
+      )?.id,
+    ).toBe("therapeutic");
+  });
+
+  it("formats notNeeded as You don’t / You don’t need to", () => {
+    expect(formatNotNeeded("need a company first.")).toBe(
+      "You don’t need a company first.",
+    );
+    expect(formatNotNeeded("form a startup solely because an invention exists.")).toBe(
+      "You don’t need to form a startup solely because an invention exists.",
+    );
   });
 });

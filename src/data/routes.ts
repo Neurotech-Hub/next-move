@@ -1,5 +1,13 @@
 import type { Route } from "../types/navigator";
 
+/**
+ * Pathway highlight sets for the journey overview / active route.
+ *
+ * `nodeIds` and `edgeIds` mark what to emphasize for a pathway — they are NOT
+ * ordered step-by-step instructions. Branches may appear without a contiguous
+ * spine walk between every pair. For chronological next-step guidance, use
+ * destinationPlans checklists instead.
+ */
 export const routes: Route[] = [
   {
     id: "strengthen-research",
@@ -54,6 +62,7 @@ export const routes: Route[] = [
     title: "Device → license without founding",
     summary:
       "Validate need, preserve options, de-risk the asset, and look for an organization that can take it forward.",
+    // License path already answers the vehicle question — highlight s7 → s8 spine, not the fork.
     nodeIds: [
       "s3",
       "ms-validate-need",
@@ -62,7 +71,6 @@ export const routes: Route[] = [
       "s5",
       "s6",
       "s7",
-      "ms-license-vs-startup",
       "s8",
       "dest-licensing",
     ],
@@ -74,8 +82,7 @@ export const routes: Route[] = [
       "e-s4-s6",
       "e-s5-s6",
       "e-s6-s7",
-      "e-s7-vehicle",
-      "e-vehicle-s8",
+      "e-s7-s8",
       "e-s8-license",
     ],
     destinationIds: ["dest-licensing"],
@@ -96,8 +103,25 @@ export const routes: Route[] = [
     title: "Therapeutic → partner path",
     summary:
       "Move from discovery toward a development candidate with modality-specific help — a startup is optional.",
-    nodeIds: ["s1", "s2", "s6", "s7", "dest-clinical", "dest-funding"],
-    edgeIds: ["e-s1-s2", "e-s6-s7", "e-s6-funding", "e-s7-clinical"],
+    nodeIds: [
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s6",
+      "s7",
+      "dest-clinical",
+      "dest-funding",
+    ],
+    edgeIds: [
+      "e-s1-s2",
+      "e-s2-s3",
+      "e-s3-s4",
+      "e-s4-s6",
+      "e-s6-s7",
+      "e-s6-funding",
+      "e-s7-clinical",
+    ],
     destinationIds: ["dest-clinical", "dest-funding"],
     motivations: ["patients", "grants"],
     modalities: ["therapeutic"],
@@ -115,19 +139,9 @@ export const routes: Route[] = [
     title: "Build a company around it",
     summary:
       "Use a company only when no existing organization will develop, manufacture, or distribute the work.",
-    nodeIds: [
-      "s7",
-      "ms-license-vs-startup",
-      "s8",
-      "s9",
-      "dest-startup",
-    ],
-    edgeIds: [
-      "e-s7-vehicle",
-      "e-vehicle-s8",
-      "e-s8-s9",
-      "e-s8-startup",
-    ],
+    // Startup already answers the vehicle question — highlight spine, not the unresolved fork.
+    nodeIds: ["s7", "s8", "dest-startup"],
+    edgeIds: ["e-s7-s8", "e-s8-startup"],
     destinationIds: ["dest-startup"],
     motivations: ["financial", "reach", "patients"],
     modalities: ["device", "therapeutic", "software", "research-tool"],

@@ -1,9 +1,19 @@
 import { useEffect, useRef } from "react";
 import { edges, nodeById, nodes, regions } from "../../data";
+import {
+  shouldShowVehicleBridge,
+  VEHICLE_BRIDGE_ID,
+} from "../../logic/vehicleBridge";
 import { useNavigator } from "../../state/NavigatorContext";
 import type { MapNode } from "../../types/navigator";
 
+export { VEHICLE_BRIDGE_ID } from "../../logic/vehicleBridge";
+
 const stateNodes = nodes.filter((node) => node.type === "state");
+
+export function isVehicleBridge(node: MapNode): boolean {
+  return node.id === VEHICLE_BRIDGE_ID;
+}
 
 function isStackedLayout() {
   return (
@@ -19,6 +29,9 @@ function captionFor(node: MapNode | undefined, isCurrent: boolean): string {
   if (node.type === "destination") {
     return "";
   }
+  if (node.id === VEHICLE_BRIDGE_ID) {
+    return "You’re looking at the bridge into Translate — compare how the work can reach users before the path is locked in.";
+  }
   if (node.type === "milestone") {
     return "You’re looking at an optional step — useful work at this stage, not a numbered requirement.";
   }
@@ -28,35 +41,56 @@ function captionFor(node: MapNode | undefined, isCurrent: boolean): string {
   return "Step on this path. Open it to see the next evidence to collect.";
 }
 
-/** Optional milestones that leave a state (fork edges), in edge order. */
+/** Optional milestones that leave a state (fork edges), excluding the vehicle bridge. */
 export function milestonesLeaving(stateId: string): MapNode[] {
   return edges
     .filter((edge) => edge.kind === "fork" && edge.source === stateId)
     .map((edge) => nodeById[edge.target])
-    .filter((node): node is MapNode => node?.type === "milestone");
+    .filter(
+      (node): node is MapNode =>
+        node?.type === "milestone" && !isVehicleBridge(node),
+    );
+}
+
+/** Bridge milestones that feed into a state (shown in the target region). */
+export function bridgeMilestonesInto(stateId: string): MapNode[] {
+  return edges
+    .filter((edge) => edge.kind === "fork" && edge.target === stateId)
+    .map((edge) => nodeById[edge.source])
+    .filter(
+      (node): node is MapNode =>
+        node?.type === "milestone" && isVehicleBridge(node),
+    );
 }
 
 /**
- * Full-journey steps for a region: optional milestones sit indented
- * immediately under the state they branch from (same order as route nodeIds).
+ * Full-journey steps for a region.
+ * Nested optional milestones sit indented under their source state.
+ * The vehicle bridge sits in Translate before s8 — peer, not nested.
  */
 export function stepsForRegion(regionId: string): {
   node: MapNode;
   indented: boolean;
+  bridge: boolean;
 }[] {
   const steps = stateNodes
     .filter((node) => node.region === regionId)
     .sort((a, b) => a.position.x - b.position.x);
-  const items: { node: MapNode; indented: boolean }[] = [];
+  const items: { node: MapNode; indented: boolean; bridge: boolean }[] = [];
   const seen = new Set<string>();
 
   for (const state of steps) {
-    items.push({ node: state, indented: false });
+    for (const milestone of bridgeMilestonesInto(state.id)) {
+      if (seen.has(milestone.id)) continue;
+      seen.add(milestone.id);
+      items.push({ node: milestone, indented: false, bridge: true });
+    }
+    items.push({ node: state, indented: false, bridge: false });
     seen.add(state.id);
     for (const milestone of milestonesLeaving(state.id)) {
       if (seen.has(milestone.id)) continue;
       seen.add(milestone.id);
-      items.push({ node: milestone, indented: true });
+      items.push({ node: milestone, indented: true, bridge: false });
     }
   }
 
@@ -69,12 +103,14 @@ function PathStep({
   isCurrent,
   isGoal,
   indented = false,
+  bridge = false,
 }: {
   node: MapNode;
   index: number | null;
   isCurrent: boolean;
   isGoal: boolean;
   indented?: boolean;
+  bridge?: boolean;
 }) {
   const { selectNode, selectedNodeId } = useNavigator();
   const selected = selectedNodeId === node.id;
@@ -82,7 +118,9 @@ function PathStep({
 
   return (
     <li
-      className={`relative flex items-start gap-4 ${indented ? "ml-12" : ""}`}
+      className={`relative flex items-start gap-4 ${indented ? "ml-12" : ""} ${
+        bridge ? "my-1" : ""
+      }`}
     >
       <span
         className={`relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border font-mono text-[11px] font-semibold transition duration-200 ${
@@ -108,7 +146,9 @@ function PathStep({
             ? "border-ink/35 bg-raise shadow-[0_12px_32px_rgba(0,0,0,0.4)]"
             : isCurrent
               ? "border-washu/50 bg-raise shadow-[0_0_28px_rgba(225,75,82,0.14),0_12px_28px_rgba(0,0,0,0.35)]"
-              : "border-line/70 bg-card/80 hover:border-ink/25 hover:bg-raise/70 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
+              : bridge
+                ? "border-sage/35 bg-card/90 hover:border-sage/50 hover:bg-raise/70"
+                : "border-line/70 bg-card/80 hover:border-ink/25 hover:bg-raise/70 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
         }`}
       >
         {isCurrent && (
@@ -121,7 +161,12 @@ function PathStep({
             Your goal
           </span>
         )}
-        {milestone && (
+        {bridge && (
+          <span className="font-mono mb-1 block text-[9px] font-medium uppercase tracking-[0.18em] text-sage">
+            How it reaches users
+          </span>
+        )}
+        {milestone && !bridge && (
           <span className="font-mono mb-1 block text-[9px] font-medium uppercase tracking-[0.18em] text-sage">
             Optional step
           </span>
@@ -137,13 +182,18 @@ function PathStep({
   );
 }
 
-/** Keep path stages plus only the focused destination (not sibling goals). */
+/**
+ * Keep path stages plus only the focused destination (not sibling goals).
+ * Omits the vehicle bridge when the focused goal already answers that decision.
+ */
 export function nodesForIsolatedPath(
   pathIds: string[],
   focusedDestinationId: string | null,
 ): MapNode[] {
+  const showBridge = shouldShowVehicleBridge(focusedDestinationId);
   return pathIds
     .filter((id) => {
+      if (id === VEHICLE_BRIDGE_ID && !showBridge) return false;
       if (!id.startsWith("dest-")) return true;
       if (!focusedDestinationId) return false;
       return id === focusedDestinationId;
@@ -288,6 +338,7 @@ export function PathView() {
               const numbered =
                 node.type === "state" || node.type === "destination";
               if (numbered) numberedStep += 1;
+              const bridge = isVehicleBridge(node);
               return (
                 <PathStep
                   key={node.id}
@@ -295,7 +346,8 @@ export function PathView() {
                   index={numbered ? numberedStep : null}
                   isCurrent={node.id === currentId}
                   isGoal={node.id === focusedDestinationId}
-                  indented={node.type === "milestone"}
+                  indented={node.type === "milestone" && !bridge}
+                  bridge={bridge}
                 />
               );
             })}
@@ -319,7 +371,7 @@ export function PathView() {
                       className="absolute bottom-4 left-4 top-4 w-px bg-ink/10"
                       aria-hidden
                     />
-                    {items.map(({ node, indented }) => {
+                    {items.map(({ node, indented, bridge }) => {
                       const numbered = node.type === "state";
                       if (numbered) regionStep += 1;
                       return (
@@ -330,6 +382,7 @@ export function PathView() {
                           isCurrent={node.id === currentId}
                           isGoal={node.id === focusedDestinationId}
                           indented={indented}
+                          bridge={bridge}
                         />
                       );
                     })}

@@ -1,6 +1,7 @@
 import { X } from "lucide-react";
 import { destinationPlanById, nodeById, resourceById } from "../../data";
 import { resourcesForNode } from "../../logic/filters";
+import { formatNotNeeded } from "../../logic/nextMoves";
 import { useNavigator } from "../../state/NavigatorContext";
 import { ResourceCard } from "../Drawer/ResourceCard";
 import type { NextMove } from "../../types/navigator";
@@ -19,42 +20,40 @@ function MoveCard({
       <h3 className="font-display text-[16px] leading-snug text-ink">
         {move.title}
       </h3>
-      <p className="mt-1 text-sm leading-relaxed text-ink/85">{move.why}</p>
-      <dl className="mt-3 space-y-2 text-sm">
+      <p className="mt-1.5 text-sm leading-relaxed text-ink/85">{move.why}</p>
+
+      <dl className="mt-3 space-y-2.5 text-sm">
         <div>
           <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
-            Evidence required
+            What you need next
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.evidenceRequired}</dd>
         </div>
         <div>
           <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
-            Academic return
+            What this can unlock
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.academicReturn}</dd>
         </div>
-        <div>
-          <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
-            You do not
-          </dt>
-          <dd className="mt-0.5 text-ink/85">{move.notNeeded}</dd>
-        </div>
-        {move.trap && (
-          <div>
-            <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-washu">
-              Keep in mind
-            </dt>
-            <dd className="mt-0.5 text-ink/85">{move.trap}</dd>
-          </div>
-        )}
       </dl>
+
+      <p className="mt-3 text-sm leading-relaxed text-muted">
+        {formatNotNeeded(move.notNeeded)}
+      </p>
+
+      {move.trap && (
+        <p className="mt-2 text-[12px] leading-relaxed text-ink/45">
+          {move.trap}
+        </p>
+      )}
+
       {resource && (
         <div className="mt-3 rounded-xl border border-line/60 bg-paper/60 p-3">
-          <p className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-washu">
-            Why this program
+          <p className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-muted">
+            Suggested program
           </p>
           {move.resourceReason && (
-            <p className="mt-1 text-xs leading-relaxed text-ink/75">
+            <p className="mt-1 text-xs leading-relaxed text-ink/70">
               {move.resourceReason}
             </p>
           )}
@@ -133,11 +132,16 @@ function DefaultMoves() {
                   ? "A company is the vehicle."
                   : "A company is not required."
               }`
-            : "")}
+            : plan?.oneLiner ?? "")}
       </p>
-      {plan && !recommendation && (
+      {plan && (
         <p className="mt-2 text-sm text-muted">
-          Likely returns: {plan.academicReturns.slice(0, 3).join(", ")}.
+          <span className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-muted">
+            Your likely involvement
+          </span>
+          <span className="mt-0.5 block leading-relaxed">
+            {plan.facultyCommitment}
+          </span>
         </p>
       )}
 

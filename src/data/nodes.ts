@@ -155,8 +155,8 @@ export const nodes: MapNode[] = [
     id: "s6",
     type: "state",
     region: "de-risk",
-    title: "Translational plan defined",
-    shortDescription: "You know the specific risks that still block an outsider from saying yes.",
+    title: "Next development steps defined",
+    shortDescription: "You know which uncertainties matter most.",
     position: { x: 1400, y: 420 },
     tags: ["plan", "milestones", "regulatory", "de-risk"],
     resourceIds: ["dep", "icts", "needleman-npic", "gap-fund"],
@@ -164,7 +164,7 @@ export const nodes: MapNode[] = [
       whyItMatters:
         "A plan turns vague “translation” into two or three uncertainties: performance, need, safety, manufacturability, or path to users.",
       youMayBeHereIf: [
-        "You can list the three uncertainties that would stop an external party",
+        "You can list the uncertainties that would stop an external party",
         "You know whether this is a drug, device, tool, or software path",
         "The next experiment can be tied to a transfer or clinical decision",
       ],
@@ -180,22 +180,23 @@ export const nodes: MapNode[] = [
     id: "s7",
     type: "state",
     region: "de-risk",
-    title: "De-risked translational asset",
-    shortDescription: "A critical external-facing milestone has evidence beyond the originating lab.",
+    title: "Key risks addressed",
+    shortDescription:
+      "You have evidence for one or more questions that previously blocked outside adoption or development.",
     position: { x: 1640, y: 420 },
     tags: ["validated", "de-risked", "translational"],
     resourceIds: ["gap-fund", "needleman-npic", "otm-core"],
     details: {
       whyItMatters:
-        "This is often the first time licensing, partnership, or company formation become realistic — and also the moment many investigators can stop, having already gained data, grants, or collaborators.",
+        "This is often the first time licensing, partnership, distribution, or company formation become realistic — and also the moment many investigators can stop, having already gained data, grants, or collaborators.",
       youMayBeHereIf: [
         "Independent or external-facing evidence exists for a key risk",
         "A potential partner could diligence a concise package",
-        "You are choosing among license, partner, distribute, or found",
+        "You are ready to compare how the work could reach users",
       ],
       nextSteps: [
         "Build a short package: problem, evidence, remaining risks, intended use",
-        "Ask whether a new company is necessary, or whether an existing organization can take it",
+        "Compare distribution, partnership, licensing, and company formation",
         "Do not treat incorporation as the proof that the work mattered",
       ],
       leadsTo: ["s8", "ms-license-vs-startup", "dest-clinical", "dest-licensing", "dest-startup"],
@@ -205,23 +206,23 @@ export const nodes: MapNode[] = [
     id: "s8",
     type: "state",
     region: "translate",
-    title: "Vehicle ready",
-    shortDescription: "A license, partnership, distribution path, or company is actionable.",
+    title: "Path to users defined",
+    shortDescription: "You know who will take the work forward and how.",
     position: { x: 1910, y: 420 },
     tags: ["license", "startup", "partner", "vehicle"],
     resourceIds: ["otm-eir", "skandalaris-vd", "biogenerator", "otm-core"],
     details: {
       whyItMatters:
-        "The vehicle is how the work reaches users. Licensing, industry partnership, academic distribution, and a startup are alternatives — not a ladder.",
+        "The work now has a practical route beyond the originating lab. The next challenge is executing that path.",
       youMayBeHereIf: [
-        "A licensee, partner, manufacturer, or founding team is in view",
-        "University IP and transfer terms are being discussed in concrete terms",
-        "Someone other than the originating PI may run day-to-day development",
+        "You know who will develop, distribute, license, or support the work",
+        "The roles of the lab and outside organization are clear",
+        "The next development or funding needs follow from that path",
       ],
       nextSteps: [
-        "Match capital and help to the vehicle you actually chose",
-        "If founding, identify who will operate the company",
-        "If licensing, ask OTM what a capable licensee still needs",
+        "Confirm what the next party needs from you",
+        "Clarify responsibilities for development, support, and funding",
+        "Focus effort on the remaining requirements of the chosen path",
       ],
       leadsTo: ["s9", "dest-licensing", "dest-startup"],
     },
@@ -231,7 +232,8 @@ export const nodes: MapNode[] = [
     type: "state",
     region: "impact",
     title: "Adoption / impact",
-    shortDescription: "External users, labs, patients, or licensees receive sustained value.",
+    shortDescription:
+      "People outside the originating lab are getting sustained value from the work.",
     position: { x: 2300, y: 420 },
     tags: ["impact", "adoption", "clinical", "users"],
     resourceIds: ["biogenerator", "nih-ninds-sbir"],
@@ -305,23 +307,24 @@ export const nodes: MapNode[] = [
     id: "ms-license-vs-startup",
     type: "milestone",
     region: "translate",
-    title: "License or found?",
-    shortDescription: "A new company is optional. Ask why you would need one.",
+    title: "Choose how it reaches users",
+    shortDescription:
+      "An existing organization, partnership, direct distribution, or new company can all be valid paths.",
     position: { x: 1910, y: 640 },
-    tags: ["license", "startup", "vehicle"],
+    tags: ["license", "startup", "vehicle", "distribution", "partnership"],
     resourceIds: ["otm-core", "otm-eir"],
     details: {
       whyItMatters:
-        "Startups make sense when no existing organization can develop, manufacture, regulate, or distribute the work. They are a costly vehicle, not a badge of seriousness.",
+        "How the work travels is a separate question from whether it is ready. Direct sharing, partnership, licensing, and a startup solve different capability gaps — and only some require you to operate anything.",
       youMayBeHereIf: [
-        "The asset is de-risked enough that someone could take it forward",
-        "You are being asked — or asking yourself — whether to incorporate",
-        "You want impact without becoming an operator",
+        "Key risks are addressed enough that someone else could take the work forward",
+        "You are comparing who develops, manufactures, distributes, or supports it",
+        "You want impact without assuming a company is the only vehicle",
       ],
       nextSteps: [
-        "List organizations that already have the missing capabilities",
-        "If a company is truly needed, identify who will run it",
-        "Ask OTM about licensing and, only if relevant, New Ventures / EIR",
+        "Identify who could take it forward",
+        "Compare licensing, partnership, distribution, and company formation",
+        "Choose the path that fits the work and your desired involvement",
       ],
       leadsTo: ["s8", "dest-licensing", "dest-startup"],
     },
@@ -431,13 +434,14 @@ export const nodes: MapNode[] = [
     type: "destination",
     region: "impact",
     title: "Licensing",
-    shortDescription: "Another organization develops and deploys it.",
+    shortDescription:
+      "A vehicle: another organization develops and deploys the work.",
     position: { x: 2480, y: 640 },
-    tags: ["license", "industry", "partner"],
+    tags: ["license", "industry", "partner", "vehicle"],
     resourceIds: ["otm-core", "dep", "gap-fund"],
     details: {
       whyItMatters:
-        "Licensing is how many academic inventions reach users without the inventor becoming a founder. An existing company may already have manufacturing, sales, and regulatory capacity.",
+        "Licensing is a delivery vehicle, not the destination. An existing company may already have manufacturing, sales, and regulatory capacity so the work can reach users without you founding anything.",
       youMayBeHereIf: [
         "You want the work used without running a company",
         "Potential licensees already exist in the space",
@@ -456,15 +460,16 @@ export const nodes: MapNode[] = [
     type: "destination",
     region: "impact",
     title: "Build a company",
-    shortDescription: "A new company is the vehicle — not the goal itself.",
+    shortDescription:
+      "A vehicle: a new company develops and delivers the invention — not the goal itself.",
     position: { x: 2480, y: 760 },
-    tags: ["startup", "venture", "company"],
+    tags: ["startup", "venture", "company", "vehicle"],
     resourceIds: ["otm-eir", "skandalaris-vd", "biogenerator", "nih-ninds-sbir"],
     details: {
       whyItMatters:
-        "A company can be the right vehicle when no existing organization will develop the work. Faculty need not be the CEO. Equity is uncertain; time cost is not.",
+        "A company is one way the work can travel when no existing organization will develop it. Faculty need not be the CEO. Equity is uncertain; time cost is not. Adoption and impact remain the outcomes the company aims for.",
       youMayBeHereIf: [
-        "You can explain why a new company is necessary",
+        "You can explain why a new company is the right vehicle",
         "Someone is prepared to operate it day to day",
         "University IP and a license path are part of the plan",
       ],

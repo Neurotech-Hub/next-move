@@ -1,247 +1,324 @@
 import type { DestinationPlan } from "../types/navigator";
 
+// Copy note for the UI:
+// - Render `evidenceRequired` as "What you need next".
+// - Render `academicReturn` as "What this can unlock".
+// - Render `facultyCommitment` as "Your likely involvement".
+//
+// `resourceId` is a suggested fallback resource for the step. The integration
+// layer should replace it with a more relevant resource when the user's
+// invention type, current state, or eligibility points elsewhere.
+
 export const destinationPlans: DestinationPlan[] = [
   {
     destinationId: "dest-research",
-    oneLiner: "Papers, methods, collaborators, and follow-on science.",
+    oneLiner:
+      "Use the work to enable better science, methods, collaborations, and follow-on funding.",
     academicReturns: [
-      "methods or datasets",
+      "new methods or datasets",
       "collaborations",
-      "follow-on grants",
-      "enabled experiments",
+      "follow-on funding",
+      "new experiments",
     ],
-    facultyCommitment: "Stays inside research time if you keep distribution light.",
+    facultyCommitment:
+      "Usually stays close to normal research activity unless you take on ongoing distribution or support.",
     companyRequired: false,
     defaultRouteId: "strengthen-research",
     checklist: [
       {
-        title: "Define impact in academic terms",
-        why: "Success here is users, replications, collaborations, or enabled experiments — not a product.",
+        title: "Decide what success looks like in your research",
+        why:
+          "Success might mean another lab uses it, a new experiment becomes possible, a collaboration starts, or it supports a paper or grant.",
         evidenceRequired:
-          "A measurable academic outcome: users, citations, datasets, or a follow-on grant aim.",
-        academicReturn: "A clearer next paper, method, or grant story.",
+          "One concrete outcome you want the work to enable, such as outside use, a new dataset, a collaboration, or a grant aim.",
+        academicReturn:
+          "A clearer reason to keep investing research time in the work.",
         resourceId: "hope-center",
-        notNeeded: "need a company, a patent, or a commercialization plan.",
+        notNeeded: "need a company, patent, or commercialization plan first.",
       },
       {
-        title: "Make it usable outside your hands",
-        why: "A method only you can run has not yet traveled.",
+        title: "Make it usable by someone else",
+        why:
+          "If only your team can run it, its scientific reach will stay limited.",
         evidenceRequired:
-          "Documentation or a protocol an independent lab could follow.",
-        academicReturn: "Replications, citations, and trainee-ready methods.",
+          "Documentation, a protocol, software instructions, or another handoff that an independent lab could follow.",
+        academicReturn:
+          "More reproducible use, easier collaboration, and less one-off support.",
         resourceId: "neurotech-hub",
-        notNeeded: "need a startup to share a research tool.",
+        notNeeded: "need a startup to share a research tool or method.",
       },
       {
-        title: "Choose how others should get it",
-        why: "Open release, an OTM license, or a manufacturer are deliberate choices.",
-        evidenceRequired: "A transfer decision that matches how you want the work used.",
-        academicReturn: "Reach without becoming the support desk.",
+        title: "Choose how others should access it",
+        why:
+          "Direct sharing, open release, licensing, and outside manufacturing create different support and IP obligations.",
+        evidenceRequired:
+          "A practical access plan that matches how widely you want the work used and how much support your lab can provide.",
+        academicReturn:
+          "Broader use without automatically turning your lab into the long-term distributor or support team.",
         resourceId: "otm-core",
-        notNeeded: "treat incorporation as proof the science mattered.",
+        notNeeded: "treat forming a company as proof that the science matters.",
       },
     ],
   },
   {
     destinationId: "dest-funding",
-    oneLiner: "Money that buys a specific next experiment or person.",
+    oneLiner:
+      "Find funding for a specific experiment, capability, or person.",
     academicReturns: [
       "preliminary data",
       "personnel support",
       "stronger grant aims",
+      "new research capability",
     ],
-    facultyCommitment: "Proposal time now; the return is lab capacity.",
+    facultyCommitment:
+      "Requires proposal effort now in exchange for added research capacity if funded.",
     companyRequired: false,
     defaultRouteId: "strengthen-research",
     checklist: [
       {
-        title: "Name the evidence the money will buy",
-        why: "Do not start with “where can I get money?” Start with the milestone.",
+        title: "Define what the funding should accomplish",
+        why:
+          "Start with the next milestone, not with a list of funding programs.",
         evidenceRequired:
-          "Milestone, cost, duration, and the decision the data will enable.",
-        academicReturn: "A fundable aim instead of an unfocused ask.",
+          "A specific milestone, approximate cost and duration, and the decision or capability the work will enable.",
+        academicReturn:
+          "A clearer and more fundable request tied to a real research need.",
         resourceId: "icts",
-        notNeeded: "need a company or a licensing objective.",
+        notNeeded: "need a company or licensing objective first.",
       },
       {
-        title: "Match the mechanism to the milestone",
-        why: "Science, non-drug de-risking, therapeutics, and companies use different pots.",
-        evidenceRequired: "A category: science, transfer, therapeutic, or company R&D.",
-        academicReturn: "Less time spent on the wrong call.",
+        title: "Match the funding source to the work",
+        why:
+          "Basic research, technology development, therapeutic development, and small-business R&D use different funding mechanisms.",
+        evidenceRequired:
+          "A clear description of the work being funded and whether it belongs in an academic project, a translational program, or a small business.",
+        academicReturn:
+          "Less time spent pursuing programs that do not fit the work.",
         resourceId: "icts",
-        notNeeded: "apply for SBIR/STTR while this is still an academic lab project.",
-        trap: "An academic laboratory acting alone is not an SBIR/STTR applicant.",
+        notNeeded: "apply for SBIR/STTR while the project exists only as an academic lab effort.",
+        trap:
+          "NIH SBIR/STTR applications must come from an eligible U.S. small business; universities may participate as research partners.",
       },
       {
-        title: "Treat the award as an intermediate success",
-        why: "Funding is a vehicle back to the destination you actually want.",
-        evidenceRequired: "A plan for what the award unlocks next.",
-        academicReturn: "Data, people, or a de-risked asset — then the next decision.",
+        title: "Decide what the award should unlock",
+        why:
+          "The most useful funding produces a defined capability, dataset, person, or decision.",
+        evidenceRequired:
+          "A simple plan for what you will be able to do or decide after the funded work is complete.",
+        academicReturn:
+          "New data, people, or capability that moves the research forward.",
         resourceId: "hope-center",
-        notNeeded: "change destinations just because a funding pot exists.",
+        notNeeded: "change your larger goal simply because a funding program is available.",
       },
     ],
   },
   {
     destinationId: "dest-distribution",
-    oneLiner: "Other labs or users actually get and use it.",
+    oneLiner:
+      "Get the tool, method, or software into other users' hands.",
     academicReturns: [
       "scientific reach",
-      "methods papers",
+      "possible methods publications",
       "collaborators",
+      "external users",
     ],
     facultyCommitment:
-      "Moderate if the lab must support users; lower if you pick a light transfer path.",
+      "Depends on how much fabrication, hosting, documentation, and user support your lab keeps.",
     companyRequired: false,
     defaultRouteId: "research-tool-adoption",
     checklist: [
       {
-        title: "Name the user and how they obtain it",
-        why: "Adoption is a logistics problem, not a press-release problem.",
-        evidenceRequired: "A user, a use case, and a realistic handoff.",
-        academicReturn: "Use, not merely disclosure or a website.",
+        title: "Define the user and how they will get it",
+        why:
+          "Adoption depends on a practical way to obtain, use, and support the work.",
+        evidenceRequired:
+          "A specific user, use case, and realistic way for that user to receive and use it.",
+        academicReturn:
+          "A clearer path from a lab result to real outside use.",
         resourceId: "neurotech-hub",
-        notNeeded: "default to a company as the distribution vehicle.",
+        notNeeded: "default to a company as the distribution route.",
       },
       {
-        title: "Test with an independent user",
-        why: "Support, hosting, or fabrication often breaks only after someone else tries it.",
-        evidenceRequired: "Feedback from at least one lab or user outside the originating pair of hands.",
-        academicReturn: "A methods paper and a shorter support burden.",
-        resourceId: "dep",
-        notNeeded: "scale before one outsider can run it.",
+        title: "Test it with someone outside your team",
+        why:
+          "Documentation, setup, hosting, fabrication, and support problems often appear only when someone else tries it.",
+        evidenceRequired:
+          "Feedback from at least one lab or user outside the originating team.",
+        academicReturn:
+          "A more reproducible tool and a clearer picture of the support users actually need.",
+        resourceId: "neurotech-hub",
+        notNeeded: "scale distribution before an independent user can make it work.",
       },
       {
-        title: "Pick the lightest transfer that will hold",
-        why: "Open release, a manufacturer, or an OTM license are alternatives.",
-        evidenceRequired: "A decision about documentation, updates, quality, and IP obligations.",
-        academicReturn: "Reach without you becoming the manufacturer.",
+        title: "Choose the simplest distribution model that works",
+        why:
+          "Direct sharing, open release, licensing, and outside manufacturing each create different maintenance and IP obligations.",
+        evidenceRequired:
+          "A decision about who will provide documentation, updates, quality control, fabrication, hosting, and support.",
+        academicReturn:
+          "Broader reach without automatically making your lab the permanent manufacturer or support desk.",
         resourceId: "otm-core",
-        notNeeded: "form a startup solely because people want the tool.",
+        notNeeded: "form a startup solely because other people want the tool.",
       },
     ],
   },
   {
     destinationId: "dest-clinical",
-    oneLiner: "Change a clinical decision — planned backward from the patient.",
+    oneLiner:
+      "Build the evidence and partnerships needed for clinical use.",
     academicReturns: [
-      "translational evidence",
+      "clinical or translational evidence",
       "clinical collaborators",
-      "patient-impact grants",
+      "translational grant opportunities",
+      "a clearer path to patient impact",
     ],
     facultyCommitment:
-      "Moderate on a partner or license path; high if you operate the vehicle.",
+      "Depends on the path: lower when an experienced partner takes on development, higher when your team leads it.",
     companyRequired: false,
     defaultRouteId: "therapeutic",
     checklist: [
       {
-        title: "Define the patient and the decision this changes",
-        why: "Clinical use is a destination. Plan backward from the unmet need.",
-        evidenceRequired: "A named user or patient and the intervention or decision being changed.",
-        academicReturn: "A translational question that can become aims, not only a paper.",
+        title: "Define the intended clinical use",
+        why:
+          "Start with who benefits, what changes in care, and why the current approach is insufficient.",
+        evidenceRequired:
+          "A specific patient or clinical user, the intended use, and the decision, intervention, or outcome you want to change.",
+        academicReturn:
+          "A sharper clinical question that can guide studies, collaborations, and grant aims.",
         resourceId: "icts",
-        notNeeded: "form a company before the clinical question is sharp.",
+        notNeeded: "form a company before the clinical need is clear.",
       },
       {
-        title: "Separate therapeutic routing from device routing",
-        why: "Needleman and VeritaScience are not the Gap Fund; NINDS devices are not an R01.",
-        evidenceRequired: "A modality: drug, device/diagnostic, or something else.",
-        academicReturn: "The right expertise instead of a generic “translation” card.",
+        title: "Identify the development path that applies",
+        why:
+          "Drugs, devices, diagnostics, software, and other clinical innovations require different evidence, expertise, and funding.",
+        evidenceRequired:
+          "A clear description of what the intervention is and how it would be used clinically.",
+        academicReturn:
+          "A better match to the people, programs, and studies that can help next.",
         resourceId: "needleman-npic",
-        notNeeded: "rely on one generic translational-funding application.",
-        trap: "Needleman applications are closed as of 2026-09-04 — treat it as a future window.",
+        notNeeded: "assume one generic translational program fits every clinical innovation.",
+        trap:
+          "Needleman is specific to therapeutic development and should only be shown when that modality fits; verify current application status before presenting it as open.",
       },
       {
-        title: "Fund the uncertainty that blocks an outsider",
-        why: "The next experiment should correspond to safety, efficacy, usability, or deployment — not another interesting mechanism.",
-        evidenceRequired: "The largest remaining uncertainty and who will manufacture, sponsor, and support.",
-        academicReturn: "Evidence a partner, licensee, or trialist can use.",
+        title: "Identify the next uncertainty blocking clinical use",
+        why:
+          "The next study should address the issue most likely to stop further development, such as safety, efficacy or performance, usability, manufacturing, or deployment.",
+        evidenceRequired:
+          "The most important unresolved question and the evidence needed for a clinical collaborator, sponsor, partner, or regulator to continue.",
+        academicReturn:
+          "Evidence that can support the next study, partnership, funding decision, or development step.",
         resourceId: "ninds-devices",
-        notNeeded: "become the operator if a partner can take it.",
+        notNeeded: "personally lead every downstream development activity if an experienced partner can take it on.",
+        trap:
+          "NINDS device programs apply only to eligible nervous-system or neuromuscular device projects; select a different resource when the modality or disease area does not fit.",
       },
     ],
   },
   {
     destinationId: "dest-licensing",
-    oneLiner: "Another organization develops and deploys it. You stay faculty.",
+    oneLiner:
+      "Use licensing as a vehicle so another organization can take the work forward while you stay focused on research.",
     academicReturns: [
       "validation data",
       "industry collaborators",
-      "possible inventor licensing return",
-      "trainee projects",
+      "possible inventor licensing income",
+      "new research or trainee projects",
     ],
     facultyCommitment:
-      "Moderate during validation; usually much lower than founding.",
+      "Usually requires meaningful involvement during evaluation and validation, but less operational responsibility than founding a company.",
     companyRequired: false,
     defaultRouteId: "device-license",
     checklist: [
       {
-        title: "Ask who already has the missing capabilities",
-        why: "Licensing is how many academic inventions reach users without a founder-PI.",
+        title: "Identify organizations with the missing capabilities",
+        why:
+          "An established organization may already have the manufacturing, regulatory, sales, distribution, or support capabilities the invention needs.",
         evidenceRequired:
-          "Existing companies with manufacturing, regulatory, sales, or distribution capacity.",
-        academicReturn: "A path to use without you running operations.",
+          "A short list of plausible organizations and the capabilities each could contribute.",
+        academicReturn:
+          "A possible path to real-world use without you running the downstream operation.",
         resourceId: "otm-core",
         notNeeded: "form a startup solely because an invention exists.",
       },
       {
-        title: "Learn what a licensee would need to see",
-        why: "External diligence is not the same as a stronger paper.",
-        evidenceRequired: "A short list of data, IP status, and remaining risks.",
-        academicReturn: "A shorter de-risking list and possible Gap Fund or DEP path.",
+        title: "Ask what a potential licensee would need to see",
+        why:
+          "The evidence that interests a company may differ from what strengthens the next paper.",
+        evidenceRequired:
+          "A short list of the data, IP status, technical questions, and remaining risks a potential partner would evaluate.",
+        academicReturn:
+          "A more focused development plan and fewer unnecessary experiments.",
         resourceId: "dep",
-        notNeeded: "need a pitch deck or founding team first.",
+        notNeeded: "need a pitch deck or founding team before exploring licensing.",
       },
       {
-        title: "Fund only the work that improves transferability",
-        why: "Company formation is optional. Transfer-ready evidence is not.",
-        evidenceRequired: "A concise package: problem, evidence, IP/transfer status, intended use.",
-        academicReturn: "Validation data, a methods or translational paper, industry collaborators.",
+        title: "Generate the evidence that most improves partner interest",
+        why:
+          "Focus development effort on the questions that materially affect whether another organization can take the invention forward.",
+        evidenceRequired:
+          "A defined experiment or development milestone tied to a specific partner concern or adoption barrier.",
+        academicReturn:
+          "Useful validation data that may also support publications, grants, or industry collaboration.",
         resourceId: "gap-fund",
-        notNeeded: "seek founder coaching unless you later decide a company is necessary.",
-        trap: "The Gap Fund is for non-drug WashU technologies — therapeutics route to Needleman or VeritaScience.",
+        notNeeded: "seek founder coaching unless you later decide a startup is the better path.",
+        trap:
+          "WashU Gap Fund applies to eligible non-drug technologies and has program-specific disclosure, assignment, feasibility, and IP requirements; verify current eligibility before recommending it.",
       },
     ],
   },
   {
     destinationId: "dest-startup",
-    oneLiner: "A company only if no existing organization will take it.",
+    oneLiner:
+      "Use a new company as the vehicle when that is the best way to develop and deliver the invention — adoption remains the outcome.",
     academicReturns: [
-      "entrepreneurial learning",
+      "entrepreneurial experience",
       "possible equity — uncertain",
-      "a vehicle for deployment",
+      "a path to develop and deliver the invention",
+      "new external collaborators",
     ],
     facultyCommitment:
-      "High if you operate it; moderate if an external CEO runs it.",
+      "Usually high if you lead the company; potentially lower if an experienced external operator leads it.",
     companyRequired: true,
     defaultRouteId: "startup",
     checklist: [
       {
-        title: "Answer why a new company is necessary",
-        why: "A startup is a costly vehicle, not a badge of seriousness.",
+        title: "Explain why a new company is the right path",
+        why:
+          "Founding adds time, responsibility, and financing needs, so compare it with licensing or partnering first.",
         evidenceRequired:
-          "A reason no licensee, partner, or distributor can develop, manufacture, or deploy it.",
-        academicReturn: "A go/no-go before you spend a year founding.",
+          "A clear reason a new company is better suited than an existing organization to develop and deliver the invention.",
+        academicReturn:
+          "A go/no-go decision before you commit substantial time to company formation.",
         resourceId: "otm-eir",
-        notNeeded: "need to be the CEO. Faculty inventor and operator need not be the same person.",
+        notNeeded: "be the CEO yourself; the faculty inventor and company operator can be different people.",
       },
       {
-        title: "Clarify the WashU IP and license path",
-        why: "EIR and New Ventures assume foundational WashU patent rights for the startup.",
-        evidenceRequired: "An OTM conversation and a plausible license route.",
-        academicReturn: "A legal path that later capital can actually use.",
+        title: "Clarify the WashU IP and licensing path",
+        why:
+          "If the company will depend on WashU IP, the ownership and license path need to be clear before serious financing or company-building work.",
+        evidenceRequired:
+          "An OTM conversation about disclosure, ownership, and the likely licensing path for the relevant WashU IP.",
+        academicReturn:
+          "A clearer foundation for deciding whether the startup can move forward.",
         resourceId: "otm-core",
-        notNeeded: "treat Skandalaris Venture Competition as a faculty-IP fundraising plan.",
-        trap: "SVC currently prohibits WashU IP and licenses to university IP.",
+        notNeeded: "treat the Skandalaris Venture Competition as a default funding route for a WashU-IP faculty startup.",
+        trap:
+          "Current Skandalaris Venture Competition rules exclude WashU IP and licenses to university IP; verify the current cycle before showing it as eligible.",
       },
       {
-        title: "Match capital to company stage — and skip ineligible pots",
-        why: "SBIR needs a small business; Arch Grants needs a full-time founder in St. Louis; MTC matches private capital.",
-        evidenceRequired: "A company, a milestone, and a fund that can actually write the check.",
-        academicReturn: "Non-dilutive or regional capital when the vehicle is real.",
+        title: "Match funding to the company's stage and eligibility",
+        why:
+          "Startup programs differ in company structure, founder commitment, location, matching capital, and project-stage requirements.",
+        evidenceRequired:
+          "A defined company milestone plus a funding program whose eligibility and terms actually match the team.",
+        academicReturn:
+          "A more realistic financing plan and less time spent on programs the company cannot use.",
         resourceId: "biogenerator",
-        notNeeded: "file academic-lab SBIR applications, or enter competitions that exclude university IP.",
-        trap: "Arch Grants 2026 is closed; at least one founder must work on the company full-time and HQ in St. Louis for a year.",
+        notNeeded: "apply to company-only programs before the team meets their eligibility requirements.",
+        trap:
+          "Check current eligibility and deadlines for every startup program; requirements and open cycles change frequently.",
       },
     ],
   },

@@ -119,20 +119,24 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
         .filter((route): route is Route => Boolean(route));
     }
     if (focusedDestinationId) {
-      const route = routeForDestination(focusedDestinationId);
+      const route = routeForDestination(focusedDestinationId, guideAnswers);
       return route ? [route] : [];
     }
     return [];
-  }, [focusedDestinationId, recommendation]);
+  }, [focusedDestinationId, guideAnswers, recommendation]);
 
   const activeRoute = useMemo(() => {
     const fromId = suggestedRoutes.find((route) => route.id === activeRouteId);
     if (fromId) return fromId;
     if (focusedDestinationId) {
-      return routeForDestination(focusedDestinationId) ?? suggestedRoutes[0] ?? null;
+      return (
+        routeForDestination(focusedDestinationId, guideAnswers) ??
+        suggestedRoutes[0] ??
+        null
+      );
     }
     return suggestedRoutes[0] ?? null;
-  }, [activeRouteId, focusedDestinationId, suggestedRoutes]);
+  }, [activeRouteId, focusedDestinationId, guideAnswers, suggestedRoutes]);
 
   const nextMoves = useMemo(() => {
     if (recommendation && activeRoute) {
@@ -144,38 +148,48 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
       );
     }
     if (focusedDestinationId) {
-      return nextMovesForDestination(focusedDestinationId);
+      return nextMovesForDestination(
+        focusedDestinationId,
+        guideAnswers,
+        recommendation?.currentStateId,
+      );
     }
     return [];
   }, [activeRoute, focusedDestinationId, guideAnswers, recommendation]);
 
-  const focusDestination = useCallback((id: string | null) => {
-    setFocusedDestinationId(id);
-    setSelectedResourceId(null);
-    setGuideOpen(false);
-    setRecommendation(null);
-    if (id) {
-      const plan = destinationPlanById[id];
-      if (plan) setActiveRouteId(plan.defaultRouteId);
-      setSelectedNodeId(id);
-      setShowFullJourney(false);
-    } else {
-      setSelectedNodeId(null);
-      setActiveRouteId(null);
-    }
-  }, []);
-
-  const selectNode = useCallback((id: string | null) => {
-    setSelectedNodeId(id);
-    setSelectedResourceId(null);
-    setGuideOpen(false);
-    if (id?.startsWith("dest-")) {
+  const focusDestination = useCallback(
+    (id: string | null) => {
       setFocusedDestinationId(id);
-      const plan = destinationPlanById[id];
-      if (plan) setActiveRouteId(plan.defaultRouteId);
-      setShowFullJourney(false);
-    }
-  }, []);
+      setSelectedResourceId(null);
+      setGuideOpen(false);
+      setRecommendation(null);
+      if (id) {
+        const route = routeForDestination(id, guideAnswers);
+        setActiveRouteId(route?.id ?? null);
+        setSelectedNodeId(id);
+        setShowFullJourney(false);
+      } else {
+        setSelectedNodeId(null);
+        setActiveRouteId(null);
+      }
+    },
+    [guideAnswers],
+  );
+
+  const selectNode = useCallback(
+    (id: string | null) => {
+      setSelectedNodeId(id);
+      setSelectedResourceId(null);
+      setGuideOpen(false);
+      if (id?.startsWith("dest-")) {
+        setFocusedDestinationId(id);
+        const route = routeForDestination(id, guideAnswers);
+        setActiveRouteId(route?.id ?? null);
+        setShowFullJourney(false);
+      }
+    },
+    [guideAnswers],
+  );
 
   const selectResource = useCallback((id: string | null, nodeId?: string) => {
     setSelectedResourceId(id);
