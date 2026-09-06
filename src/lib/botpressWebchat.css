@@ -1,0 +1,41 @@
+/* Compact FAB only — leave Botpress's own panel, bubbles, and composer. */
+
+.bpFabWrapper,
+.bpFab,
+.bpFabContainer,
+.bpFabIcon,
+.bpFabImage {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.bpFabWrapper {
+  right: 16px !important;
+  bottom: 16px !important;
+}
+
+.bpFabIcon svg,
+.bpFabImage img,
+.bpFabImage svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Header title is enough — drop letter avatars and the empty-transcript identity card. */
+.bpHeaderContentAvatarContainer,
+.bpHeaderContentAvatarImage,
+.bpHeaderContentAvatarFallback,
+.bpMessageAvatarContainer,
+.bpMessageAvatarImage,
+.bpMessageAvatarFallback,
+.bpMessageListHeaderMessage,
+.bpMessageListMarqueeContainer,
+.bpMessageListMarqueeContent,
+.bpMessageListMarqueeTitle,
+.bpMessageListMarqueeDescription,
+.bpMessageListMarqueeAvatarContainer,
+.bpMessageListMarqueeAvatarImage,
+.bpMessageListMarqueeAvatarFallback,
+.bpHeaderExpandedContentContainer {
+  display: none !important;
+}

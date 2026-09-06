@@ -270,6 +270,11 @@ body {
   }
 }
 
+/* Hide the Botpress host until the compact FAB skin is in the shadow root. */
+.bpChatContainer:not(.nm-webchat-ready) {
+  visibility: hidden !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
