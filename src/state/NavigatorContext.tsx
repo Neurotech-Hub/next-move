@@ -198,6 +198,13 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const openGuide = useCallback(() => {
+    // Clear pathway so Guide me doesn’t sit on top of a stale goal/route.
+    setSelectedNodeId(null);
+    setSelectedResourceId(null);
+    setFocusedDestinationId(null);
+    setRecommendation(null);
+    setActiveRouteId(null);
+    setShowFullJourney(false);
     setGuideOpen(true);
     setView("journey");
   }, []);

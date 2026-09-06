@@ -399,7 +399,7 @@ export function PathView() {
             onClick={() => setShowFullJourney(!showFullJourney)}
             className="mt-8 text-sm font-medium text-muted underline-offset-4 hover:text-ink hover:underline"
           >
-            {showFullJourney ? "Show only this path" : "Explore every path"}
+            {showFullJourney ? "Back to roadmap" : "Explore every path"}
           </button>
         )}
       </div>
