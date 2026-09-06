@@ -190,11 +190,24 @@ export interface Resource {
   locations: ResourceLocation[];
 }
 
+/**
+ * Narrow research situations used to gate specialized cores.
+ * These are not destinations — they refine which support door fits.
+ */
+export type ResearchContext =
+  | "digital-health"
+  | "multicenter-trial"
+  | "industry-collaboration"
+  | "cancer"
+  | "emergency-care"
+  | "clinical-workflow";
+
 export interface GuideAnswers {
   asset?: AssetAnswer;
   destinations: DestinationAnswer[];
   motivations: MotivationAnswer[];
   involvement?: InvolvementAnswer;
+  researchContexts?: ResearchContext[];
 }
 
 export interface NextMove {

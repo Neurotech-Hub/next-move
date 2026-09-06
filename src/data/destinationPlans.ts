@@ -1,9 +1,10 @@
 import type { DestinationPlan } from "../types/navigator";
 
 // Copy note for the UI:
-// - Render `evidenceRequired` as "What you need next".
-// - Render `academicReturn` as "What this can unlock".
+// - Render `evidenceRequired` as "Gather this".
+// - Render `academicReturn` as "It can unlock".
 // - Render `facultyCommitment` as "Your likely involvement".
+// - Program eligibility belongs on the program, not as a note above it.
 //
 // `resourceId` is a suggested fallback resource for the step. The integration
 // layer should replace it with a more relevant resource when the user's
@@ -185,7 +186,7 @@ export const destinationPlans: DestinationPlan[] = [
           "A specific patient or clinical user, the intended use, and the decision, intervention, or outcome you want to change.",
         academicReturn:
           "A sharper clinical question that can guide studies, collaborations, and grant aims.",
-        resourceId: "icts",
+        resourceId: "center-clinical-studies",
         notNeeded: "form a company before the clinical need is clear.",
       },
       {
@@ -196,10 +197,10 @@ export const destinationPlans: DestinationPlan[] = [
           "A clear description of what the intervention is and how it would be used clinically.",
         academicReturn:
           "A better match to the people, programs, and studies that can help next.",
-        resourceId: "needleman-npic",
+        resourceId: "icts-regulatory-support",
         notNeeded: "assume one generic translational program fits every clinical innovation.",
         trap:
-          "Needleman is specific to therapeutic development and should only be shown when that modality fits; verify current application status before presenting it as open.",
+          "Therapeutic, device, digital-health, and care-delivery paths use different support doors. Match the program to the invention type, not only the stage.",
       },
       {
         title: "Identify the next uncertainty blocking clinical use",
@@ -209,10 +210,10 @@ export const destinationPlans: DestinationPlan[] = [
           "The most important unresolved question and the evidence needed for a clinical collaborator, sponsor, partner, or regulator to continue.",
         academicReturn:
           "Evidence that can support the next study, partnership, funding decision, or development step.",
-        resourceId: "ninds-devices",
+        resourceId: "icts",
         notNeeded: "personally lead every downstream development activity if an experienced partner can take it on.",
         trap:
-          "NINDS device programs apply only to eligible nervous-system or neuromuscular device projects; select a different resource when the modality or disease area does not fit.",
+          "Specialized cores (cancer, emergency care, multi-center trials, mHealth) only apply when that context is present — stage alone is not enough.",
       },
     ],
   },

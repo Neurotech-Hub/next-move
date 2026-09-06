@@ -34,7 +34,13 @@ export const nodes: MapNode[] = [
     shortDescription: "A hypothesis, target, algorithm, or new use exists.",
     position: { x: 280, y: 420 },
     tags: ["idea", "discovery", "concept", "target"],
-    resourceIds: ["neurotech-hub", "icts", "hope-center"],
+    resourceIds: [
+      "neurotech-hub",
+      "icts",
+      "hope-center",
+      "center-drug-discovery",
+      "mhealth-research-core",
+    ],
     details: {
       whyItMatters:
         "A named approach lets you design a first decisive test — and decide whether this is a research direction, a tool, or something that could travel further.",
@@ -59,7 +65,13 @@ export const nodes: MapNode[] = [
     shortDescription: "A first experiment or benchtop prototype suggests feasibility.",
     position: { x: 590, y: 420 },
     tags: ["evidence", "prototype", "proof", "feasibility"],
-    resourceIds: ["neurotech-hub", "icts", "hope-center"],
+    resourceIds: [
+      "neurotech-hub",
+      "icts",
+      "hope-center",
+      "center-drug-discovery",
+      "mhealth-research-core",
+    ],
     details: {
       whyItMatters:
         "First feasibility is exciting and easy to over-read. The useful next question is whether someone else could evaluate it.",
@@ -84,7 +96,14 @@ export const nodes: MapNode[] = [
     shortDescription: "It works repeatedly under defined conditions.",
     position: { x: 810, y: 420 },
     tags: ["prototype", "software", "device", "research-tool", "reproducible"],
-    resourceIds: ["otm-core", "neurotech-hub", "dep"],
+    resourceIds: [
+      "otm-core",
+      "neurotech-hub",
+      "dep",
+      "center-drug-discovery",
+      "mhealth-research-core",
+      "healthcare-innovation-lab",
+    ],
     details: {
       whyItMatters:
         "A repeatable asset is the first point where transfer, distribution, or deeper de-risking become real options — not obligations.",
@@ -109,7 +128,14 @@ export const nodes: MapNode[] = [
     shortDescription: "Someone outside the lab can say why this matters.",
     position: { x: 1100, y: 240 },
     tags: ["need", "users", "clinical", "industry", "feedback"],
-    resourceIds: ["dep", "xir", "skandalaris-vd", "icts"],
+    resourceIds: [
+      "dep",
+      "xir",
+      "skandalaris-vd",
+      "icts",
+      "jroc",
+      "healthcare-innovation-lab",
+    ],
     details: {
       whyItMatters:
         "External relevance is not a market analysis. It is evidence that a clinician, company, or independent user can articulate the need in their own words.",
@@ -134,7 +160,7 @@ export const nodes: MapNode[] = [
     shortDescription: "OTM has helped you understand protection and transfer options.",
     position: { x: 1100, y: 600 },
     tags: ["ip", "patent", "disclosure", "license", "otm"],
-    resourceIds: ["otm-core", "otm-inventor-companion"],
+    resourceIds: ["otm-core", "otm-inventor-companion", "jroc"],
     details: {
       whyItMatters:
         "A patent is a vehicle. The useful outcome here is a strategy: protect, license, distribute, partner, open-release — or combine them.",
@@ -159,7 +185,21 @@ export const nodes: MapNode[] = [
     shortDescription: "You know which uncertainties matter most.",
     position: { x: 1400, y: 420 },
     tags: ["plan", "milestones", "regulatory", "de-risk"],
-    resourceIds: ["dep", "icts", "needleman-npic", "gap-fund"],
+    resourceIds: [
+      "dep",
+      "icts",
+      "needleman-npic",
+      "gap-fund",
+      "center-drug-discovery",
+      "center-clinical-studies",
+      "icts-regulatory-support",
+      "mhealth-research-core",
+      "healthcare-innovation-lab",
+      "jroc",
+      "trial-care",
+      "siteman-sip-rda",
+      "ecrc",
+    ],
     details: {
       whyItMatters:
         "A plan turns vague “translation” into two or three uncertainties: performance, need, safety, manufacturability, or path to users.",
@@ -185,7 +225,19 @@ export const nodes: MapNode[] = [
       "You have evidence for one or more questions that previously blocked outside adoption or development.",
     position: { x: 1640, y: 420 },
     tags: ["validated", "de-risked", "translational"],
-    resourceIds: ["gap-fund", "needleman-npic", "otm-core"],
+    resourceIds: [
+      "gap-fund",
+      "needleman-npic",
+      "otm-core",
+      "center-drug-discovery",
+      "center-clinical-studies",
+      "icts-regulatory-support",
+      "mhealth-research-core",
+      "jroc",
+      "trial-care",
+      "ecrc",
+      "healthcare-innovation-lab",
+    ],
     details: {
       whyItMatters:
         "This is often the first time licensing, partnership, distribution, or company formation become realistic — and also the moment many investigators can stop, having already gained data, grants, or collaborators.",
@@ -210,7 +262,16 @@ export const nodes: MapNode[] = [
     shortDescription: "You know who will take the work forward and how.",
     position: { x: 1910, y: 420 },
     tags: ["license", "startup", "partner", "vehicle"],
-    resourceIds: ["otm-eir", "skandalaris-vd", "biogenerator", "otm-core"],
+    resourceIds: [
+      "otm-eir",
+      "skandalaris-vd",
+      "biogenerator",
+      "otm-core",
+      "center-clinical-studies",
+      "icts-regulatory-support",
+      "trial-care",
+      "jroc",
+    ],
     details: {
       whyItMatters:
         "The work now has a practical route beyond the originating lab. The next challenge is executing that path.",
@@ -362,7 +423,14 @@ export const nodes: MapNode[] = [
     shortDescription: "Resources to continue the research or development.",
     position: { x: 2480, y: 190 },
     tags: ["funding", "grants", "personnel"],
-    resourceIds: ["icts", "hope-center", "gap-fund", "needleman-npic"],
+    resourceIds: [
+      "icts",
+      "hope-center",
+      "gap-fund",
+      "needleman-npic",
+      "center-drug-discovery",
+      "siteman-sip-rda",
+    ],
     details: {
       whyItMatters:
         "Funding is often the immediate objective. The useful question is what evidence the money will buy — not which pot is largest.",
@@ -412,7 +480,13 @@ export const nodes: MapNode[] = [
     shortDescription: "Eventually used in patient care.",
     position: { x: 2480, y: 520 },
     tags: ["clinical", "patients", "therapeutic", "device"],
-    resourceIds: ["needleman-npic", "icts", "nih-ninds-sbir"],
+    resourceIds: [
+      "center-clinical-studies",
+      "icts-regulatory-support",
+      "icts",
+      "center-drug-discovery",
+      "mhealth-research-core",
+    ],
     details: {
       whyItMatters:
         "Patient impact is a destination. Plan backward through evidence, regulatory, and who will sponsor, manufacture, and support the intervention.",

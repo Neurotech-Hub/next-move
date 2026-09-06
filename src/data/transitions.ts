@@ -15,7 +15,7 @@ export const transitions: Transition[] = [
     to: "s2",
     question: "What is the cheapest convincing test of the core principle?",
     evidence: "A first decisive feasibility experiment or prototype.",
-    resourceIds: ["neurotech-hub", "icts"],
+    resourceIds: ["neurotech-hub", "icts", "center-drug-discovery", "mhealth-research-core"],
   },
   {
     id: "t-s2-s3",
@@ -24,7 +24,13 @@ export const transitions: Transition[] = [
     question:
       "Does it work reliably enough that somebody other than the inventor can evaluate it?",
     evidence: "Repeatability, controls, and a defined protocol or performance.",
-    resourceIds: ["neurotech-hub", "hope-center", "icts"],
+    resourceIds: [
+      "neurotech-hub",
+      "hope-center",
+      "icts",
+      "center-drug-discovery",
+      "mhealth-research-core",
+    ],
   },
   {
     id: "t-s3-s4",
@@ -32,7 +38,7 @@ export const transitions: Transition[] = [
     to: "s4",
     question: "Who outside your lab cares, and what do they actually need?",
     evidence: "External user, clinical, or industry feedback in their words.",
-    resourceIds: ["dep", "xir", "skandalaris-vd", "icts"],
+    resourceIds: ["dep", "xir", "skandalaris-vd", "icts", "jroc", "healthcare-innovation-lab"],
   },
   {
     id: "t-s3-s5",
@@ -58,7 +64,16 @@ export const transitions: Transition[] = [
     to: "s6",
     question: "What three uncertainties prevent an external party from saying yes?",
     evidence: "A prioritized risk list and a milestone plan.",
-    resourceIds: ["dep", "icts", "needleman-npic", "veritascience", "ninds-devices"],
+    resourceIds: [
+      "dep",
+      "icts",
+      "needleman-npic",
+      "veritascience",
+      "ninds-devices",
+      "center-drug-discovery",
+      "center-clinical-studies",
+      "jroc",
+    ],
   },
   {
     id: "t-s5-s6",
@@ -66,7 +81,14 @@ export const transitions: Transition[] = [
     to: "s6",
     question: "What three uncertainties prevent an external party from saying yes?",
     evidence: "A prioritized risk list and a milestone plan.",
-    resourceIds: ["dep", "icts", "needleman-npic", "veritascience"],
+    resourceIds: [
+      "dep",
+      "icts",
+      "needleman-npic",
+      "veritascience",
+      "center-drug-discovery",
+      "center-clinical-studies",
+    ],
   },
   {
     id: "t-s6-s7",
@@ -74,7 +96,14 @@ export const transitions: Transition[] = [
     to: "s7",
     question: "What experiment or prototype removes the largest transfer risk?",
     evidence: "Milestone-linked data an outsider can evaluate.",
-    resourceIds: ["gap-fund", "icts", "hope-center", "nih-ninds-sbir"],
+    resourceIds: [
+      "gap-fund",
+      "icts",
+      "hope-center",
+      "nih-ninds-sbir",
+      "center-clinical-studies",
+      "icts-regulatory-support",
+    ],
   },
   {
     id: "t-s6-s7-therapeutic",
@@ -83,8 +112,29 @@ export const transitions: Transition[] = [
     question: "What is required to move toward a development candidate or IND?",
     evidence:
       "A target or product profile, plus efficacy, safety, and developability appropriate to the modality.",
-    resourceIds: ["needleman-npic", "veritascience", "bms-neuro", "nih-ninds-sbir"],
+    resourceIds: [
+      "needleman-npic",
+      "center-drug-discovery",
+      "veritascience",
+      "bms-neuro",
+      "nih-ninds-sbir",
+    ],
     modalities: ["therapeutic"],
+  },
+  {
+    id: "t-s6-s7-software",
+    from: "s6",
+    to: "s7",
+    question: "What digital-health or remote-study evidence removes the largest clinical risk?",
+    evidence:
+      "A fundable mHealth or software-as-intervention plan, including workflow, vendor, and Part 11 questions.",
+    resourceIds: [
+      "mhealth-research-core",
+      "center-clinical-studies",
+      "icts-regulatory-support",
+      "healthcare-innovation-lab",
+    ],
+    modalities: ["software"],
   },
   {
     id: "t-s7-s8-license",
@@ -92,7 +142,7 @@ export const transitions: Transition[] = [
     to: "s8",
     question: "Is there an organization that can take this forward?",
     evidence: "A transfer package, diligence materials, and an interested counterparty.",
-    resourceIds: ["otm-core", "dep"],
+    resourceIds: ["otm-core", "dep", "jroc"],
   },
   {
     id: "t-s7-s8-startup",
@@ -132,7 +182,7 @@ export const transitions: Transition[] = [
     to: "dest-funding",
     question: "What evidence will the money buy?",
     evidence: "A named milestone that removes a specific uncertainty.",
-    resourceIds: ["gap-fund", "icts", "needleman-npic"],
+    resourceIds: ["gap-fund", "icts", "needleman-npic", "center-drug-discovery"],
   },
 ];
 

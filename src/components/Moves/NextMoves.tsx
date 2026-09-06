@@ -22,54 +22,47 @@ function MoveCard({
       </h3>
       <p className="mt-1.5 text-sm leading-relaxed text-ink/85">{move.why}</p>
 
-      <dl className="mt-3 space-y-2.5 text-sm">
+      <dl className="mt-3 space-y-2 text-sm">
         <div>
           <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
-            What you need next
+            Gather this
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.evidenceRequired}</dd>
         </div>
         <div>
           <dt className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
-            What this can unlock
+            It can unlock
           </dt>
           <dd className="mt-0.5 text-ink/85">{move.academicReturn}</dd>
         </div>
       </dl>
 
-      <p className="mt-3 text-sm leading-relaxed text-muted">
-        {formatNotNeeded(move.notNeeded)}
-      </p>
-
-      {move.trap && (
-        <p className="mt-2 text-[12px] leading-relaxed text-ink/45">
-          {move.trap}
-        </p>
-      )}
-
       {resource && (
-        <div className="mt-3 rounded-xl border border-line/60 bg-paper/60 p-3">
-          <p className="font-mono text-[9px] font-medium uppercase tracking-[0.16em] text-muted">
-            Suggested program
+        <div className="mt-3 border-t border-line/60 pt-3">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
+            A program that can help
           </p>
-          {move.resourceReason && (
-            <p className="mt-1 text-xs leading-relaxed text-ink/70">
-              {move.resourceReason}
-            </p>
-          )}
           <button
             type="button"
             onClick={() => onOpenResource(resource.id)}
-            className="mt-2 w-full rounded-lg border border-line bg-raise px-3 py-2 text-left text-sm transition duration-200 hover:border-ink/25 hover:bg-raise/80"
+            className="mt-1.5 w-full rounded-lg border border-line bg-paper/70 px-3 py-2 text-left text-sm transition duration-200 hover:border-ink/25 hover:bg-raise"
           >
             <span className="block font-medium text-ink">{resource.title}</span>
-            <span className="mt-0.5 block text-xs text-muted">
-              View program details
-              {move.contact ? ` · ${move.contact}` : ""}
+            <span className="mt-0.5 block text-xs leading-relaxed text-muted">
+              {resource.usefulWhen[0] ?? "View program details"}
             </span>
           </button>
+          {resource.caveats[0] && (
+            <p className="mt-1.5 text-[12px] leading-relaxed text-muted">
+              {resource.caveats[0]}
+            </p>
+          )}
         </div>
       )}
+
+      <p className="mt-3 text-[13px] leading-relaxed text-muted">
+        {formatNotNeeded(move.notNeeded)}
+      </p>
     </article>
   );
 }

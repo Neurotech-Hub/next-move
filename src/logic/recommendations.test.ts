@@ -9,6 +9,7 @@ import {
 import {
   formatNotNeeded,
   nextMovesForDestination,
+  rankResourcesForAnswers,
   resolveChecklistResource,
   resourceFitsAsset,
   routeForDestination,
@@ -314,5 +315,159 @@ describe("checklist resource integration", () => {
     expect(formatNotNeeded("form a startup solely because an invention exists.")).toBe(
       "You don’t need to form a startup solely because an invention exists.",
     );
+  });
+});
+
+const NEW_SUPPORT_IDS = [
+  "center-drug-discovery",
+  "center-clinical-studies",
+  "icts-regulatory-support",
+  "trial-care",
+  "mhealth-research-core",
+  "jroc",
+  "healthcare-innovation-lab",
+  "siteman-sip-rda",
+  "ecrc",
+] as const;
+
+const GATED_SPECIALISTS = [
+  "trial-care",
+  "mhealth-research-core",
+  "healthcare-innovation-lab",
+  "jroc",
+  "siteman-sip-rda",
+  "ecrc",
+] as const;
+
+describe("contextual support doors", () => {
+  it("registers the new resource IDs without new destination nodes", () => {
+    for (const id of NEW_SUPPORT_IDS) {
+      expect(resourceById[id]?.type).toBe("resource");
+    }
+  });
+
+  it("locks CDD to therapeutics", () => {
+    expect(
+      resourceFitsAsset(resourceById["center-drug-discovery"]!, "device"),
+    ).toBe(false);
+    expect(
+      resourceFitsAsset(resourceById["center-drug-discovery"]!, "therapeutic"),
+    ).toBe(true);
+  });
+
+  it("does not treat Needleman or NINDS as generic clinical checklist fallbacks", () => {
+    const moves = nextMovesForDestination(
+      "dest-clinical",
+      undefined,
+      "s6",
+    );
+    expect(moves.map((move) => move.resourceId)).toEqual([
+      "center-clinical-studies",
+      "icts-regulatory-support",
+      "icts",
+    ]);
+  });
+
+  it("produces different resource sets for therapeutic, device, digital-health, multicenter-trial, industry-collaboration, cancer, and emergency-care", () => {
+    const clinical: Pick<GuideAnswers, "destinations" | "motivations" | "involvement"> = {
+      destinations: ["clinical-use"],
+      motivations: ["patients"],
+      involvement: "advise",
+    };
+
+    const therapeutic = rankResourcesForAnswers(
+      answers({ ...clinical, asset: "therapeutic" }),
+      "s6",
+    );
+    const device = rankResourcesForAnswers(
+      answers({ ...clinical, asset: "device" }),
+      "s6",
+    );
+    const digital = rankResourcesForAnswers(
+      answers({
+        ...clinical,
+        asset: "software",
+        researchContexts: ["digital-health"],
+      }),
+      "s6",
+    );
+    const multicenter = rankResourcesForAnswers(
+      answers({
+        ...clinical,
+        asset: "therapeutic",
+        researchContexts: ["multicenter-trial"],
+      }),
+      "s6",
+    );
+    const industry = rankResourcesForAnswers(
+      answers({
+        ...clinical,
+        asset: "device",
+        researchContexts: ["industry-collaboration"],
+      }),
+      "s4",
+    );
+    const cancer = rankResourcesForAnswers(
+      answers({
+        ...clinical,
+        asset: "therapeutic",
+        researchContexts: ["cancer"],
+      }),
+      "s6",
+    );
+    const emergency = rankResourcesForAnswers(
+      answers({
+        ...clinical,
+        asset: "device",
+        researchContexts: ["emergency-care"],
+      }),
+      "s6",
+    );
+
+    expect(therapeutic).toContain("center-drug-discovery");
+    expect(therapeutic).not.toEqual(expect.arrayContaining(["ecrc"]));
+    expect(therapeutic).not.toEqual(
+      expect.arrayContaining(["siteman-sip-rda", "trial-care", "mhealth-research-core"]),
+    );
+
+    expect(device).not.toContain("center-drug-discovery");
+    expect(device).not.toContain("needleman-npic");
+    expect(device.some((id) =>
+      ["center-clinical-studies", "icts-regulatory-support", "ninds-devices"].includes(id),
+    )).toBe(true);
+
+    expect(digital).toContain("mhealth-research-core");
+    expect(digital).not.toContain("center-drug-discovery");
+    expect(digital).not.toContain("ecrc");
+
+    expect(multicenter).toContain("trial-care");
+    expect(industry).toContain("jroc");
+    expect(cancer).toContain("siteman-sip-rda");
+    expect(emergency).toContain("ecrc");
+
+    const signatures = [
+      therapeutic,
+      device,
+      digital,
+      multicenter,
+      industry,
+      cancer,
+      emergency,
+    ].map((ids) => ids.join("|"));
+    expect(new Set(signatures).size).toBe(signatures.length);
+  });
+
+  it("does not dump every specialized clinical core onto a generic s6 therapeutic inventor", () => {
+    const ranked = rankResourcesForAnswers(
+      answers({
+        destinations: ["clinical-use"],
+        asset: "therapeutic",
+        motivations: ["patients"],
+        involvement: "advise",
+      }),
+      "s6",
+    );
+    const gatedHits = GATED_SPECIALISTS.filter((id) => ranked.includes(id));
+    expect(gatedHits).toEqual([]);
   });
 });

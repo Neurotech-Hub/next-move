@@ -11,6 +11,7 @@ import type {
   GuideAnswers,
   MotivationAnswer,
   NextMove,
+  ResearchContext,
   Resource,
   Route,
 } from "../types/navigator";
@@ -28,7 +29,36 @@ const MODALITY_LOCKED: Record<string, string[]> = {
   "needleman-npic": ["therapeutic"],
   veritascience: ["therapeutic"],
   "bms-neuro": ["therapeutic"],
+  "center-drug-discovery": ["therapeutic"],
   "ninds-devices": ["device"],
+};
+
+/**
+ * Specialized cores that share clinical states (s6–s8) but must not fire on
+ * stage match alone. Required tags are researchContexts and/or problemsSolved.
+ */
+const CONTEXT_GATED: Record<string, string[]> = {
+  ecrc: ["emergency-care"],
+  "siteman-sip-rda": ["cancer"],
+  "trial-care": ["multicenter-trial"],
+  "mhealth-research-core": ["digital-health", "mhealth"],
+  "healthcare-innovation-lab": ["clinical-workflow", "digital-health"],
+  jroc: ["industry-collaboration", "industry-sponsored-research"],
+};
+
+const CONTEXT_EXPAND: Record<string, string[]> = {
+  "digital-health": ["digital-health", "mhealth", "clinical-workflow"],
+  "clinical-workflow": ["clinical-workflow", "digital-health"],
+  "industry-collaboration": [
+    "industry-collaboration",
+    "industry-sponsored-research",
+    "research-contracts",
+    "collaboration-agreements",
+  ],
+  "multicenter-trial": ["multicenter-trial"],
+  cancer: ["cancer"],
+  "emergency-care": ["emergency-care"],
+  mhealth: ["mhealth", "digital-health"],
 };
 
 const MOTIVATION_TERMS: Record<MotivationAnswer, string[]> = {
@@ -45,6 +75,39 @@ const MOTIVATION_TERMS: Record<MotivationAnswer, string[]> = {
 function modalityOf(answers?: GuideAnswers): string | undefined {
   if (!answers?.asset) return undefined;
   return ASSET_TO_MODALITY[answers.asset];
+}
+
+function expandContexts(contexts: string[]): string[] {
+  const expanded = new Set<string>();
+  for (const context of contexts) {
+    expanded.add(context);
+    for (const alias of CONTEXT_EXPAND[context] ?? []) {
+      expanded.add(alias);
+    }
+  }
+  return [...expanded];
+}
+
+/** Infer extra context from known answers; explicit researchContexts always win. */
+export function inferResearchContexts(
+  answers?: GuideAnswers,
+): ResearchContext[] {
+  const inferred = new Set<ResearchContext>(answers?.researchContexts ?? []);
+  if (answers?.asset === "software") {
+    inferred.add("digital-health");
+    inferred.add("clinical-workflow");
+  }
+  return [...inferred];
+}
+
+function resourceFitsContext(
+  resource: Resource,
+  contexts: string[],
+): boolean {
+  const required = CONTEXT_GATED[resource.id];
+  if (!required) return true;
+  const expanded = expandContexts(contexts);
+  return required.some((tag) => expanded.includes(tag));
 }
 
 /** True when a resource is eligible for the user's known invention type. */
@@ -87,6 +150,9 @@ function scoreResource(
   toId: string | undefined,
   answers?: GuideAnswers,
 ): number {
+  const contexts = inferResearchContexts(answers);
+  if (!resourceFitsContext(resource, contexts)) return -Infinity;
+
   let score = 0;
   if (fromId && resource.states.includes(fromId)) score += 2;
   if (toId && resource.states.includes(toId)) score += 3;
@@ -95,7 +161,15 @@ function scoreResource(
   if (!resourceFitsAsset(resource, answers.asset)) return -Infinity;
 
   const modality = modalityOf(answers);
-  if (modality && resource.domains.includes(modality)) score += 8;
+  // Domain/modality fit outweighs raw stage overlap so s6 does not dump
+  // every clinical core onto every inventor.
+  if (modality && resource.domains.includes(modality)) score += 12;
+
+  const expanded = expandContexts(contexts);
+  for (const problem of resource.problemsSolved) {
+    if (expanded.includes(problem)) score += 14;
+  }
+  if (CONTEXT_GATED[resource.id]) score += 8;
 
   const text = resourceText(resource);
   for (const motivation of answers.motivations) {
@@ -115,6 +189,29 @@ function scoreResource(
   }
 
   return score;
+}
+
+/** Rank catalog resources for tests and destination overrides. */
+export function rankResourcesForAnswers(
+  answers: GuideAnswers,
+  currentStateId?: string | null,
+  limit = 5,
+): string[] {
+  return resources
+    .map((resource, index) => ({
+      resource,
+      index,
+      score: scoreResource(
+        resource,
+        currentStateId ?? undefined,
+        undefined,
+        answers,
+      ),
+    }))
+    .filter((item) => item.score !== -Infinity)
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .slice(0, limit)
+    .map((item) => item.resource.id);
 }
 
 function reasonForResource(
@@ -262,7 +359,8 @@ function moveFromNodes(
         item,
       ): item is { id: string; index: number; resource: Resource } =>
         Boolean(item.resource) &&
-        resourceFitsAsset(item.resource, answers?.asset),
+        resourceFitsAsset(item.resource, answers?.asset) &&
+        scoreResource(item.resource, fromId, toId, answers) !== -Infinity,
     )
     .sort(
       (a, b) =>
@@ -297,7 +395,6 @@ function moveFromNodes(
       route.companyRequired
         ? "treat incorporation as the proof that the work mattered."
         : "need a company or a patent, unless this path requires one.",
-    trap: resource?.caveats[0],
     contact: resource?.contact,
     fromStateId: fromId,
     toStateId: toId,
@@ -361,9 +458,6 @@ export function nextMovesForDestination(
         ? reasonForResource(resource, answers, overridden)
         : undefined,
       notNeeded: item.notNeeded,
-      // Plan trap is an eligibility caveat — do not promote resource caveats
-      // into the main next-step narrative.
-      trap: item.trap,
       contact: resource?.contact,
     };
   });
