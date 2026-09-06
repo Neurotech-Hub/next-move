@@ -71,3 +71,7 @@ Do not create one-off components for individual programs.
 ## Guide Me
 
 Deterministic rules live in `src/logic/recommendations.ts` and `src/logic/nextMoves.ts`. Questions start with success and academic return, then current asset and involvement. Program eligibility belongs with the suggested program, not as a note above it.
+
+## Analytics (Plausible)
+
+The site loads Plausible from `index.html`. Custom events are fired from `src/lib/analytics.ts`. Use **[`PLAUSIBLE_EVENTS.md`](./PLAUSIBLE_EVENTS.md)** as the checklist when adding custom-event goals in the Plausible dashboard.

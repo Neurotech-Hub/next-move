@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { destinationPlanById, nodeById, routes } from "../data";
+import { AnalyticsEvent, track } from "../lib/analytics";
 import { parseHash, writeHash } from "../logic/hash";
 import {
   nextMovesForDestination,
@@ -83,7 +84,7 @@ function recommendationFromRoutes(
 
 export function NavigatorProvider({ children }: { children: ReactNode }) {
   const initial = parseHash();
-  const [view, setView] = useState<ViewMode>(initial.view);
+  const [view, setViewState] = useState<ViewMode>(initial.view);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(
     initial.node,
   );
@@ -105,12 +106,30 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
         ? destinationPlanById[initial.goal]?.defaultRouteId ?? null
         : null),
   );
-  const [showFullJourney, setShowFullJourney] = useState(false);
+  const [showFullJourney, setShowFullJourneyState] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [guideAnswers, setGuideAnswers] = useState<GuideAnswers>(
     emptyGuideAnswers,
   );
   const [searchQuery, setSearchQuery] = useState("");
+
+  const setView = useCallback((next: ViewMode) => {
+    setViewState((current) => {
+      if (current !== next) {
+        track(AnalyticsEvent.ViewChanged, { view: next });
+      }
+      return next;
+    });
+  }, []);
+
+  const setShowFullJourney = useCallback((value: boolean) => {
+    setShowFullJourneyState((current) => {
+      if (current !== value) {
+        track(AnalyticsEvent.FullJourneyToggled, { on: value });
+      }
+      return value;
+    });
+  }, []);
 
   const suggestedRoutes = useMemo(() => {
     if (recommendation) {
@@ -164,6 +183,7 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
       setGuideOpen(false);
       setRecommendation(null);
       if (id) {
+        track(AnalyticsEvent.GoalSelected, { goal: id });
         const route = routeForDestination(id, guideAnswers);
         setActiveRouteId(route?.id ?? null);
         setSelectedNodeId(id);
@@ -173,7 +193,7 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
         setActiveRouteId(null);
       }
     },
-    [guideAnswers],
+    [guideAnswers, setShowFullJourney],
   );
 
   const selectNode = useCallback(
@@ -182,23 +202,31 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
       setSelectedResourceId(null);
       setGuideOpen(false);
       if (id?.startsWith("dest-")) {
+        track(AnalyticsEvent.GoalSelected, { goal: id });
         setFocusedDestinationId(id);
         const route = routeForDestination(id, guideAnswers);
         setActiveRouteId(route?.id ?? null);
         setShowFullJourney(false);
       }
     },
-    [guideAnswers],
+    [guideAnswers, setShowFullJourney],
   );
 
   const selectResource = useCallback((id: string | null, nodeId?: string) => {
     setSelectedResourceId(id);
     if (nodeId) setSelectedNodeId(nodeId);
-    if (id) setGuideOpen(false);
+    if (id) {
+      track(AnalyticsEvent.ResourceOpened, {
+        resource: id,
+        node: nodeId,
+      });
+      setGuideOpen(false);
+    }
   }, []);
 
   const openGuide = useCallback(() => {
     // Clear pathway so Guide me doesn’t sit on top of a stale goal/route.
+    track(AnalyticsEvent.GuideOpened);
     setSelectedNodeId(null);
     setSelectedResourceId(null);
     setFocusedDestinationId(null);
@@ -207,26 +235,34 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
     setShowFullJourney(false);
     setGuideOpen(true);
     setView("journey");
-  }, []);
+  }, [setShowFullJourney, setView]);
 
   const closeGuide = useCallback(() => setGuideOpen(false), []);
 
-  const applyGuide = useCallback((answers: GuideAnswers) => {
-    if (!isGuideComplete(answers)) return;
-    const next = recommend(answers);
-    const primaryDestination = next.destinationIds[0] ?? null;
-    setRecommendation(next);
-    setActiveRouteId(next.routeIds[0] ?? null);
-    setFocusedDestinationId(primaryDestination);
-    setSelectedNodeId(primaryDestination);
-    setSelectedResourceId(null);
-    setGuideOpen(false);
-    setGuideAnswers(answers);
-    setShowFullJourney(false);
-    setView("journey");
-  }, []);
+  const applyGuide = useCallback(
+    (answers: GuideAnswers) => {
+      if (!isGuideComplete(answers)) return;
+      const next = recommend(answers);
+      const primaryDestination = next.destinationIds[0] ?? null;
+      track(AnalyticsEvent.GuideCompleted, {
+        goal: primaryDestination,
+        route: next.routeIds[0],
+      });
+      setRecommendation(next);
+      setActiveRouteId(next.routeIds[0] ?? null);
+      setFocusedDestinationId(primaryDestination);
+      setSelectedNodeId(primaryDestination);
+      setSelectedResourceId(null);
+      setGuideOpen(false);
+      setGuideAnswers(answers);
+      setShowFullJourney(false);
+      setView("journey");
+    },
+    [setShowFullJourney, setView],
+  );
 
   const reset = useCallback(() => {
+    track(AnalyticsEvent.NavigatorReset);
     setSelectedNodeId(null);
     setSelectedResourceId(null);
     setFocusedDestinationId(null);
@@ -237,7 +273,7 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
     setSearchQuery("");
     setShowFullJourney(false);
     setView("journey");
-  }, []);
+  }, [setShowFullJourney, setView]);
 
   useEffect(() => {
     writeHash({
@@ -301,6 +337,8 @@ export function NavigatorProvider({ children }: { children: ReactNode }) {
       selectResource,
       selectedNodeId,
       selectedResourceId,
+      setShowFullJourney,
+      setView,
       showFullJourney,
       suggestedRoutes,
       view,

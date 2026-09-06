@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { AnalyticsEvent, track } from "../../lib/analytics";
 import type { Resource } from "../../types/navigator";
 import { useNavigator } from "../../state/NavigatorContext";
 
@@ -126,6 +127,12 @@ export function ResourceCard({
         href={resource.url}
         target="_blank"
         rel="noreferrer"
+        onClick={() =>
+          track(AnalyticsEvent.OutboundClick, {
+            resource: resource.id,
+            url: resource.url,
+          })
+        }
         className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition duration-200 hover:bg-ink/90"
       >
         Official page
