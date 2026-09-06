@@ -121,7 +121,7 @@ function DefaultMoves() {
         </button>
       ) : (
         <h2 className="font-display mt-1 text-2xl leading-tight text-ink">
-          Plan backwards from this goal
+          Ready to dig in?
         </h2>
       )}
       <p className="mt-2 text-sm leading-relaxed text-ink/85">

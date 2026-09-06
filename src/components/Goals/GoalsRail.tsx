@@ -141,7 +141,7 @@ export function GoalsRail() {
           <span className="goals-step" aria-hidden="true">
             A.{" "}
           </span>
-          Your goals
+          Your goal
         </p>
         <h2 className="font-display mt-1 text-[1.55rem] leading-tight text-ink">
           What's your goal?
@@ -182,7 +182,7 @@ export function GoalsRail() {
       className={`flex w-full shrink-0 flex-col border-line bg-card lg:h-full lg:min-h-0 lg:w-[320px] lg:border-r ${
         awaitingGoal && !guideOpen ? "goals-invite" : ""
       }`}
-      aria-label="A. Your goals"
+      aria-label="A. Your goal"
     >
       <div className="px-5 py-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto">
         {body}
