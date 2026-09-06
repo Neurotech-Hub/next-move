@@ -39,3 +39,47 @@
 .bpHeaderExpandedContentContainer {
   display: none !important;
 }
+
+/* Avatar gone — stack name and description so they are not one truncated row. */
+.bpHeaderContainer {
+  height: auto !important;
+  min-height: 4.5rem !important;
+}
+
+.bpHeaderConversationHistoryButton {
+  display: none !important;
+}
+
+.bpHeaderContentContainer {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: start !important;
+  column-gap: 0.5rem !important;
+}
+
+.bpHeaderContentTitle {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  display: block !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: unset !important;
+}
+
+.bpHeaderContentDescription {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  display: block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: unset !important;
+  line-height: 1.35 !important;
+}
+
+.bpHeaderContentActionsContainer {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  align-self: start !important;
+}
