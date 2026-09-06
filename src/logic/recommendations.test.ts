@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { nodesForIsolatedPath } from "../components/Journey/PathView";
+import { nodesForIsolatedPath, stepsForRegion } from "../components/Journey/PathView";
 import {
   isGuideComplete,
   primaryDestinationFor,
@@ -149,9 +149,35 @@ describe("primaryDestinationFor", () => {
 describe("nodesForIsolatedPath", () => {
   it("keeps only the focused destination", () => {
     const route = routes.find((item) => item.id === "strengthen-research") as Route;
-    const nodes = nodesForIsolatedPath(route.nodeIds, "dest-research");
-    const destIds = nodes.filter((n) => n.type === "destination").map((n) => n.id);
+    const pathNodes = nodesForIsolatedPath(route.nodeIds, "dest-research");
+    const destIds = pathNodes
+      .filter((n) => n.type === "destination")
+      .map((n) => n.id);
     expect(destIds).toEqual(["dest-research"]);
-    expect(nodes.some((n) => n.id === "dest-funding")).toBe(false);
+    expect(pathNodes.some((n) => n.id === "dest-funding")).toBe(false);
+  });
+});
+
+describe("stepsForRegion", () => {
+  it("places License or found? under De-risked translational asset, indented", () => {
+    const items = stepsForRegion("de-risk");
+    const ids = items.map((item) => item.node.id);
+    const s7At = ids.indexOf("s7");
+    const licenseAt = ids.indexOf("ms-license-vs-startup");
+    expect(licenseAt).toBe(s7At + 1);
+    expect(items[licenseAt]?.indented).toBe(true);
+    expect(items[s7At]?.indented).toBe(false);
+  });
+
+  it("does not float License above Vehicle ready in Translate", () => {
+    const items = stepsForRegion("translate");
+    expect(items.map((item) => item.node.id)).toEqual(["s8"]);
+  });
+
+  it("places optional milestones under the states they branch from", () => {
+    const items = stepsForRegion("develop");
+    const ids = items.map((item) => item.node.id);
+    expect(ids.indexOf("ms-validate-need")).toBe(ids.indexOf("s3") + 1);
+    expect(ids.indexOf("ms-preserve-ip")).toBe(ids.indexOf("s3") + 2);
   });
 });

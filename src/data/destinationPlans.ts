@@ -230,7 +230,7 @@ export const destinationPlans: DestinationPlan[] = [
         why: "EIR and New Ventures assume foundational WashU patent rights for the startup.",
         evidenceRequired: "An OTM conversation and a plausible license route.",
         academicReturn: "A legal path that later capital can actually use.",
-        resourceId: "otm-eir",
+        resourceId: "otm-core",
         notNeeded: "treat Skandalaris Venture Competition as a faculty-IP fundraising plan.",
         trap: "SVC currently prohibits WashU IP and licenses to university IP.",
       },

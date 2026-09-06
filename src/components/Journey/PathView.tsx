@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
-import { nodes, regions } from "../../data";
+import { edges, nodeById, nodes, regions } from "../../data";
 import { useNavigator } from "../../state/NavigatorContext";
 import type { MapNode } from "../../types/navigator";
 
 const stateNodes = nodes.filter((node) => node.type === "state");
-const milestoneNodes = nodes.filter((node) => node.type === "milestone");
 
 function isStackedLayout() {
   return (
@@ -29,23 +28,62 @@ function captionFor(node: MapNode | undefined, isCurrent: boolean): string {
   return "Step on this path. Open it to see the next evidence to collect.";
 }
 
+/** Optional milestones that leave a state (fork edges), in edge order. */
+export function milestonesLeaving(stateId: string): MapNode[] {
+  return edges
+    .filter((edge) => edge.kind === "fork" && edge.source === stateId)
+    .map((edge) => nodeById[edge.target])
+    .filter((node): node is MapNode => node?.type === "milestone");
+}
+
+/**
+ * Full-journey steps for a region: optional milestones sit indented
+ * immediately under the state they branch from (same order as route nodeIds).
+ */
+export function stepsForRegion(regionId: string): {
+  node: MapNode;
+  indented: boolean;
+}[] {
+  const steps = stateNodes
+    .filter((node) => node.region === regionId)
+    .sort((a, b) => a.position.x - b.position.x);
+  const items: { node: MapNode; indented: boolean }[] = [];
+  const seen = new Set<string>();
+
+  for (const state of steps) {
+    items.push({ node: state, indented: false });
+    seen.add(state.id);
+    for (const milestone of milestonesLeaving(state.id)) {
+      if (seen.has(milestone.id)) continue;
+      seen.add(milestone.id);
+      items.push({ node: milestone, indented: true });
+    }
+  }
+
+  return items;
+}
+
 function PathStep({
   node,
   index,
   isCurrent,
   isGoal,
+  indented = false,
 }: {
   node: MapNode;
   index: number | null;
   isCurrent: boolean;
   isGoal: boolean;
+  indented?: boolean;
 }) {
   const { selectNode, selectedNodeId } = useNavigator();
   const selected = selectedNodeId === node.id;
   const milestone = node.type === "milestone";
 
   return (
-    <li className="relative flex items-start gap-4">
+    <li
+      className={`relative flex items-start gap-4 ${indented ? "ml-12" : ""}`}
+    >
       <span
         className={`relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full border font-mono text-[11px] font-semibold transition duration-200 ${
           isCurrent
@@ -257,6 +295,7 @@ export function PathView() {
                   index={numbered ? numberedStep : null}
                   isCurrent={node.id === currentId}
                   isGoal={node.id === focusedDestinationId}
+                  indented={node.type === "milestone"}
                 />
               );
             })}
@@ -266,13 +305,9 @@ export function PathView() {
         {showFullJourney && (
           <ol className="mt-8 space-y-10">
             {regions.map((region) => {
-              const steps = stateNodes.filter(
-                (node) => node.region === region.id,
-              );
-              const milestones = milestoneNodes.filter(
-                (node) => node.region === region.id,
-              );
-              if (!steps.length) return null;
+              const items = stepsForRegion(region.id);
+              if (!items.some((item) => item.node.type === "state")) return null;
+              let regionStep = 0;
               return (
                 <li key={region.id}>
                   <h2 className="font-display text-2xl text-ink">
@@ -284,29 +319,21 @@ export function PathView() {
                       className="absolute bottom-4 left-4 top-4 w-px bg-ink/10"
                       aria-hidden
                     />
-                    {steps.map((node, index) => (
-                      <PathStep
-                        key={node.id}
-                        node={node}
-                        index={index + 1}
-                        isCurrent={node.id === currentId}
-                        isGoal={node.id === focusedDestinationId}
-                      />
-                    ))}
-                  </ol>
-                  {milestones.length > 0 && (
-                    <ul className="ml-12 mt-3 space-y-3">
-                      {milestones.map((node) => (
+                    {items.map(({ node, indented }) => {
+                      const numbered = node.type === "state";
+                      if (numbered) regionStep += 1;
+                      return (
                         <PathStep
                           key={node.id}
                           node={node}
-                          index={null}
-                          isCurrent={false}
-                          isGoal={false}
+                          index={numbered ? regionStep : null}
+                          isCurrent={node.id === currentId}
+                          isGoal={node.id === focusedDestinationId}
+                          indented={indented}
                         />
-                      ))}
-                    </ul>
-                  )}
+                      );
+                    })}
+                  </ol>
                 </li>
               );
             })}
