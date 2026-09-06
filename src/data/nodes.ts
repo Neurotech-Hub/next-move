@@ -535,7 +535,7 @@ export const nodes: MapNode[] = [
     region: "impact",
     title: "Build a company",
     shortDescription:
-      "A vehicle: a new company develops and delivers the invention — not the goal itself.",
+      "A vehicle: form a company when that is the best way to develop and deliver the invention.",
     position: { x: 2480, y: 760 },
     tags: ["startup", "venture", "company", "vehicle"],
     resourceIds: ["otm-eir", "skandalaris-vd", "biogenerator", "nih-ninds-sbir"],
