@@ -312,7 +312,7 @@ export function PathView() {
                 <circle className="roadmap-node roadmap-node--goal" cx="252" cy="60" r="8" />
               </svg>
               <p className="roadmap-awaiting mt-6 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-muted">
-                Awaiting your goals
+                Awaiting your goal
                 <span className="roadmap-awaiting-dots" aria-hidden>
                   …
                 </span>

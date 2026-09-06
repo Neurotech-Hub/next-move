@@ -73,7 +73,7 @@ function compareCatalogResources(a: Resource, b: Resource) {
 
 function groupResources(viewBy: ViewBy) {
   const sections = sectionsFor(viewBy);
-  return sections
+  const groups = sections
     .map((section) => ({
       id: section.id,
       label: section.label,
@@ -94,6 +94,12 @@ function groupResources(viewBy: ViewBy) {
         .sort(compareCatalogResources),
     }))
     .filter((section) => section.resources.length > 0);
+
+  // Location keeps geographic order; other lenses sort A–Z for jump + listings.
+  if (viewBy === "locations") return groups;
+  return [...groups].sort((a, b) =>
+    a.label.localeCompare(b.label, undefined, { sensitivity: "base" }),
+  );
 }
 
 function CatalogCard({
