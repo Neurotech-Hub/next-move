@@ -701,7 +701,7 @@
         "A company-formation program",
         "Unrestricted laboratory operating support"
       ],
-      "eligibility": "Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. As of 2026-09-04 the 2026 CTRFP LOI deadline had passed; invited full applications were due September 14, 2026. JIT has separate rolling processes and limits.",
+      "eligibility": "Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. The 2026 CTRFP cycle closed (invited full applications were due September 14, 2026); the next cycle has not been posted as of 2026-10-25. JIT has separate rolling processes and limits.",
       "requiresDisclosure": false,
       "companyRequired": false,
       "funding": "CTRFP up to $50,000 / $25,000 by category; JIT core-service support",
@@ -721,8 +721,8 @@
         "s7"
       ],
       "status": "evergreen_program_verify_current_call",
-      "nextDeadline": "2026-09-14 (invited CTRFP applications; verify)",
-      "lastVerified": "2026-09-06",
+      "nextDeadline": null,
+      "lastVerified": "2026-10-25",
       "sourceUrls": [
         "https://icts.wustl.edu/research-services/research-development-program/research-forum-program/",
         "https://icts.wustl.edu/funding/ctrfp-funding-program/",
@@ -1081,8 +1081,8 @@
         "s4"
       ],
       "status": "evergreen_program_verify_current_call",
-      "nextDeadline": null,
-      "lastVerified": "2026-09-06",
+      "nextDeadline": "2026-12-08 (invited full proposals; verify)",
+      "lastVerified": "2026-10-25",
       "sourceUrls": [
         "https://hopecenter.wustl.edu/funding-awards/pilot-projects/"
       ]
@@ -1440,7 +1440,7 @@
       "type": "resource",
       "title": "BioGenerator Ventures",
       "organization": "BioSTL",
-      "url": "https://www.biostl.org/what-we-do/biogenerator",
+      "url": "https://www.biogeneratorventures.com/",
       "internality": "regional",
       "needs": [
         "startup-support",
@@ -1499,8 +1499,9 @@
       ],
       "status": "evergreen",
       "nextDeadline": null,
-      "lastVerified": "2026-09-06",
+      "lastVerified": "2026-10-25",
       "sourceUrls": [
+        "https://www.biogeneratorventures.com/",
         "https://www.biostl.org/what-we-do/biogenerator",
         "https://www.biostl.org/about/"
       ]
@@ -1839,7 +1840,7 @@
       ],
       "status": "evergreen_program_verify_current_call",
       "nextDeadline": null,
-      "lastVerified": "2026-09-06",
+      "lastVerified": "2026-10-25",
       "sourceUrls": [
         "https://skandalaris.wustl.edu/program/skandalaris-venture-competition/"
       ],
@@ -2103,7 +2104,7 @@
       "companyRequired": true,
       "funding": null,
       "caveats": [
-        "Next noted event: September 9–10, 2026 (Startup Connect 2027 is listed for September 8–9). Confirm before planning around it."
+        "Startup Connect 2026 has concluded; Startup Connect 2027 is scheduled for September 8–9, 2027 (request an invitation on the event page)."
       ],
       "investigatorReturns": [
         "investor meetings",
@@ -2113,8 +2114,8 @@
         "s9"
       ],
       "status": "evergreen_program_verify_current_call",
-      "nextDeadline": "2026-09-09 (Startup Connect; verify)",
-      "lastVerified": "2026-09-07",
+      "nextDeadline": "2027-09-08 (Startup Connect 2027; invite-only)",
+      "lastVerified": "2026-10-25",
       "sourceUrls": [
         "https://www.biostl.org/events/startup-connect/",
         "https://www.biostl.org/what-we-do/biogenerator"
@@ -2320,8 +2321,8 @@
         "s9"
       ],
       "status": "evergreen_program_verify_current_call",
-      "nextDeadline": null,
-      "lastVerified": "2026-09-06",
+      "nextDeadline": "2026-11-03 (January 2027 cycle, 11:59 pm; verify)",
+      "lastVerified": "2026-10-25",
       "sourceUrls": [
         "https://www.missouritechnology.com/venture-capital-investments/mtc-idea-fund/"
       ],
@@ -2650,8 +2651,8 @@
         "s9"
       ],
       "status": "evergreen",
-      "nextDeadline": null,
-      "lastVerified": "2026-09-06",
+      "nextDeadline": "2026-12-18 (2027 cohort 1 request; verify)",
+      "lastVerified": "2026-10-25",
       "sourceUrls": [
         "https://seed.nih.gov/I-Corps-at-NIH"
       ],

@@ -219,8 +219,8 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-NEXT DEADLINE: 2026-09-09 (Startup Connect; verify)
-LAST VERIFIED: 2026-09-07
+NEXT DEADLINE: 2027-09-08 (Startup Connect 2027; invite-only)
+LAST VERIFIED: 2026-10-25
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -241,7 +241,7 @@ ELIGIBILITY:
 Invite-only. Not an early idea-development program.
 
 CAVEATS:
-- Next noted event: September 9–10, 2026 (Startup Connect 2027 is listed for September 8–9). Confirm before planning around it.
+- Startup Connect 2026 has concluded; Startup Connect 2027 is scheduled for September 8–9, 2027 (request an invitation on the event page).
 
 ACADEMIC RETURNS:
 - investor meetings
@@ -261,7 +261,7 @@ SOURCE URLS:
 
 ID: biogenerator
 ORGANIZATION: BioSTL
-OFFICIAL URL: https://www.biostl.org/what-we-do/biogenerator
+OFFICIAL URL: https://www.biogeneratorventures.com/
 LOCATION: st-louis
 SCOPE: regional
 NEEDS ADDRESSED: startup-support, funding
@@ -272,7 +272,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-25
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -311,6 +311,7 @@ FUNDING:
 Early-stage company capital (deal-specific)
 
 SOURCE URLS:
+- https://www.biogeneratorventures.com/
 - https://www.biostl.org/what-we-do/biogenerator
 - https://www.biostl.org/about/
 
@@ -730,7 +731,8 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+NEXT DEADLINE: 2026-12-08 (invited full proposals; verify)
+LAST VERIFIED: 2026-10-25
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -787,7 +789,8 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+NEXT DEADLINE: 2026-12-18 (2027 cohort 1 request; verify)
+LAST VERIFIED: 2026-10-25
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -899,8 +902,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-NEXT DEADLINE: 2026-09-14 (invited CTRFP applications; verify)
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-25
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -919,7 +921,7 @@ NOT FOR (do not recommend when):
 - Unrestricted laboratory operating support
 
 ELIGIBILITY:
-Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. As of 2026-09-04 the 2026 CTRFP LOI deadline had passed; invited full applications were due September 14, 2026. JIT has separate rolling processes and limits.
+Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. The 2026 CTRFP cycle closed (invited full applications were due September 14, 2026); the next cycle has not been posted as of 2026-10-25. JIT has separate rolling processes and limits.
 
 CAVEATS:
 - CTRFP is a competitive call with cycle-specific deadlines — verify current status.
@@ -1131,7 +1133,8 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+NEXT DEADLINE: 2026-11-03 (January 2027 cycle, 11:59 pm; verify)
+LAST VERIFIED: 2026-10-25
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2067,7 +2070,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-25
 MODALITY LOCK: none
 CONTEXT GATE: none
 
