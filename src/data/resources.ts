@@ -1,6 +1,6 @@
 import type { Resource } from "../types/navigator";
 
-const VERIFIED = "2026-09-06";
+const VERIFIED = "2026-10-26";
 
 // Resource grouping metadata rules:
 // - needs: tag only capabilities the resource directly provides; prefer 1, max 2 except unusually integrated programs.
@@ -62,7 +62,7 @@ export const resources: Resource[] = [
       "https://otm.wustl.edu/disclose-inventions/licensing-process/",
       "https://otm.wustl.edu/disclose-inventions/otm-contact-by-washu-department/",
     ],
-    contact: "otm@wustl.edu · 314-747-1700",
+    contact: "otm@wustl.edu · 314-747-1794",
   },
   {
     id: "otm-inventor-companion",
@@ -109,7 +109,7 @@ export const resources: Resource[] = [
     nextStates: ["s5"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-05",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://neurotechhub.wustl.edu/an-ai-companion-for-new-inventions/",
       "https://github.com/Neurotech-Hub/WashU-OTM-Inventor-Companion",
@@ -165,7 +165,7 @@ export const resources: Resource[] = [
     nextStates: ["s6", "s7", "s8"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://research.washu.edu/offices/jroc/",
       "https://research.washu.edu/topics/contracts-subagreements/",
@@ -272,7 +272,7 @@ export const resources: Resource[] = [
     states: ["s6", "s7"],
     problemsSolved: ["funding", "de-risking", "prototype"],
     whatYouGet:
-      "Translational funding for promising non-drug WashU technologies. Current OTM information says commitments are made in blocks up to $55,000; technically no overall maximum is stated.",
+      "Translational funding for promising non-drug WashU technologies. Current OTM information says commitments are made in blocks up to $65,000; technically no overall maximum is stated.",
     whyYouMightCare:
       "Pays for work conventional academic grants may not prioritize but that can de-risk a technology. You do not need to start a company.",
     usefulWhen: [
@@ -287,10 +287,10 @@ export const resources: Resource[] = [
       "WashU researcher with an appointment covered by the IP policy; non-drug technology; proof of feasibility demonstrated; technology disclosed to OTM and properly assigned to WashU; reasonable probability of adequate IP protection. Applications/consideration are available year-round, including ad hoc proposals.",
     requiresDisclosure: true,
     companyRequired: false,
-    funding: "Commitments in blocks up to $55,000 (verify current terms)",
+    funding: "Commitments in blocks up to $65,000 (verify current terms)",
     caveats: [
       "This is not a drug-development program and does not fund startup-company expenses.",
-      "A single award commitment is up to $55,000; larger development plans may be staged through sequential awards.",
+      "A single award commitment is up to $65,000; larger development plans may be staged through sequential awards.",
       "The technology must already have proof of feasibility and be disclosed/assigned to WashU before an application.",
     ],
     investigatorReturns: [
@@ -356,7 +356,7 @@ export const resources: Resource[] = [
     nextStates: ["s3", "s6", "s7"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://cdd.wustl.edu/",
       "https://cdd.wustl.edu/funding/pilot-grant/",
@@ -459,7 +459,7 @@ export const resources: Resource[] = [
     nextStates: ["s2", "s6", "s7"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: null,
-    lastVerified: "2026-10-25",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://icts.wustl.edu/research-services/research-development-program/research-forum-program/",
       "https://icts.wustl.edu/funding/ctrfp-funding-program/",
@@ -510,7 +510,7 @@ export const resources: Resource[] = [
     nextStates: ["s7", "s8"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: ["https://research.washu.edu/offices/center-for-clinical-studies/"],
     contact: "ccs@wustl.edu · 314-747-4000",
   },
@@ -557,7 +557,7 @@ export const resources: Resource[] = [
     nextStates: ["s7", "s8"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://icts.wustl.edu/research-services/regulatory-support/",
       "https://icts.wustl.edu/items/regulatory-support-center-rsc/",
@@ -607,7 +607,7 @@ export const resources: Resource[] = [
     nextStates: ["s7", "s8"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://icts.wustl.edu/items/trial-care/",
       "https://icts.wustl.edu/research-services/regulatory-support/",
@@ -656,8 +656,9 @@ export const resources: Resource[] = [
     nextStates: ["s2", "s6", "s7"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: [
+      "https://mhealth.wustl.edu/people/associate-director-mhrc/",
       "https://icts.wustl.edu/items/mhealth-research-core/",
       "https://research.washu.edu/part-11/",
     ],
@@ -702,7 +703,7 @@ export const resources: Resource[] = [
     nextStates: ["s2", "s3", "s4"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: "2026-12-08 (invited full proposals; verify)",
-    lastVerified: "2026-10-25",
+    lastVerified: VERIFIED,
     sourceUrls: ["https://hopecenter.wustl.edu/funding-awards/pilot-projects/"],
   },
   {
@@ -883,7 +884,7 @@ export const resources: Resource[] = [
     nextStates: ["s2", "s3", "s6"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: ["https://siteman.washu.edu/research/funding-opportunities/"],
     priority: "second",
     purposes: ["research", "funding"],
@@ -923,7 +924,7 @@ export const resources: Resource[] = [
     nextStates: ["s7"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-06",
+    lastVerified: VERIFIED,
     sourceUrls: ["https://research.washu.edu/core-facilities/ecrc/"],
     priority: "second",
     purposes: ["research", "expertise"],
@@ -969,7 +970,7 @@ export const resources: Resource[] = [
     nextStates: ["s8", "s9"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-10-25",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://www.biogeneratorventures.com/",
       "https://www.biostl.org/what-we-do/biogenerator",
@@ -1148,7 +1149,7 @@ export const resources: Resource[] = [
     nextStates: ["s6", "s8"],
     status: "evergreen",
     nextDeadline: null,
-    lastVerified: "2026-09-07",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://skandalaris.wustl.edu/programs/",
       "https://skandalaris.wustl.edu/resource/in-residence-program/",
@@ -1193,7 +1194,7 @@ export const resources: Resource[] = [
     nextStates: ["s8"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: null,
-    lastVerified: "2026-10-25",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://skandalaris.wustl.edu/program/skandalaris-venture-competition/",
     ],
@@ -1206,7 +1207,7 @@ export const resources: Resource[] = [
     type: "resource",
     title: "VeritaScience — WashU + Deerfield",
     organization: "Washington University in St. Louis · Deerfield Management",
-    url: "https://source.washu.edu/2024/01/washington-university-deerfield-management-launch-veritascience-to-drive-drug-discovery/",
+    url: "https://www.veritascience.com/",
     internality: "washu",
     needs: ["funding", "expertise-mentorship"],
     inventionTypes: ["therapeutics"],
@@ -1227,13 +1228,13 @@ export const resources: Resource[] = [
       "A general faculty grant program",
     ],
     eligibility:
-      "WashU investigator proposals; disease indication may vary. Current standing submission dates are unspecified publicly in the source reviewed.",
+      "WashU investigator proposals, accepted on a rolling basis per the NPIC partners page; project proposals can be designed around any disease indication. NPIC suggests first scheduling a consultation with its senior director (Shripad Bhagwat, PhD).",
     requiresDisclosure: false,
     companyRequired: false,
     funding: "Up to $130M over ten years across the collaboration (project-specific)",
     caveats: [
       "Routing is through WashU/Deerfield scientific review, guided by OTM and WUSM business development.",
-      "Older information-session contact should be verified before use.",
+      "Project sourcing and evaluation questions go to the WashU Medicine business development team.",
     ],
     investigatorReturns: [
       "industry development expertise",
@@ -1245,9 +1246,11 @@ export const resources: Resource[] = [
     nextDeadline: null,
     lastVerified: VERIFIED,
     sourceUrls: [
+      "https://www.veritascience.com/",
+      "https://needlemanprogram.wustl.edu/about/partners/",
       "https://source.washu.edu/2024/01/washington-university-deerfield-management-launch-veritascience-to-drive-drug-discovery/",
     ],
-    contact: "OTM / WUSM business development; verify current contact",
+    contact: "Mark Van Horn · markv@wustl.edu · Oscar Diaz Ruiz · doscar@wustl.edu (WashU Medicine business development)",
     priority: "second",
     purposes: ["funding", "expertise"],
   },
@@ -1375,7 +1378,7 @@ export const resources: Resource[] = [
     nextStates: ["s9"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: "2027-09-08 (Startup Connect 2027; invite-only)",
-    lastVerified: "2026-10-25",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://www.biostl.org/events/startup-connect/",
       "https://www.biostl.org/what-we-do/biogenerator",
@@ -1410,7 +1413,7 @@ export const resources: Resource[] = [
       "Late-stage company financing",
     ],
     eligibility:
-      "Ignite prerequisites are light. Current listed fee is $50 with need-based scholarships. Cohort dates vary.",
+      "Ignite prerequisites are light. Current listed fee is $50 with need-based scholarships. 2027 cohorts: Spring sessions March 1, 8, 15, 22 and Summer sessions June 7, 14, 21, 28; the page says applications open December 15 (rolling applications listed January 1 to May 31).",
     requiresDisclosure: false,
     companyRequired: false,
     funding: null,
@@ -1508,7 +1511,7 @@ export const resources: Resource[] = [
     nextStates: ["s9"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: "2026-11-03 (January 2027 cycle, 11:59 pm; verify)",
-    lastVerified: "2026-10-25",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://www.missouritechnology.com/venture-capital-investments/mtc-idea-fund/",
     ],
@@ -1579,7 +1582,7 @@ export const resources: Resource[] = [
       "Requires an investable company. No standardized investigator eligibility. Not a grant.",
     requiresDisclosure: false,
     companyRequired: true,
-    funding: "Venture investment, roughly $100k–$3.5M initial checks (verify)",
+    funding: "Venture investment; initial checks $250,000–$1,000,000 with follow-on potential (verify)",
     caveats: ["Downstream financing. Not a general investigator service."],
     investigatorReturns: ["regional venture capital — if the company is investable"],
     nextStates: ["s9"],
@@ -1700,7 +1703,7 @@ export const resources: Resource[] = [
     nextStates: ["s8", "s9"],
     status: "evergreen",
     nextDeadline: "2026-12-18 (2027 cohort 1 request; verify)",
-    lastVerified: "2026-10-25",
+    lastVerified: VERIFIED,
     sourceUrls: ["https://seed.nih.gov/I-Corps-at-NIH"],
     priority: "second",
     purposes: ["expertise", "company"],
