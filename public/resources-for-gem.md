@@ -103,7 +103,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-05
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -164,7 +164,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: closed_verify
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -220,7 +220,7 @@ COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
 NEXT DEADLINE: 2027-09-08 (Startup Connect 2027; invite-only)
-LAST VERIFIED: 2026-10-25
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -272,7 +272,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-10-25
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -333,7 +333,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: closed_verify
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -391,7 +391,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -448,7 +448,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -514,7 +514,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -533,7 +533,7 @@ NOT FOR (do not recommend when):
 - Late-stage company financing
 
 ELIGIBILITY:
-Ignite prerequisites are light. Current listed fee is $50 with need-based scholarships. Cohort dates vary.
+Ignite prerequisites are light. Current listed fee is $50 with need-based scholarships. 2027 cohorts: Spring sessions March 1, 8, 15, 22 and Summer sessions June 7, 14, 21, 28; the page says applications open December 15 (rolling applications listed January 1 to May 31).
 
 CAVEATS:
 - Education, not capital. Confirm current cohort dates.
@@ -567,7 +567,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -598,7 +598,7 @@ PROBLEMS SOLVED:
 - startup
 
 FUNDING:
-Venture investment, roughly $100k–$3.5M initial checks (verify)
+Venture investment; initial checks $250,000–$1,000,000 with follow-on potential (verify)
 
 SOURCE URLS:
 - https://cultivationcapital.com/strategies/life-sciences-health-technology/
@@ -621,7 +621,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -675,7 +675,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes emergency-care
 
@@ -732,7 +732,7 @@ COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
 NEXT DEADLINE: 2026-12-08 (invited full proposals; verify)
-LAST VERIFIED: 2026-10-25
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -790,7 +790,7 @@ COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
 NEXT DEADLINE: 2026-12-18 (2027 cohort 1 request; verify)
-LAST VERIFIED: 2026-10-25
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -841,7 +841,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -902,7 +902,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-10-25
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -965,7 +965,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes industry-collaboration, industry-sponsored-research
 
@@ -1025,7 +1025,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes digital-health, mhealth
 
@@ -1062,6 +1062,7 @@ PROBLEMS SOLVED:
 - part-11
 
 SOURCE URLS:
+- https://mhealth.wustl.edu/people/associate-director-mhrc/
 - https://icts.wustl.edu/items/mhealth-research-core/
 - https://research.washu.edu/part-11/
 
@@ -1082,7 +1083,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1134,7 +1135,7 @@ COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
 NEXT DEADLINE: 2026-11-03 (January 2027 cycle, 11:59 pm; verify)
-LAST VERIFIED: 2026-10-25
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1189,7 +1190,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1243,7 +1244,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: closed_verify
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -1355,7 +1356,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1410,7 +1411,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1462,7 +1463,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1521,7 +1522,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: device
 CONTEXT GATE: none
 
@@ -1576,7 +1577,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1627,7 +1628,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1670,7 +1671,7 @@ SOURCE URLS:
 ID: otm-core
 ORGANIZATION: Office of Technology Management, WashU
 OFFICIAL URL: https://otm.wustl.edu/disclose-inventions/licensing-process/
-CONTACT: otm@wustl.edu · 314-747-1700
+CONTACT: otm@wustl.edu · 314-747-1794
 LOCATION: washu
 SCOPE: washu
 NEEDS ADDRESSED: ip-licensing, expertise-mentorship
@@ -1681,7 +1682,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1740,7 +1741,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1793,7 +1794,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1851,7 +1852,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1903,7 +1904,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1956,7 +1957,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes cancer
 
@@ -2015,7 +2016,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-07
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2070,7 +2071,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-10-25
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2124,7 +2125,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2180,7 +2181,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes multicenter-trial
 
@@ -2226,8 +2227,8 @@ SOURCE URLS:
 
 ID: veritascience
 ORGANIZATION: Washington University in St. Louis · Deerfield Management
-OFFICIAL URL: https://source.washu.edu/2024/01/washington-university-deerfield-management-launch-veritascience-to-drive-drug-discovery/
-CONTACT: OTM / WUSM business development; verify current contact
+OFFICIAL URL: https://www.veritascience.com/
+CONTACT: Mark Van Horn · markv@wustl.edu · Oscar Diaz Ruiz · doscar@wustl.edu (WashU Medicine business development)
 LOCATION: washu
 SCOPE: washu
 NEEDS ADDRESSED: funding, expertise-mentorship
@@ -2238,7 +2239,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -2257,11 +2258,11 @@ NOT FOR (do not recommend when):
 - A general faculty grant program
 
 ELIGIBILITY:
-WashU investigator proposals; disease indication may vary. Current standing submission dates are unspecified publicly in the source reviewed.
+WashU investigator proposals, accepted on a rolling basis per the NPIC partners page; project proposals can be designed around any disease indication. NPIC suggests first scheduling a consultation with its senior director (Shripad Bhagwat, PhD).
 
 CAVEATS:
 - Routing is through WashU/Deerfield scientific review, guided by OTM and WUSM business development.
-- Older information-session contact should be verified before use.
+- Project sourcing and evaluation questions go to the WashU Medicine business development team.
 
 ACADEMIC RETURNS:
 - industry development expertise
@@ -2277,6 +2278,8 @@ FUNDING:
 Up to $130M over ten years across the collaboration (project-specific)
 
 SOURCE URLS:
+- https://www.veritascience.com/
+- https://needlemanprogram.wustl.edu/about/partners/
 - https://source.washu.edu/2024/01/washington-university-deerfield-management-launch-veritascience-to-drive-drug-discovery/
 
 ---
@@ -2297,12 +2300,12 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
 WHAT YOU GET:
-Translational funding for promising non-drug WashU technologies. Current OTM information says commitments are made in blocks up to $55,000; technically no overall maximum is stated.
+Translational funding for promising non-drug WashU technologies. Current OTM information says commitments are made in blocks up to $65,000; technically no overall maximum is stated.
 
 WHY AN INVESTIGATOR MIGHT CARE:
 Pays for work conventional academic grants may not prioritize but that can de-risk a technology. You do not need to start a company.
@@ -2320,7 +2323,7 @@ WashU researcher with an appointment covered by the IP policy; non-drug technolo
 
 CAVEATS:
 - This is not a drug-development program and does not fund startup-company expenses.
-- A single award commitment is up to $55,000; larger development plans may be staged through sequential awards.
+- A single award commitment is up to $65,000; larger development plans may be staged through sequential awards.
 - The technology must already have proof of feasibility and be disclosed/assigned to WashU before an application.
 
 ACADEMIC RETURNS:
@@ -2334,7 +2337,7 @@ PROBLEMS SOLVED:
 - prototype
 
 FUNDING:
-Commitments in blocks up to $55,000 (verify current terms)
+Commitments in blocks up to $65,000 (verify current terms)
 
 SOURCE URLS:
 - https://otm.wustl.edu/disclose-inventions/gap-fund/
@@ -2356,7 +2359,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-09-06
+LAST VERIFIED: 2026-10-26
 MODALITY LOCK: none
 CONTEXT GATE: none
 
