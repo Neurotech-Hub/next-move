@@ -88,20 +88,8 @@ export function FeedbackPrompt() {
     document.body.style.overflow = "hidden";
     panelRef.current?.focus();
 
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setVisible(false);
-        setDismissedThisVisit(true);
-        markPromptHandled();
-        track(AnalyticsEvent.FeedbackDismissed);
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-
     return () => {
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
     };
   }, [visible]);
 
@@ -123,11 +111,9 @@ export function FeedbackPrompt() {
 
   return (
     <div className="feedback-prompt fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-6">
-      <button
-        type="button"
-        aria-label="Dismiss feedback"
+      <div
+        aria-hidden="true"
         className="feedback-prompt__scrim absolute inset-0 bg-paper/55 backdrop-blur-md"
-        onClick={dismiss}
       />
       <div
         ref={panelRef}
