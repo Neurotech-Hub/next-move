@@ -74,6 +74,6 @@ Do not create one-off components for individual programs.
 
 Deterministic rules live in `src/logic/recommendations.ts` and `src/logic/nextMoves.ts`. Questions start with success and academic return, then current asset and involvement. Program eligibility belongs with the suggested program, not as a note above it.
 
-## Analytics (Plausible)
+## Analytics
 
-The site loads Plausible from `index.html`. Custom events are fired from `src/lib/analytics.ts`. Use **[`PLAUSIBLE_EVENTS.md`](./PLAUSIBLE_EVENTS.md)** as the checklist when adding custom-event goals in the Plausible dashboard.
+The site loads hubtracker from `index.html` (`data-site="next-move"`). It records pageviews. `src/lib/analytics.ts` still counts in-app engagement for the feedback prompt; those events are not sent to a vendor.

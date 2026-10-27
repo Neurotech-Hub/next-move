@@ -1,7 +1,7 @@
 /**
- * Plausible custom events for NextMove.
- * Event names must match goals created in the Plausible dashboard.
- * Checklist for that setup: /PLAUSIBLE_EVENTS.md
+ * In-app engagement events for NextMove.
+ * Pageviews are collected by the hubtracker snippet in index.html.
+ * These events drive the feedback prompt and are not sent to a vendor.
  */
 
 export const AnalyticsEvent = {
@@ -34,33 +34,10 @@ const ENGAGEMENT_EVENTS: ReadonlySet<AnalyticsEventName> = new Set([
 
 type Props = Record<string, string | number | boolean | undefined | null>;
 
-type PlausibleFn = (
-  event: string,
-  options?: { props?: Record<string, string | number | boolean> },
-) => void;
-
-declare global {
-  interface Window {
-    plausible?: PlausibleFn;
-  }
-}
-
 type Listener = () => void;
 
 let engagementCount = 0;
 const engagementListeners = new Set<Listener>();
-
-function cleanProps(
-  props?: Props,
-): Record<string, string | number | boolean> | undefined {
-  if (!props) return undefined;
-  const out: Record<string, string | number | boolean> = {};
-  for (const [key, value] of Object.entries(props)) {
-    if (value === undefined || value === null || value === "") continue;
-    out[key] = value;
-  }
-  return Object.keys(out).length ? out : undefined;
-}
 
 function noteEngagement(event: AnalyticsEventName) {
   if (!ENGAGEMENT_EVENTS.has(event)) return;
@@ -79,12 +56,10 @@ export function subscribeEngagement(listener: Listener): () => void {
   };
 }
 
-export function track(event: AnalyticsEventName, props?: Props): void {
-  const cleaned = cleanProps(props);
+export function track(event: AnalyticsEventName, _props?: Props): void {
   try {
-    window.plausible?.(event, cleaned ? { props: cleaned } : undefined);
+    noteEngagement(event);
   } catch {
     // Analytics must never break the navigator.
   }
-  noteEngagement(event);
 }
