@@ -1,6 +1,6 @@
 import type { Resource } from "../types/navigator";
 
-const VERIFIED = "2026-10-26";
+const VERIFIED = "2026-11-01";
 
 // Resource grouping metadata rules:
 // - needs: tag only capabilities the resource directly provides; prefer 1, max 2 except unusually integrated programs.
@@ -1338,7 +1338,7 @@ export const resources: Resource[] = [
     nextStates: ["s8"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: null,
-    lastVerified: "2026-09-07",
+    lastVerified: VERIFIED,
     sourceUrls: [
       "https://neuro360engine.org/",
       "https://innovation.washu.edu/our-ecosystem/",
@@ -1825,7 +1825,7 @@ export const resources: Resource[] = [
     nextStates: ["s8"],
     status: "evergreen_program_verify_current_call",
     nextDeadline: null,
-    lastVerified: VERIFIED,
+    lastVerified: "2026-10-26",
     sourceUrls: ["https://www.nia.nih.gov/research/sbir/about-nia-small-business-funding"],
     priority: "second",
     purposes: ["funding", "company"],
