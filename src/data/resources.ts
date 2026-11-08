@@ -1,6 +1,6 @@
 import type { Resource } from "../types/navigator";
 
-const VERIFIED = "2026-11-01";
+const VERIFIED = "2026-11-08";
 
 // Resource grouping metadata rules:
 // - needs: tag only capabilities the resource directly provides; prefer 1, max 2 except unusually integrated programs.
@@ -442,7 +442,7 @@ export const resources: Resource[] = [
       "Unrestricted laboratory operating support",
     ],
     eligibility:
-      "Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. The 2026 CTRFP cycle closed (invited full applications were due September 14, 2026); the next cycle has not been posted as of 2026-10-25. JIT has separate rolling processes and limits.",
+      "Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. The 2026 CTRFP cycle closed (invited full applications were due September 14, 2026); the next cycle has not been posted as of 2026-11-08. JIT has separate rolling processes and limits.",
     requiresDisclosure: false,
     companyRequired: false,
     funding: "CTRFP up to $50,000 / $25,000 by category; JIT core-service support",
@@ -458,7 +458,8 @@ export const resources: Resource[] = [
     ],
     nextStates: ["s2", "s6", "s7"],
     status: "evergreen_program_verify_current_call",
-    nextDeadline: null,
+    nextDeadline:
+      "2026-11-10 (JIT: last application date for 2026; system reopens Dec 11 for the January 11 deadline)",
     lastVerified: VERIFIED,
     sourceUrls: [
       "https://icts.wustl.edu/research-services/research-development-program/research-forum-program/",
@@ -693,7 +694,7 @@ export const resources: Resource[] = [
       "Hope Center faculty membership required for the PI of the current pilot program; collaborator membership rules are less restrictive.",
     requiresDisclosure: false,
     companyRequired: false,
-    funding: "Pilot awards (cycle-specific; verify current call)",
+    funding: "Pilot awards up to $100,000 for two-year collaborative projects (cycle-specific)",
     caveats: ["Confirm current membership and cycle requirements before applying."],
     investigatorReturns: [
       "pilot data",
@@ -705,6 +706,7 @@ export const resources: Resource[] = [
     nextDeadline: "2026-12-08 (invited full proposals; verify)",
     lastVerified: VERIFIED,
     sourceUrls: ["https://hopecenter.wustl.edu/funding-awards/pilot-projects/"],
+    contact: "HopeCenter@email.wustl.edu",
   },
   {
     id: "xir",
@@ -851,7 +853,7 @@ export const resources: Resource[] = [
     type: "resource",
     title: "Siteman Investment Program Research Development Awards (SIP RDA)",
     organization: "Siteman Cancer Center, WashU",
-    url: "https://siteman.washu.edu/research/funding-opportunities/",
+    url: "https://siteman.washu.edu/research/funding-opportunities/siteman-investment-program-sip-awards/",
     internality: "washu",
     needs: ["funding"],
     inventionTypes: ["broad"],
@@ -885,7 +887,11 @@ export const resources: Resource[] = [
     status: "evergreen_program_verify_current_call",
     nextDeadline: null,
     lastVerified: VERIFIED,
-    sourceUrls: ["https://siteman.washu.edu/research/funding-opportunities/"],
+    sourceUrls: [
+      "https://siteman.washu.edu/research/funding-opportunities/siteman-investment-program-sip-awards/",
+      "https://siteman.washu.edu/research/funding-opportunities/",
+    ],
+    contact: "Steve Baer · steve.baer@wustl.edu",
     priority: "second",
     purposes: ["research", "funding"],
   },
@@ -973,7 +979,6 @@ export const resources: Resource[] = [
     lastVerified: VERIFIED,
     sourceUrls: [
       "https://www.biogeneratorventures.com/",
-      "https://www.biostl.org/what-we-do/biogenerator",
       "https://www.biostl.org/about/",
     ],
   },
@@ -1020,7 +1025,8 @@ export const resources: Resource[] = [
     ],
     nextStates: ["s7", "s8", "s9"],
     status: "evergreen_program_verify_current_call",
-    nextDeadline: null,
+    nextDeadline:
+      "2027-01-05 (NIH SBIR/STTR standard due date; parent NOFOs PA-27-100 / PA-27-102)",
     lastVerified: VERIFIED,
     sourceUrls: [
       "https://seed.nih.gov/small-business-funding/find-funding/sbir-sttr-funding-opportunities",
@@ -1153,6 +1159,7 @@ export const resources: Resource[] = [
     sourceUrls: [
       "https://skandalaris.wustl.edu/programs/",
       "https://skandalaris.wustl.edu/resource/in-residence-program/",
+      "https://skandalaris.wustl.edu/program/ideabounce/",
     ],
     contact: "sc@wustl.edu",
     priority: "second",
@@ -1381,7 +1388,7 @@ export const resources: Resource[] = [
     lastVerified: VERIFIED,
     sourceUrls: [
       "https://www.biostl.org/events/startup-connect/",
-      "https://www.biostl.org/what-we-do/biogenerator",
+      "https://www.biogeneratorventures.com/",
     ],
     contact: "aj@biogeneratorventures.com",
     priority: "second",
@@ -1510,7 +1517,7 @@ export const resources: Resource[] = [
     investigatorReturns: ["state-backed match on a real financing round"],
     nextStates: ["s9"],
     status: "evergreen_program_verify_current_call",
-    nextDeadline: "2026-11-03 (January 2027 cycle, 11:59 pm; verify)",
+    nextDeadline: "2027-02-05 (April 2027 cycle, 11:59 pm; portal reopens early December 2026)",
     lastVerified: VERIFIED,
     sourceUrls: [
       "https://www.missouritechnology.com/venture-capital-investments/mtc-idea-fund/",
@@ -1705,6 +1712,7 @@ export const resources: Resource[] = [
     nextDeadline: "2026-12-18 (2027 cohort 1 request; verify)",
     lastVerified: VERIFIED,
     sourceUrls: ["https://seed.nih.gov/I-Corps-at-NIH"],
+    contact: "icorps@mail.nih.gov",
     priority: "second",
     purposes: ["expertise", "company"],
   },

@@ -103,7 +103,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -164,7 +164,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: closed_verify
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -220,7 +220,7 @@ COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
 NEXT DEADLINE: 2027-09-08 (Startup Connect 2027; invite-only)
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -253,7 +253,7 @@ PROBLEMS SOLVED:
 
 SOURCE URLS:
 - https://www.biostl.org/events/startup-connect/
-- https://www.biostl.org/what-we-do/biogenerator
+- https://www.biogeneratorventures.com/
 
 ---
 
@@ -272,7 +272,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -312,7 +312,6 @@ Early-stage company capital (deal-specific)
 
 SOURCE URLS:
 - https://www.biogeneratorventures.com/
-- https://www.biostl.org/what-we-do/biogenerator
 - https://www.biostl.org/about/
 
 ---
@@ -333,7 +332,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: closed_verify
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -391,7 +390,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -448,7 +447,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -514,7 +513,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -567,7 +566,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -621,7 +620,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -675,7 +674,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes emergency-care
 
@@ -721,6 +720,7 @@ SOURCE URLS:
 ID: hope-center
 ORGANIZATION: Washington University in St. Louis
 OFFICIAL URL: https://hopecenter.wustl.edu/funding-awards/pilot-projects/
+CONTACT: HopeCenter@email.wustl.edu
 LOCATION: washu
 SCOPE: washu
 NEEDS ADDRESSED: funding, expertise-mentorship
@@ -732,7 +732,7 @@ COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
 NEXT DEADLINE: 2026-12-08 (invited full proposals; verify)
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -767,7 +767,7 @@ PROBLEMS SOLVED:
 - neuroscience
 
 FUNDING:
-Pilot awards (cycle-specific; verify current call)
+Pilot awards up to $100,000 for two-year collaborative projects (cycle-specific)
 
 SOURCE URLS:
 - https://hopecenter.wustl.edu/funding-awards/pilot-projects/
@@ -779,6 +779,7 @@ SOURCE URLS:
 ID: nih-icorps
 ORGANIZATION: NIH SEED
 OFFICIAL URL: https://seed.nih.gov/I-Corps-at-NIH
+CONTACT: icorps@mail.nih.gov
 LOCATION: national
 SCOPE: federal
 NEEDS ADDRESSED: expertise-mentorship, startup-support
@@ -790,7 +791,7 @@ COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
 NEXT DEADLINE: 2026-12-18 (2027 cohort 1 request; verify)
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -841,7 +842,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -902,7 +903,8 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+NEXT DEADLINE: 2026-11-10 (JIT: last application date for 2026; system reopens Dec 11 for the January 11 deadline)
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -921,7 +923,7 @@ NOT FOR (do not recommend when):
 - Unrestricted laboratory operating support
 
 ELIGIBILITY:
-Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. The 2026 CTRFP cycle closed (invited full applications were due September 14, 2026); the next cycle has not been posted as of 2026-10-25. JIT has separate rolling processes and limits.
+Research Forum is available to ICTS members across career stages and partner affiliations. CTRFP PI must be an ICTS member. The 2026 CTRFP cycle closed (invited full applications were due September 14, 2026); the next cycle has not been posted as of 2026-11-08. JIT has separate rolling processes and limits.
 
 CAVEATS:
 - CTRFP is a competitive call with cycle-specific deadlines — verify current status.
@@ -965,7 +967,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes industry-collaboration, industry-sponsored-research
 
@@ -1025,7 +1027,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes digital-health, mhealth
 
@@ -1083,7 +1085,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1134,8 +1136,8 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-NEXT DEADLINE: 2026-11-03 (January 2027 cycle, 11:59 pm; verify)
-LAST VERIFIED: 2026-11-01
+NEXT DEADLINE: 2027-02-05 (April 2027 cycle, 11:59 pm; portal reopens early December 2026)
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1190,7 +1192,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1244,7 +1246,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: closed_verify
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -1305,7 +1307,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1356,7 +1358,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1463,7 +1465,8 @@ PRIORITY: unspecified
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+NEXT DEADLINE: 2027-01-05 (NIH SBIR/STTR standard due date; parent NOFOs PA-27-100 / PA-27-102)
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1522,7 +1525,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: device
 CONTEXT GATE: none
 
@@ -1577,7 +1580,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1628,7 +1631,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1682,7 +1685,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1741,7 +1744,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1794,7 +1797,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1852,7 +1855,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1904,7 +1907,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -1946,7 +1949,8 @@ SOURCE URLS:
 
 ID: siteman-sip-rda
 ORGANIZATION: Siteman Cancer Center, WashU
-OFFICIAL URL: https://siteman.washu.edu/research/funding-opportunities/
+OFFICIAL URL: https://siteman.washu.edu/research/funding-opportunities/siteman-investment-program-sip-awards/
+CONTACT: Steve Baer · steve.baer@wustl.edu
 LOCATION: washu
 SCOPE: washu
 NEEDS ADDRESSED: funding
@@ -1957,7 +1961,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes cancer
 
@@ -1996,6 +2000,7 @@ FUNDING:
 Pilot funding; amount and categories are cycle-specific
 
 SOURCE URLS:
+- https://siteman.washu.edu/research/funding-opportunities/siteman-investment-program-sip-awards/
 - https://siteman.washu.edu/research/funding-opportunities/
 
 ---
@@ -2016,7 +2021,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2052,6 +2057,7 @@ PROBLEMS SOLVED:
 SOURCE URLS:
 - https://skandalaris.wustl.edu/programs/
 - https://skandalaris.wustl.edu/resource/in-residence-program/
+- https://skandalaris.wustl.edu/program/ideabounce/
 
 ---
 
@@ -2071,7 +2077,7 @@ PRIORITY: second
 COMPANY REQUIRED: yes
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2125,7 +2131,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2181,7 +2187,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: only when context includes multicenter-trial
 
@@ -2239,7 +2245,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: therapeutic
 CONTEXT GATE: none
 
@@ -2300,7 +2306,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: yes
 STATUS: evergreen_program_verify_current_call
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
@@ -2359,7 +2365,7 @@ PRIORITY: second
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen
-LAST VERIFIED: 2026-11-01
+LAST VERIFIED: 2026-11-08
 MODALITY LOCK: none
 CONTEXT GATE: none
 
