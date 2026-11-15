@@ -903,7 +903,7 @@ PRIORITY: unspecified
 COMPANY REQUIRED: no
 DISCLOSURE TYPICALLY NEEDED: no
 STATUS: evergreen_program_verify_current_call
-NEXT DEADLINE: 2026-11-10 (JIT: last application date for 2026; system reopens Dec 11 for the January 11 deadline)
+NEXT DEADLINE: 2027-01-11 (JIT: application system reopens Dec 11, 2026 after upgrade; Nov 10 was the last 2026 date)
 LAST VERIFIED: 2026-11-15
 MODALITY LOCK: none
 CONTEXT GATE: none
