@@ -459,7 +459,7 @@ export const resources: Resource[] = [
     nextStates: ["s2", "s6", "s7"],
     status: "evergreen_program_verify_current_call",
     nextDeadline:
-      "2026-11-10 (JIT: last application date for 2026; system reopens Dec 11 for the January 11 deadline)",
+      "2027-01-11 (JIT: application system reopens Dec 11, 2026 after upgrade; Nov 10 was the last 2026 date)",
     lastVerified: VERIFIED,
     sourceUrls: [
       "https://icts.wustl.edu/research-services/research-development-program/research-forum-program/",
