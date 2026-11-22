@@ -1,6 +1,6 @@
 import type { Resource } from "../types/navigator";
 
-const VERIFIED = "2026-11-15";
+const VERIFIED = "2026-11-22";
 
 // Resource grouping metadata rules:
 // - needs: tag only capabilities the resource directly provides; prefer 1, max 2 except unusually integrated programs.
